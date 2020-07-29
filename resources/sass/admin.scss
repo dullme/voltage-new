@@ -1,0 +1,23 @@
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+#loading >div:first-child {
+    animation: fade-in;
+    animation-duration: .5s;
+    -webkit-animation: fade-in .5s;
+}
