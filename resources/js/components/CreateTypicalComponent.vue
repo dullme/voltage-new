@@ -29,7 +29,6 @@
                         <th>Name</th>
                         <th>Color</th>
                         <th>String</th>
-                        <th>Count</th>
                         <th>剩余可摆放数</th>
                         <th>Length</th>
                         <th>Remarks</th>
@@ -40,10 +39,13 @@
                     <tr v-for="(harness,key) in harnesses_selected">
                         <td><input type="radio" @click="updateCurrentHarness(key)" name="radio_harness"></td>
                         <td>{{ harness.name }}</td>
-                        <td><i class="fa fa-circle" :style="'color: '+ harness.color"></i></td>
+                        <td>
+                            <a class="cube" :style="'background-color:'+ harness.color">
+                                <span>{{ harness.harness_key}}</span>
+                            </a>
+                        </td>
                         <td>{{ harness.string }}</td>
-                        <td>{{ harness.count }}</td>
-                        <td>{{ harness.remaining }}/{{ harness.string * harness.count }}</td>
+                        <td>{{ harness.remaining }}</td>
                         <td>{{ harness.min_length }} ~ {{ harness.max_length }}</td>
                         <td>{{ harness.remarks }}</td>
                         <td>
@@ -80,8 +82,8 @@
 
                             <label style="margin-left: 20px">有没有保险丝：</label>
                             <select style="height: 34px;padding: 6px 12px;" v-model="pos_neg">
-                                <option value="1">Fuse</option>
-                                <option value="0">Nofuse</option>
+                                <option value="fuse">Fuse</option>
+                                <option value="nofuse">Nofuse</option>
                             </select>
                             <button v-if="this.stages.length" type="button" style="margin-left: 20px"
                                     class="btn btn-sm btn-danger" @click="createStage">重新生成行列
@@ -105,23 +107,24 @@
                             <div class="panel-body">
                                 <table class="table table-hover stages" style="width: auto">
                                     <thead>
-                                        <tr>
-                                            <th style="text-align: center;">
-                                                <p style="margin-bottom: unset">NO.</p>
-                                            </th>
-                                            <th style="text-align: center;" v-for="(i,index) in motors">
-                                                <p style="margin-bottom: unset;cursor: pointer">{{ i.name }}</p>
-                                            </th>
-                                        </tr>
-                                        <tr>
-                                            <th style="text-align: center;">
-                                                <p style="margin-bottom: unset">长度</p>
-                                            </th>
-                                            <th style="text-align: center;" v-for="(i,index) in motors">
-                                                <p style="margin-bottom: unset;cursor: pointer" :class="i.number == 0 ? 'color_gray' :''"
-                                                   @click="setMotor(index)">{{ i.number }}</p>
-                                            </th>
-                                        </tr>
+                                    <tr>
+                                        <th style="text-align: center;">
+                                            <p style="margin-bottom: unset">NO.</p>
+                                        </th>
+                                        <th style="text-align: center;" v-for="(i,index) in motors">
+                                            <p style="margin-bottom: unset;cursor: pointer">{{ i.name }}</p>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th style="text-align: center;">
+                                            <p style="margin-bottom: unset">长度</p>
+                                        </th>
+                                        <th style="text-align: center;" v-for="(i,index) in motors">
+                                            <p style="margin-bottom: unset;cursor: pointer"
+                                               :class="i.number == 0 ? 'color_gray' :''"
+                                               @click="setMotor(index)">{{ i.number }}</p>
+                                        </th>
+                                    </tr>
                                     </thead>
                                     <tbody>
                                     <tr v-for="(stage,s_index) in stages">
@@ -132,8 +135,8 @@
                                             <a v-if="i_index%2 == 0" class="cube"
                                                :style="item['color'] ? 'background-color:'+item['color'] : ''"
                                                @click="changeCube(s_index, i_index)">
-                                                <span class="cube cube_motor"
-                                                      :class="item['motor']?'is_motor':''"></span>
+                                                <span v-if="item['motor']" class="cube cube_motor is_motor">{{ item['harness_key'] }}</span>
+                                                <span v-else >{{ item['harness_key'] }}</span>
                                             </a>
                                             <a v-else style="display: flex;justify-content: center">
                                                 <span class="cube cube_motor"
@@ -146,10 +149,144 @@
                                 </table>
                             </div>
                             <div class="panel-footer">
-                                <button type="button" @click="stageSave">Submit</button>
+                                <button type="button" @click="stageSave">保存当前格局</button>
                             </div>
                         </div>
                     </div>
+
+
+                    <!-- 保存的格局Fuse START -->
+                    <div style="clear: both" v-if="saved_data.fuse.pos_neg">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <span>有没有保险丝：{{ saved_data.fuse.pos_neg == 'fuse' ? 'Fuse' : 'Nofuse' }}</span>
+                                <button @click="deleteSavedData('fuse')" class="btn btn-xs btn-danger pull-right"
+                                        type="button"><i class="fa fa-trash"></i></button>
+                            </div>
+                            <div class="panel-body">
+                                <table class="table table-hover stages" style="width: auto">
+                                    <thead>
+                                    <tr>
+                                        <th style="text-align: center;">
+                                            <p style="margin-bottom: unset">NO.</p>
+                                        </th>
+                                        <th style="text-align: center;" v-for="(i,index) in saved_data.fuse.motors">
+                                            <p style="margin-bottom: unset;cursor: pointer">{{ i.name }}</p>
+                                        </th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                    <tr>
+                                        <th style="text-align: center;">
+                                            <p style="margin-bottom: unset">长度</p>
+                                        </th>
+                                        <th style="text-align: center;" v-for="(i,index) in saved_data.fuse.motors">
+                                            <p style="margin-bottom: unset;cursor: pointer"
+                                               :class="i.number == 0 ? 'color_gray' :''">{{ i.number }}</p>
+                                        </th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr v-for="(stage,s_index) in saved_data.fuse.stages">
+                                        <th style="max-width: 70px;text-align: center;height: 20px">{{ s_index + 1 }}
+                                        </th>
+                                        <td v-for="(item,i_index) in stage"
+                                            style="text-align: center;vertical-align: middle">
+                                            <a v-if="i_index%2 == 0" class="cube"
+                                               :style="item['color'] ? 'background-color:'+item['color'] : ''">
+                                                <span v-if="item['motor']" class="cube cube_motor is_motor">{{ item['harness_key'] }}</span>
+                                                <span v-else >{{ item['harness_key'] }}</span>
+                                            </a>
+                                            <a v-else style="display: flex;justify-content: center">
+                                                <span class="cube cube_motor"
+                                                      :class="item['motor']?'is_motor':''"></span>
+                                            </a>
+
+                                        </td>
+                                        <td>
+                                            <span v-for="fuse in saved_data.fuse.res[s_index]">
+                                                <i class="fa fa-circle"
+                                                   :style="'font-size:12px;color: '+fuse.color"></i>
+                                                {{ fuse.length }}
+                                            </span>
+                                        </td>
+                                        <td><input v-if="saved_data.fuse.res[s_index].length" type="checkbox"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 保存的格局Fuse END -->
+
+
+                    <!-- 保存的格局Nofuse START -->
+                    <div style="clear: both" v-if="saved_data.nofuse.pos_neg">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <span>有没有保险丝：{{ saved_data.nofuse.pos_neg == 'fuse' ? 'Fuse' : 'Nofuse' }}</span>
+                                <button @click="deleteSavedData('nofuse')" class="btn btn-xs btn-danger pull-right"
+                                        type="button"><i class="fa fa-trash"></i></button>
+                            </div>
+                            <div class="panel-body">
+                                <table class="table table-hover stages" style="width: auto">
+                                    <thead>
+                                    <tr>
+                                        <th style="text-align: center;">
+                                            <p style="margin-bottom: unset">NO.</p>
+                                        </th>
+                                        <th style="text-align: center;" v-for="i in saved_data.nofuse.motors">
+                                            <p style="margin-bottom: unset;cursor: pointer">{{ i.name }}</p>
+                                        </th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                    <tr>
+                                        <th style="text-align: center;">
+                                            <p style="margin-bottom: unset">长度</p>
+                                        </th>
+                                        <th style="text-align: center;" v-for="i in saved_data.nofuse.motors">
+                                            <p style="margin-bottom: unset;cursor: pointer"
+                                               :class="i.number == 0 ? 'color_gray' :''">{{ i.number }}</p>
+                                        </th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr v-for="(stage,s_index) in saved_data.nofuse.stages">
+                                        <th style="max-width: 70px;text-align: center;height: 20px">{{ s_index + 1 }}
+                                        </th>
+                                        <td v-for="(item,i_index) in stage"
+                                            style="text-align: center;vertical-align: middle">
+                                            <a v-if="i_index%2 == 0" class="cube"
+                                               :style="item['color'] ? 'background-color:'+item['color'] : ''">
+                                                <span v-if="item['motor']" class="cube cube_motor is_motor">{{ item['harness_key'] }}</span>
+                                                <span v-else >{{ item['harness_key'] }}</span>
+                                            </a>
+                                            <a v-else style="display: flex;justify-content: center">
+                                                <span class="cube cube_motor"
+                                                      :class="item['motor']?'is_motor':''"></span>
+                                            </a>
+
+                                        </td>
+                                        <td>
+                                            <span v-for="nofuse in saved_data.nofuse.res[s_index]">
+                                                <i class="fa fa-circle"
+                                                   :style="'font-size:12px;color: '+nofuse.color"></i>
+                                                {{ nofuse.length }}
+                                            </span>
+                                        </td>
+                                        <td><input v-if="saved_data.nofuse.res[s_index].length" type="checkbox"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 保存的格局Nofuse END -->
 
 
                 </div>
@@ -235,7 +372,11 @@
     export default {
         data() {
             return {
-                pos_neg: 1,
+                saved_data: {
+                    'fuse': [],
+                    'nofuse': []
+                },
+                pos_neg: 'fuse',
                 current_harness_key: undefined,
                 harnesses: [],
                 harnesses_selected: [],
@@ -301,14 +442,26 @@
                             }
                         })
 
-                        if (need_add) {
-                            let harness = this.harnesses[key]
-                            harness['count'] = number
-                            harness['color'] = this.color.pop()
-                            harness['remaining'] = this.harnesses[key]['string'] * number
-                            this.harnesses_selected.push(harness)
+                        if (need_add) { //第一次添加 Harness
+                            let color = this.color.pop()
+                            for (let i = 0; i < number; i++) {
+                                let harness = {
+                                    checked:this.harnesses[key]['checked'],
+                                    id:this.harnesses[key]['id'],
+                                    max_length:this.harnesses[key]['max_length'],
+                                    min_length:this.harnesses[key]['min_length'],
+                                    name:this.harnesses[key]['name'],
+                                    remarks:this.harnesses[key]['remarks'],
+                                    string:this.harnesses[key]['string'],
+                                    remaining : this.harnesses[key]['string'],
+                                    harness_key : i,
+                                    color : color
+                                }
+
+                                this.harnesses_selected.push(harness)
+                            }
                             toastr.success('添加成功')
-                        } else {
+                        } else { //已经存在harness
                             swal('INFO', '已经添加过了', 'info')
                         }
                     }
@@ -317,6 +470,8 @@
 
             deleteHarness(key) {
                 this.current_harness_key = undefined
+                this.saved_data = {'fuse': [], 'nofuse': []}
+
                 this.createStage()
                 this.harnesses.forEach((item, index) => {
                     if (item.id == this.harnesses_selected[key]['id']) {
@@ -335,7 +490,7 @@
             createStage() {
                 //重置剩余可摆放数
                 for (let i = 0; i < this.harnesses_selected.length; i++) {
-                    this.harnesses_selected[i]['remaining'] = this.harnesses_selected[i]['string'] * this.harnesses_selected[i]['count']
+                    this.harnesses_selected[i]['remaining'] = this.harnesses_selected[i]['string']
                 }
 
                 this.stages = [];
@@ -344,8 +499,15 @@
                 for (let i = 0; i < this.hang; i++) {
                     this.stages[i] = {}
                     for (let j = 0; j < lie; j++) {
-                        let only_motor = j%2 == 0 ? false :true
-                        this.$set(this.stages[i], j, {id: '', color: '', motor: false, only_motor:only_motor, motor_number:0})
+                        let only_motor = j % 2 == 0 ? false : true
+                        this.$set(this.stages[i], j, {
+                            harness_key: undefined,
+                            id: '',
+                            color: '',
+                            motor: false,
+                            only_motor: only_motor,
+                            motor_number: 0
+                        })
                     }
                 }
 
@@ -396,12 +558,13 @@
                 if (i_index % 2 == 0) {
                     if (this.current_harness_key == undefined) {
                         toastr.info('请先选择 Harness')
-                    } else if (this.stages[s_index][i_index]['id'] != this.harnesses_selected[this.current_harness_key]['id'] && this.harnesses_selected[this.current_harness_key]['remaining'] == 0) {
+                    } else if (this.stages[s_index][i_index]['harness_key'] != this.harnesses_selected[this.current_harness_key]['harness_key'] && this.harnesses_selected[this.current_harness_key]['remaining'] == 0) {
                         toastr.info('剩余可摆放数不足')
                     } else {
-                        let real_count = this.harnesses_selected[this.current_harness_key]['string'] * this.harnesses_selected[this.current_harness_key]['count']
+                        let real_count = this.harnesses_selected[this.current_harness_key]['string']
                         //如果已经被当前颜色填充 去掉当前颜色 并增加可填充剩余数
-                        if (this.stages[s_index][i_index]['id'] == this.harnesses_selected[this.current_harness_key]['id']) {
+                        if (this.stages[s_index][i_index]['id'] == this.harnesses_selected[this.current_harness_key]['id'] && this.stages[s_index][i_index]['harness_key'] == this.harnesses_selected[this.current_harness_key]['harness_key']) {
+                            this.stages[s_index][i_index]['harness_key'] = undefined
                             this.stages[s_index][i_index]['id'] = ''
                             this.stages[s_index][i_index]['color'] = ''
                             this.harnesses_selected[this.current_harness_key]['remaining'] += 1
@@ -411,10 +574,8 @@
                             }
 
                             //当前有其他颜色存在
-                        } else if (this.stages[s_index][i_index]['id'] && this.stages[s_index][i_index]['id'] != this.harnesses_selected[this.current_harness_key]['id']) {
-                            toastr.warning('当前格子已被填充')
-                            //可以填充
-                        } else {
+                        } else if (this.stages[s_index][i_index]['id'] == '') {
+                            this.stages[s_index][i_index]['harness_key'] = this.harnesses_selected[this.current_harness_key]['harness_key']
                             this.stages[s_index][i_index]['id'] = this.harnesses_selected[this.current_harness_key]['id']
                             this.stages[s_index][i_index]['color'] = this.harnesses_selected[this.current_harness_key]['color']
                             this.harnesses_selected[this.current_harness_key]['remaining'] -= 1
@@ -422,16 +583,23 @@
                             if (this.harnesses_selected[this.current_harness_key]['remaining'] < 0) {
                                 this.harnesses_selected[this.current_harness_key]['remaining'] = 0
                             }
+                            //可以填充
+                        } else {
+                            toastr.warning('当前格子已被填充')
                         }
                         this.$forceUpdate()
                     }
                 }
             },
 
+            deleteSavedData(str) {
+                this.saved_data[str] = []
+            },
+
             stageSave() {
                 for (let i = 0; i < this.harnesses_selected.length; i++) {
-                    let real_count = this.harnesses_selected[i]['string'] * this.harnesses_selected[i]['count']
-                    if(this.harnesses_selected[i]['remaining'] != 0 && this.harnesses_selected[i]['remaining'] != real_count){
+                    let real_count = this.harnesses_selected[i]['string']
+                    if (this.harnesses_selected[i]['remaining'] != 0 && this.harnesses_selected[i]['remaining'] != real_count) {
                         console.log(real_count)
                         console.log(this.harnesses_selected[i]['remaining'])
                         swal('ERROR', '请把剩余点数填充完', 'error')
@@ -444,28 +612,18 @@
                     method: 'post',
                     url: '/admin/stage-save',
                     data: {
-                        pos_neg:this.pos_neg,
-                        stages:this.stages,
-                        motors:this.motors
+                        pos_neg: this.pos_neg,
+                        stages: this.stages,
+                        motors: this.motors
                     }
                 }).then(response => {
                     $('#loading').css('display', 'none');
-                    // if (response.data.status) {
-                    //     swal('SUCCESS', '保存成功', 'success').then(() => {
-                    //         this.form_data = {
-                    //             min_length: '',
-                    //             max_length: '',
-                    //             fuse: '',
-                    //             string: '',
-                    //             outlet_length: '',
-                    //             module: '',
-                    //             remarks: '',
-                    //             components: [
-                    //                 {id: '', length: 1, quantity: 1}
-                    //             ],
-                    //         }
-                    //     })
-                    // }
+                    if (response.data.status) {
+                        swal('SUCCESS', '添加成功', 'success').then(() => {
+                            this.saved_data[response.data.data['pos_neg']] = response.data.data
+                            this.$forceUpdate()
+                        })
+                    }
                 }).catch(error => {
                     $('#loading').css('display', 'none');
                     toastr.error(error.response.data.message)
@@ -487,6 +645,8 @@
         cursor: pointer;
         justify-content: center;
         align-items: center;
+        font-size: 25px;
+        color: #FFFFFF;
     }
 
     .cube_motor {
@@ -502,8 +662,8 @@
         border-color: #dadada;
     }
 
-    .color_gray{
-        color:#dadada;
+    .color_gray {
+        color: #dadada;
     }
 
     .border_black {
