@@ -17,30 +17,44 @@
         <div class="box-body">
 
 
-            <table class="table">
+            <table class="table table-bordered">
                 <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Color</th>
-                    <th>String</th>
-                    <th>Length</th>
-                    <th>Remarks</th>
+                    <th colspan="2" style="text-align: center;font-size: 18px;font-weight: bold;max-width: 500px">Item</th>
+                    <th>Quantity</th>
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($typical->harnesses_selected as $harness)
+                <tr>
+                    <td rowspan="{{ count($harnesses) + 1 }}" style="text-align: center;vertical-align: middle;font-size: 18px;font-weight: bold;width: 100px">
+                        Harness
+                    </td>
+                </tr>
+                @foreach($harnesses as $harness)
                     <tr>
-                        <td><label style="cursor: pointer">{{ $harness['name'] }}</label></td>
-                        <td>
-                            <a class="cube" style="background-color:{{ $harness['color'] }}">
-                                <span>{{ $harness['harness_key'] }}</span>
-                            </a>
-                        </td>
-                        <td>{{ $harness['string'] }}</td>
-                        <td>{{ $harness['min_length'] }} ~ {{ $harness['max_length'] }}</td>
-                        <td>{{ $harness['remarks'] }}</td>
+                        <td style="width: 200px"><label style="cursor: pointer">{{ $harness['name'] }}</label></td>
+                        <td>{{ $harness['count'] }}</td>
                     </tr>
                 @endforeach
+                @if(count($res_fuses) > 0)
+                    <tr>
+                        <td rowspan="{{ count($res_fuses) + 1 }}" style="text-align: center;vertical-align: middle;font-size: 18px;font-weight: bold">
+                            Extender
+                        </td>
+                    </tr>
+                    @foreach($res_fuses as $fuse)
+                        <tr>
+                            <td><label>{{ ceil($fuse['length'] * $typical['margin']/100 + $fuse['length']) }}</label></td>
+                            <td>{{ $fuse['count'] }}</td>
+                        </tr>
+                    @endforeach
+                @else
+                    <tr>
+                        <td style="text-align: center;vertical-align: middle;font-size: 18px;font-weight: bold">Extender</td>
+                        <td><label>0</label></td>
+                        <td>0</td>
+                    </tr>
+                @endif
                 </tbody>
             </table>
 
@@ -99,12 +113,14 @@
                                 </td>
                                 @endforeach
                                 <td>
+                                    @if($typical->fuse['check_list'][$s_index])
                                     @foreach($typical->fuse['res'][$s_index] as $fuse)
                                     <span>
                                         <i class="fa fa-circle" style="font-size:12px;color: {{ $fuse['color'] }}"></i>
-                                        {{ $fuse['length'] . $fuse['length'] * $typical->margin/100 }}
+                                        {{ ceil($fuse['length'] * $typical['margin']/100 + $fuse['length']) }}
                                     </span>
                                     @endforeach
+                                    @endif
                                 </td>
                                 <td>
                                     @if($typical->fuse['check_list'][$s_index])
@@ -177,14 +193,20 @@
                                             </td>
                                         @endforeach
                                         <td>
+                                            @if($typical->nofuse['check_list'][$s_index])
                                             @foreach($typical->nofuse['res'][$s_index] as $fuse)
                                                 <span>
                                         <i class="fa fa-circle" style="font-size:12px;color: {{ $fuse['color'] }}"></i>
-                                        {{ $fuse['length'] . $fuse['length'] * $typical->margin/100 }}
+                                        {{ ceil($fuse['length'] * $typical['margin']/100 + $fuse['length']) }}
                                     </span>
                                             @endforeach
+                                            @endif
                                         </td>
-                                        <td><input type="checkbox"></td>
+                                        <td>
+                                            @if($typical->nofuse['check_list'][$s_index])
+                                                <i class="fa fa-check text-success"></i>
+                                            @endif
+                                        </td>
                                     </tr>
                                 @endforeach
                                 </tbody>

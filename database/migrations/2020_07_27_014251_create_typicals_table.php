@@ -19,7 +19,7 @@ class CreateTypicalsTable extends Migration
             $table->string('show_name');
             $table->integer('version');
             $table->text('harnesses_selected');
-            $table->text('margin');
+            $table->integer('margin');
             $table->text('motors');
             $table->text('fuse');
             $table->text('nofuse');
