@@ -723,6 +723,27 @@
                     if (response.data.status) {
                         swal('SUCCESS', '添加成功', 'success').then(() => {
                             this.saved_data[response.data.data['pos_neg']] = response.data.data
+
+
+                            this.saved_data= {
+                                'fuse': {
+                                    'ids':[],
+                                },
+                                'nofuse': {
+                                    'ids':[],
+                                }
+                            }
+                            this.pos_neg= 'fuse'
+                            this.current_harness_key= undefined
+                            this.harnesses= []
+                            this.harnesses_selected= []
+                            this.string= ''
+                            this.length= ''
+                            this.stages= []//舞台
+                            this.motors= []//电机
+                            this.hang= ''
+                            this.lie= ''
+                            this.margin=0
                             this.$forceUpdate()
                         })
                     }

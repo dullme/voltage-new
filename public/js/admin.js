@@ -2916,6 +2916,27 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         if (response.data.status) {
           swal('SUCCESS', '添加成功', 'success').then(function () {
             _this7.saved_data[response.data.data['pos_neg']] = response.data.data;
+            _this7.saved_data = {
+              'fuse': {
+                'ids': []
+              },
+              'nofuse': {
+                'ids': []
+              }
+            };
+            _this7.pos_neg = 'fuse';
+            _this7.current_harness_key = undefined;
+            _this7.harnesses = [];
+            _this7.harnesses_selected = [];
+            _this7.string = '';
+            _this7.length = '';
+            _this7.stages = []; //舞台
+
+            _this7.motors = []; //电机
+
+            _this7.hang = '';
+            _this7.lie = '';
+            _this7.margin = 0;
 
             _this7.$forceUpdate();
           });

@@ -148,6 +148,7 @@ EOF
         $typical = Typical::where('show_name', $data['show_name'])->orderBy('id', 'DESC')->first();
         $data['version'] = $version = sprintf('%02d', $typical ? $typical->version + 1 : 1);
         $data['name'] = "VT{$str}{$max_length}{$sum_motor}{$version}";
+        $data['margin'] = intval($data['margin']);
 
         $res = Typical::create($data);
 
