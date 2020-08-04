@@ -2141,6 +2141,23 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2515,8 +2532,12 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       saved_data: {
-        'fuse': [],
-        'nofuse': []
+        'fuse': {
+          'ids': []
+        },
+        'nofuse': {
+          'ids': []
+        }
       },
       pos_neg: 'fuse',
       current_harness_key: undefined,
@@ -2530,7 +2551,8 @@ __webpack_require__.r(__webpack_exports__);
       //电机
       hang: '',
       lie: '',
-      color: ['#00204a', '#5e63b6', '#ca82f8', '#17b978', '#ff6f3c', '#00adb5', '#b61aae', '#ff9a00', '#ff165d']
+      margin: 0,
+      color: ['#00204a', '#5e63b6', '#ca82f8', '#17b978', '#ff6f3c', '#00adb5', '#b61aae', '#ff9a00', '#ff165d', '#cdb30c', '#62760c', '#535204', '#523906', '#848ccf', '#93b5e1', '#ffe4e4', '#be5683', '#838383', '#7fdbda', '#ade498', '#ede682', '#febf63', '#fa1616', '#12cad6']
     };
   },
   mounted: function mounted() {},
@@ -2623,8 +2645,12 @@ __webpack_require__.r(__webpack_exports__);
 
       this.current_harness_key = undefined;
       this.saved_data = {
-        'fuse': [],
-        'nofuse': []
+        'fuse': {
+          ids: []
+        },
+        'nofuse': {
+          ids: []
+        }
       };
       this.createStage();
       this.harnesses.forEach(function (item, index) {
@@ -2632,7 +2658,18 @@ __webpack_require__.r(__webpack_exports__);
           _this4.harnesses[index]['checked'] = false;
         }
       });
-      this.harnesses_selected.splice(key, 1);
+      var id = this.harnesses_selected[key]['id'];
+      var new_selected = [];
+
+      for (var index in this.harnesses_selected) {
+        if (this.harnesses_selected[index]['id'] != id) {
+          new_selected.push(this.harnesses_selected[index]);
+        }
+      }
+
+      this.harnesses_selected = new_selected;
+      $('input[name=radio_harness]').attr("checked", false);
+      this.$forceUpdate();
       swal('SUCCESS', '删除成功，舞台已被重新初始化', 'success');
     },
     updateCurrentHarness: function updateCurrentHarness(key) {
@@ -2642,7 +2679,20 @@ __webpack_require__.r(__webpack_exports__);
     createStage: function createStage() {
       //重置剩余可摆放数
       for (var i = 0; i < this.harnesses_selected.length; i++) {
-        this.harnesses_selected[i]['remaining'] = this.harnesses_selected[i]['string'];
+        var is_used = false;
+        var all_ids = this.saved_data.fuse.ids.concat(this.saved_data.nofuse.ids);
+
+        for (var id in all_ids) {
+          if (all_ids[id] == this.harnesses_selected[i]['id']) {
+            is_used = true;
+          }
+        }
+
+        if (is_used) {
+          this.harnesses_selected[i]['remaining'] = 0;
+        } else {
+          this.harnesses_selected[i]['remaining'] = this.harnesses_selected[i]['string'];
+        }
       }
 
       this.stages = [];
@@ -2759,20 +2809,53 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     deleteSavedData: function deleteSavedData(str) {
-      this.saved_data[str] = [];
+      this.saved_data[str] = {
+        'ids': []
+      };
+      this.createStage();
     },
     stageSave: function stageSave() {
       var _this6 = this;
+
+      var ids = [];
 
       for (var i = 0; i < this.harnesses_selected.length; i++) {
         var real_count = this.harnesses_selected[i]['string'];
 
         if (this.harnesses_selected[i]['remaining'] != 0 && this.harnesses_selected[i]['remaining'] != real_count) {
-          console.log(real_count);
-          console.log(this.harnesses_selected[i]['remaining']);
           swal('ERROR', '请把剩余点数填充完', 'error');
           return false;
         }
+
+        if (this.harnesses_selected[i]['remaining'] != real_count) {
+          ids.push(this.harnesses_selected[i]['id']);
+        }
+      }
+
+      ids = this.unique22(ids);
+
+      for (var id in ids) {
+        for (var _i4 = 0; _i4 < this.harnesses_selected.length; _i4++) {
+          if (this.harnesses_selected[_i4]['id'] == ids[id] && this.harnesses_selected[_i4]['remaining'] != 0) {
+            swal('ERROR', '请把剩余点数填充完', 'error');
+            return false;
+          }
+        }
+      }
+
+      var is_empty = true;
+
+      for (var _i5 = 0; _i5 < this.stages.length; _i5++) {
+        for (var key in this.stages[_i5]) {
+          if (this.stages[_i5][key]['id'] != '') {
+            is_empty = false;
+          }
+        }
+      }
+
+      if (is_empty) {
+        swal('ERROR', '请填充格子', 'error');
+        return false;
       }
 
       $('#loading').css('display', 'block');
@@ -2792,12 +2875,62 @@ __webpack_require__.r(__webpack_exports__);
             _this6.saved_data[response.data.data['pos_neg']] = response.data.data;
 
             _this6.$forceUpdate();
+
+            _this6.createStage();
           });
         }
       })["catch"](function (error) {
         $('#loading').css('display', 'none');
         toastr.error(error.response.data.message);
       });
+    },
+    submit: function submit() {
+      var _this7 = this;
+
+      for (var i = 0; i < this.harnesses_selected.length; i++) {
+        if (this.harnesses_selected[i]['remaining'] != 0) {
+          swal('ERROR', '必须把所有点数填充完', 'error');
+          return false;
+        }
+      }
+
+      $('#loading').css('display', 'block');
+      axios({
+        method: 'post',
+        url: '/admin/stage-submit',
+        data: {
+          harnesses_selected: this.harnesses_selected,
+          //被选择的 Harness
+          fuse: this.saved_data.fuse,
+          //有保险丝
+          nofuse: this.saved_data.nofuse,
+          //没有保险丝
+          motors: this.motors,
+          //电机位置
+          margin: this.margin //余量
+
+        }
+      }).then(function (response) {
+        $('#loading').css('display', 'none');
+
+        if (response.data.status) {
+          swal('SUCCESS', '添加成功', 'success').then(function () {
+            _this7.saved_data[response.data.data['pos_neg']] = response.data.data;
+
+            _this7.$forceUpdate();
+          });
+        }
+      })["catch"](function (error) {
+        $('#loading').css('display', 'none');
+        toastr.error(error.response.data.message);
+      });
+    },
+    checkbox: function checkbox(name, index, e) {
+      this.saved_data[name]['check_list'][index] = e.target.checked;
+    },
+    unique22: function unique22(arr) {
+      var x = new Set(arr);
+      return _toConsumableArray(x);
     }
   }
 });
@@ -21705,7 +21838,11 @@ var render = function() {
                 return _c("tr", [
                   _c("td", [
                     _c("input", {
-                      attrs: { type: "radio", name: "radio_harness" },
+                      attrs: {
+                        id: key + "_radio_harness",
+                        type: "radio",
+                        name: "radio_harness"
+                      },
                       on: {
                         click: function($event) {
                           return _vm.updateCurrentHarness(key)
@@ -21714,7 +21851,16 @@ var render = function() {
                     })
                   ]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(harness.name))]),
+                  _c("td", [
+                    _c(
+                      "label",
+                      {
+                        staticStyle: { cursor: "pointer" },
+                        attrs: { for: key + "_radio_harness" }
+                      },
+                      [_vm._v(_vm._s(harness.name))]
+                    )
+                  ]),
                   _vm._v(" "),
                   _c("td", [
                     _c(
@@ -21940,6 +22086,32 @@ var render = function() {
                       ]
                     ),
                     _vm._v(" "),
+                    _c("label", { staticStyle: { "margin-left": "20px" } }, [
+                      _vm._v("余量：")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.margin,
+                          expression: "margin"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      staticStyle: { width: "100px" },
+                      domProps: { value: _vm.margin },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.margin = $event.target.value
+                        }
+                      }
+                    }),
+                    _vm._v(" %\n\n                        "),
                     this.stages.length
                       ? _c(
                           "button",
@@ -21965,225 +22137,234 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _c("div", { staticStyle: { clear: "both" } }, [
-                _c("div", { staticClass: "panel panel-default" }, [
-                  _c("div", { staticClass: "panel-heading" }, [
-                    _vm.current_harness_key != undefined
-                      ? _c("span", [
-                          _vm._v(
-                            "\n                                当前选中颜色："
-                          ),
-                          _c("i", {
-                            staticClass: "fa fa-circle",
-                            staticStyle: { "margin-right": "10px" },
-                            style:
-                              "color: " +
-                              this.harnesses_selected[this.current_harness_key][
-                                "color"
-                              ]
-                          }),
-                          _vm._v(
-                            "\n                                " +
-                              _vm._s(
-                                this.harnesses_selected[
-                                  this.current_harness_key
-                                ]["remaining"]
-                              ) +
-                              "\n                            "
-                          )
-                        ])
-                      : _c("span", [_vm._v("请选择 Harness")])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "panel-body" }, [
-                    _c(
-                      "table",
-                      {
-                        staticClass: "table table-hover stages",
-                        staticStyle: { width: "auto" }
-                      },
-                      [
-                        _c("thead", [
-                          _c(
-                            "tr",
-                            [
-                              _vm._m(2),
-                              _vm._v(" "),
-                              _vm._l(_vm.motors, function(i, index) {
-                                return _c(
-                                  "th",
-                                  { staticStyle: { "text-align": "center" } },
-                                  [
-                                    _c(
-                                      "p",
-                                      {
-                                        staticStyle: {
-                                          "margin-bottom": "unset",
-                                          cursor: "pointer"
-                                        }
-                                      },
-                                      [_vm._v(_vm._s(i.name))]
-                                    )
-                                  ]
-                                )
-                              })
-                            ],
-                            2
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "tr",
-                            [
-                              _vm._m(3),
-                              _vm._v(" "),
-                              _vm._l(_vm.motors, function(i, index) {
-                                return _c(
-                                  "th",
-                                  { staticStyle: { "text-align": "center" } },
-                                  [
-                                    _c(
-                                      "p",
-                                      {
-                                        class:
-                                          i.number == 0 ? "color_gray" : "",
-                                        staticStyle: {
-                                          "margin-bottom": "unset",
-                                          cursor: "pointer"
-                                        },
-                                        on: {
-                                          click: function($event) {
-                                            return _vm.setMotor(index)
-                                          }
-                                        }
-                                      },
-                                      [_vm._v(_vm._s(i.number))]
-                                    )
-                                  ]
-                                )
-                              })
-                            ],
-                            2
-                          )
-                        ]),
-                        _vm._v(" "),
+              _vm.stages.length
+                ? _c("div", { staticStyle: { clear: "both" } }, [
+                    _c("div", { staticClass: "panel panel-default" }, [
+                      _c("div", { staticClass: "panel-heading" }, [
+                        _vm.current_harness_key != undefined
+                          ? _c("span", [
+                              _vm._v(
+                                "\n                                当前选中颜色："
+                              ),
+                              _c("i", {
+                                staticClass: "fa fa-circle",
+                                staticStyle: { "margin-right": "10px" },
+                                style:
+                                  "color: " +
+                                  this.harnesses_selected[
+                                    this.current_harness_key
+                                  ]["color"]
+                              }),
+                              _vm._v(
+                                "\n                                " +
+                                  _vm._s(
+                                    this.harnesses_selected[
+                                      this.current_harness_key
+                                    ]["remaining"]
+                                  ) +
+                                  "\n                            "
+                              )
+                            ])
+                          : _c("span", [_vm._v("请选择 Harness")])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "panel-body" }, [
                         _c(
-                          "tbody",
-                          _vm._l(_vm.stages, function(stage, s_index) {
-                            return _c(
-                              "tr",
-                              [
-                                _c(
-                                  "th",
-                                  {
-                                    staticStyle: {
-                                      "max-width": "70px",
-                                      "text-align": "center",
-                                      height: "20px"
-                                    }
-                                  },
-                                  [
-                                    _vm._v(
-                                      _vm._s(s_index + 1) +
-                                        "\n                                    "
+                          "table",
+                          {
+                            staticClass: "table table-hover stages",
+                            staticStyle: { width: "auto" }
+                          },
+                          [
+                            _c("thead", [
+                              _c(
+                                "tr",
+                                [
+                                  _vm._m(2),
+                                  _vm._v(" "),
+                                  _vm._l(_vm.motors, function(i, index) {
+                                    return _c(
+                                      "th",
+                                      {
+                                        staticStyle: { "text-align": "center" }
+                                      },
+                                      [
+                                        _c(
+                                          "p",
+                                          {
+                                            staticStyle: {
+                                              "margin-bottom": "unset",
+                                              cursor: "pointer"
+                                            }
+                                          },
+                                          [_vm._v(_vm._s(i.name))]
+                                        )
+                                      ]
                                     )
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _vm._l(stage, function(item, i_index) {
-                                  return _c(
-                                    "td",
-                                    {
-                                      staticStyle: {
-                                        "text-align": "center",
-                                        "vertical-align": "middle"
-                                      }
-                                    },
-                                    [
-                                      i_index % 2 == 0
-                                        ? _c(
-                                            "a",
-                                            {
-                                              staticClass: "cube",
-                                              style: item["color"]
-                                                ? "background-color:" +
-                                                  item["color"]
-                                                : "",
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.changeCube(
-                                                    s_index,
-                                                    i_index
-                                                  )
-                                                }
-                                              }
+                                  })
+                                ],
+                                2
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "tr",
+                                [
+                                  _vm._m(3),
+                                  _vm._v(" "),
+                                  _vm._l(_vm.motors, function(i, index) {
+                                    return _c(
+                                      "th",
+                                      {
+                                        staticStyle: { "text-align": "center" }
+                                      },
+                                      [
+                                        _c(
+                                          "p",
+                                          {
+                                            class:
+                                              i.number == 0 ? "color_gray" : "",
+                                            staticStyle: {
+                                              "margin-bottom": "unset",
+                                              cursor: "pointer"
                                             },
-                                            [
-                                              item["motor"]
-                                                ? _c(
-                                                    "span",
-                                                    {
-                                                      staticClass:
-                                                        "cube cube_motor is_motor"
-                                                    },
-                                                    [
-                                                      _vm._v(
-                                                        _vm._s(
-                                                          item["harness_key"]
+                                            on: {
+                                              click: function($event) {
+                                                return _vm.setMotor(index)
+                                              }
+                                            }
+                                          },
+                                          [_vm._v(_vm._s(i.number))]
+                                        )
+                                      ]
+                                    )
+                                  })
+                                ],
+                                2
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "tbody",
+                              _vm._l(_vm.stages, function(stage, s_index) {
+                                return _c(
+                                  "tr",
+                                  [
+                                    _c(
+                                      "th",
+                                      {
+                                        staticStyle: {
+                                          "max-width": "70px",
+                                          "text-align": "center",
+                                          height: "20px"
+                                        }
+                                      },
+                                      [
+                                        _vm._v(
+                                          _vm._s(s_index + 1) +
+                                            "\n                                    "
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _vm._l(stage, function(item, i_index) {
+                                      return _c(
+                                        "td",
+                                        {
+                                          staticStyle: {
+                                            "text-align": "center",
+                                            "vertical-align": "middle"
+                                          }
+                                        },
+                                        [
+                                          i_index % 2 == 0
+                                            ? _c(
+                                                "a",
+                                                {
+                                                  staticClass: "cube",
+                                                  style: item["color"]
+                                                    ? "background-color:" +
+                                                      item["color"]
+                                                    : "",
+                                                  on: {
+                                                    click: function($event) {
+                                                      return _vm.changeCube(
+                                                        s_index,
+                                                        i_index
+                                                      )
+                                                    }
+                                                  }
+                                                },
+                                                [
+                                                  item["motor"]
+                                                    ? _c(
+                                                        "span",
+                                                        {
+                                                          staticClass:
+                                                            "cube cube_motor is_motor"
+                                                        },
+                                                        [
+                                                          _vm._v(
+                                                            _vm._s(
+                                                              item[
+                                                                "harness_key"
+                                                              ]
+                                                            )
+                                                          )
+                                                        ]
+                                                      )
+                                                    : _c("span", [
+                                                        _vm._v(
+                                                          _vm._s(
+                                                            item["harness_key"]
+                                                          )
                                                         )
-                                                      )
-                                                    ]
-                                                  )
-                                                : _c("span", [
-                                                    _vm._v(
-                                                      _vm._s(
-                                                        item["harness_key"]
-                                                      )
-                                                    )
-                                                  ])
-                                            ]
-                                          )
-                                        : _c(
-                                            "a",
-                                            {
-                                              staticStyle: {
-                                                display: "flex",
-                                                "justify-content": "center"
-                                              }
-                                            },
-                                            [
-                                              _c("span", {
-                                                staticClass: "cube cube_motor",
-                                                class: item["motor"]
-                                                  ? "is_motor"
-                                                  : ""
-                                              })
-                                            ]
-                                          )
-                                    ]
-                                  )
-                                })
-                              ],
-                              2
+                                                      ])
+                                                ]
+                                              )
+                                            : _c(
+                                                "a",
+                                                {
+                                                  staticStyle: {
+                                                    display: "flex",
+                                                    "justify-content": "center"
+                                                  }
+                                                },
+                                                [
+                                                  _c("span", {
+                                                    staticClass:
+                                                      "cube cube_motor",
+                                                    class: item["motor"]
+                                                      ? "is_motor"
+                                                      : ""
+                                                  })
+                                                ]
+                                              )
+                                        ]
+                                      )
+                                    })
+                                  ],
+                                  2
+                                )
+                              }),
+                              0
                             )
-                          }),
-                          0
+                          ]
                         )
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "panel-footer" }, [
-                    _c(
-                      "button",
-                      {
-                        attrs: { type: "button" },
-                        on: { click: _vm.stageSave }
-                      },
-                      [_vm._v("保存当前格局")]
-                    )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "panel-footer" }, [
+                        _c(
+                          "button",
+                          {
+                            attrs: { type: "button" },
+                            on: { click: _vm.stageSave }
+                          },
+                          [_vm._v("保存当前格局")]
+                        )
+                      ])
+                    ])
                   ])
-                ])
-              ]),
+                : _vm._e(),
               _vm._v(" "),
               _vm.saved_data.fuse.pos_neg
                 ? _c("div", { staticStyle: { clear: "both" } }, [
@@ -22408,7 +22589,12 @@ var render = function() {
                                             }),
                                             _vm._v(
                                               "\n                                            " +
-                                                _vm._s(fuse.length) +
+                                                _vm._s(
+                                                  fuse.length +
+                                                    (fuse.length *
+                                                      parseInt(_vm.margin)) /
+                                                      100
+                                                ) +
                                                 "\n                                        "
                                             )
                                           ])
@@ -22420,7 +22606,16 @@ var render = function() {
                                     _c("td", [
                                       _vm.saved_data.fuse.res[s_index].length
                                         ? _c("input", {
-                                            attrs: { type: "checkbox" }
+                                            attrs: { type: "checkbox" },
+                                            on: {
+                                              click: function($event) {
+                                                return _vm.checkbox(
+                                                  "fuse",
+                                                  s_index,
+                                                  $event
+                                                )
+                                              }
+                                            }
                                           })
                                         : _vm._e()
                                     ])
@@ -22658,7 +22853,10 @@ var render = function() {
                                             }),
                                             _vm._v(
                                               "\n                                            " +
-                                                _vm._s(nofuse.length) +
+                                                _vm._s(
+                                                  nofuse.length +
+                                                    parseInt(_vm.margin)
+                                                ) +
                                                 "\n                                        "
                                             )
                                           ])
@@ -22670,7 +22868,16 @@ var render = function() {
                                     _c("td", [
                                       _vm.saved_data.nofuse.res[s_index].length
                                         ? _c("input", {
-                                            attrs: { type: "checkbox" }
+                                            attrs: { type: "checkbox" },
+                                            on: {
+                                              click: function($event) {
+                                                return _vm.checkbox(
+                                                  "nofuse",
+                                                  s_index,
+                                                  $event
+                                                )
+                                              }
+                                            }
                                           })
                                         : _vm._e()
                                     ])
@@ -22684,6 +22891,19 @@ var render = function() {
                         )
                       ])
                     ])
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.saved_data.fuse.res || _vm.saved_data.nofuse.res
+                ? _c("div", { staticClass: "btn-group" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "btn btn-primary",
+                        on: { click: _vm.submit }
+                      },
+                      [_vm._v("Submit")]
+                    )
                   ])
                 : _vm._e()
             ])

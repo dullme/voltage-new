@@ -15,7 +15,14 @@ class CreateTypicalsTable extends Migration
     {
         Schema::create('typicals', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('harness_id');
+            $table->string('name')->unique();
+            $table->string('show_name');
+            $table->integer('version');
+            $table->text('harnesses_selected');
+            $table->text('margin');
+            $table->text('motors');
+            $table->text('fuse');
+            $table->text('nofuse');
             $table->timestamps();
         });
     }

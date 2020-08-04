@@ -37,8 +37,8 @@
                     </thead>
                     <tbody>
                     <tr v-for="(harness,key) in harnesses_selected">
-                        <td><input type="radio" @click="updateCurrentHarness(key)" name="radio_harness"></td>
-                        <td>{{ harness.name }}</td>
+                        <td><input :id="key+'_radio_harness'" type="radio" @click="updateCurrentHarness(key)" name="radio_harness"></td>
+                        <td><label style="cursor: pointer" :for="key+'_radio_harness'">{{ harness.name }}</label></td>
                         <td>
                             <a class="cube" :style="'background-color:'+ harness.color">
                                 <span>{{ harness.harness_key}}</span>
@@ -85,6 +85,10 @@
                                 <option value="fuse">Fuse</option>
                                 <option value="nofuse">Nofuse</option>
                             </select>
+
+                            <label style="margin-left: 20px">余量：</label>
+                            <input class="form-control" style="width: 100px" v-model="margin">&nbsp;%
+
                             <button v-if="this.stages.length" type="button" style="margin-left: 20px"
                                     class="btn btn-sm btn-danger" @click="createStage">重新生成行列
                             </button>
@@ -93,7 +97,7 @@
                             </button>
                         </div>
                     </div>
-                    <div style="clear: both">
+                    <div v-if="stages.length" style="clear: both">
                         <div class="panel panel-default">
                             <div class="panel-heading">
 
@@ -209,10 +213,10 @@
                                             <span v-for="fuse in saved_data.fuse.res[s_index]">
                                                 <i class="fa fa-circle"
                                                    :style="'font-size:12px;color: '+fuse.color"></i>
-                                                {{ fuse.length }}
+                                                {{ fuse.length + fuse.length * parseInt(margin)/100 }}
                                             </span>
                                         </td>
-                                        <td><input v-if="saved_data.fuse.res[s_index].length" type="checkbox"></td>
+                                        <td><input v-if="saved_data.fuse.res[s_index].length" type="checkbox" @click="checkbox('fuse', s_index ,$event)"></td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -276,10 +280,10 @@
                                             <span v-for="nofuse in saved_data.nofuse.res[s_index]">
                                                 <i class="fa fa-circle"
                                                    :style="'font-size:12px;color: '+nofuse.color"></i>
-                                                {{ nofuse.length }}
+                                                {{ nofuse.length + parseInt(margin) }}
                                             </span>
                                         </td>
-                                        <td><input v-if="saved_data.nofuse.res[s_index].length" type="checkbox"></td>
+                                        <td><input v-if="saved_data.nofuse.res[s_index].length" type="checkbox" @click="checkbox('nofuse', s_index ,$event)"></td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -288,6 +292,7 @@
                     </div>
                     <!-- 保存的格局Nofuse END -->
 
+                    <div class="btn-group" v-if="saved_data.fuse.res || saved_data.nofuse.res"><a class="btn btn-primary" @click="submit">Submit</a></div>
 
                 </div>
 
@@ -373,8 +378,12 @@
         data() {
             return {
                 saved_data: {
-                    'fuse': [],
-                    'nofuse': []
+                    'fuse': {
+                        'ids':[],
+                    },
+                    'nofuse': {
+                        'ids':[],
+                    }
                 },
                 pos_neg: 'fuse',
                 current_harness_key: undefined,
@@ -386,10 +395,16 @@
                 motors: [],//电机
                 hang: '',
                 lie: '',
+                margin:0,
                 color: [
                     '#00204a', '#5e63b6', '#ca82f8',
                     '#17b978', '#ff6f3c', '#00adb5',
                     '#b61aae', '#ff9a00', '#ff165d',
+                    '#cdb30c', '#62760c', '#535204',
+                    '#523906', '#848ccf', '#93b5e1',
+                    '#ffe4e4', '#be5683', '#838383',
+                    '#7fdbda', '#ade498', '#ede682',
+                    '#febf63', '#fa1616', '#12cad6',
                 ]
             }
         },
@@ -470,7 +485,7 @@
 
             deleteHarness(key) {
                 this.current_harness_key = undefined
-                this.saved_data = {'fuse': [], 'nofuse': []}
+                this.saved_data = {'fuse': {ids:[]}, 'nofuse': {ids:[]}}
 
                 this.createStage()
                 this.harnesses.forEach((item, index) => {
@@ -478,7 +493,17 @@
                         this.harnesses[index]['checked'] = false;
                     }
                 })
-                this.harnesses_selected.splice(key, 1)
+                let id = this.harnesses_selected[key]['id']
+                let new_selected = [];
+                for(let index in this.harnesses_selected){
+                    if(this.harnesses_selected[index]['id'] != id){
+                        new_selected.push(this.harnesses_selected[index])
+                    }
+                }
+
+                this.harnesses_selected = new_selected
+                $('input[name=radio_harness]').attr("checked",false);
+                this.$forceUpdate()
                 swal('SUCCESS', '删除成功，舞台已被重新初始化', 'success')
             },
 
@@ -490,7 +515,20 @@
             createStage() {
                 //重置剩余可摆放数
                 for (let i = 0; i < this.harnesses_selected.length; i++) {
-                    this.harnesses_selected[i]['remaining'] = this.harnesses_selected[i]['string']
+                    let is_used = false
+
+                    let all_ids = this.saved_data.fuse.ids.concat(this.saved_data.nofuse.ids)
+                    for(let id in all_ids){
+                        if(all_ids[id] == this.harnesses_selected[i]['id']){
+                            is_used = true
+                        }
+                    }
+
+                    if(is_used){
+                        this.harnesses_selected[i]['remaining'] = 0
+                    }else{
+                        this.harnesses_selected[i]['remaining'] = this.harnesses_selected[i]['string']
+                    }
                 }
 
                 this.stages = [];
@@ -593,18 +631,48 @@
             },
 
             deleteSavedData(str) {
-                this.saved_data[str] = []
+                this.saved_data[str] = { 'ids':[] }
+                this.createStage()
             },
 
             stageSave() {
+                let ids = [];
+
                 for (let i = 0; i < this.harnesses_selected.length; i++) {
                     let real_count = this.harnesses_selected[i]['string']
                     if (this.harnesses_selected[i]['remaining'] != 0 && this.harnesses_selected[i]['remaining'] != real_count) {
-                        console.log(real_count)
-                        console.log(this.harnesses_selected[i]['remaining'])
                         swal('ERROR', '请把剩余点数填充完', 'error')
                         return false
                     }
+
+                    if(this.harnesses_selected[i]['remaining'] != real_count){
+                        ids.push(this.harnesses_selected[i]['id'])
+                    }
+                }
+
+                ids = this.unique22(ids)
+                for(let id in ids){
+                    for (let i = 0; i < this.harnesses_selected.length; i++) {
+                        if (this.harnesses_selected[i]['id'] == ids[id] && this.harnesses_selected[i]['remaining'] != 0) {
+                            swal('ERROR', '请把剩余点数填充完', 'error')
+                            return false
+                        }
+                    }
+                }
+
+
+                let is_empty = true;
+                for (let i = 0; i<this.stages.length; i++){
+                    for(let key in this.stages[i]){
+                        if(this.stages[i][key]['id'] != ''){
+                            is_empty = false;
+                        }
+                    }
+                }
+
+                if(is_empty){
+                    swal('ERROR', '请填充格子', 'error')
+                    return false
                 }
 
                 $('#loading').css('display', 'block');
@@ -622,6 +690,7 @@
                         swal('SUCCESS', '添加成功', 'success').then(() => {
                             this.saved_data[response.data.data['pos_neg']] = response.data.data
                             this.$forceUpdate()
+                            this.createStage()
                         })
                     }
                 }).catch(error => {
@@ -629,6 +698,48 @@
                     toastr.error(error.response.data.message)
                 });
             },
+
+            submit(){
+                for (let i = 0; i < this.harnesses_selected.length; i++) {
+                    if (this.harnesses_selected[i]['remaining'] != 0) {
+                        swal('ERROR', '必须把所有点数填充完', 'error')
+                        return false
+                    }
+                }
+
+                $('#loading').css('display', 'block');
+                axios({
+                    method: 'post',
+                    url: '/admin/stage-submit',
+                    data: {
+                        harnesses_selected: this.harnesses_selected, //被选择的 Harness
+                        fuse: this.saved_data.fuse, //有保险丝
+                        nofuse: this.saved_data.nofuse, //没有保险丝
+                        motors: this.motors, //电机位置
+                        margin: this.margin //余量
+                    }
+                }).then(response => {
+                    $('#loading').css('display', 'none');
+                    if (response.data.status) {
+                        swal('SUCCESS', '添加成功', 'success').then(() => {
+                            this.saved_data[response.data.data['pos_neg']] = response.data.data
+                            this.$forceUpdate()
+                        })
+                    }
+                }).catch(error => {
+                    $('#loading').css('display', 'none');
+                    toastr.error(error.response.data.message)
+                });
+            },
+
+            checkbox(name, index, e){
+                this.saved_data[name]['check_list'][index] = e.target.checked
+            },
+
+            unique22(arr){
+                let x = new Set(arr);
+                return [...x];
+            }
         },
     }
 </script>

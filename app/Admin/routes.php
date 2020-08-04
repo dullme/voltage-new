@@ -24,6 +24,8 @@ Route::group([
 
     //Typical
     $router->resource('typicals', TypicalController::class);
+    $router->get('typicals/{typical}', 'TypicalController@detailInfo');
     $router->post('stage-save', 'TypicalController@stageSave');
+    $router->post('stage-submit', 'TypicalController@stageSubmit');
 
 });

@@ -31,11 +31,31 @@ class TypicalController extends ResponseController
         $grid = new Grid(new Typical());
 
         $grid->column('id', __('Id'));
-        $grid->column('harness_id', __('Harness id'));
+        $grid->column('name', __('Name'))->display(function ($name) {
+            $url = url('/admin/typicals/' . $this->id);
+
+            return "<a href='{$url}'>{$name}</a>";
+        });
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
 
+        $grid->actions(function (Grid\Displayers\Actions $actions) {
+            $actions->disableView();
+            $actions->disableEdit();
+//            $actions->disableDelete();
+        });
+
         return $grid;
+    }
+
+    protected function detailInfo($id, Content $content)
+    {
+        $typical = Typical::findOrFail($id);
+
+        return $content
+            ->title($this->title())
+            ->description($this->description['create'] ?? trans('admin.create'))
+            ->body(view('admin.typical.detail', compact('typical')));
     }
 
     public function create(Content $content)
@@ -60,7 +80,36 @@ EOF
             return $this->jiSuan($item);
         });
 
+        $data['ids'] = collect($data['stages'])->flatten(1)->pluck('id')->unique()->filter()->values()->toArray();
+        $data['check_list'] = [];
+        for($i = 0 ; $i < count($data['res']); $i++){
+            $data['check_list'][$i] = false;
+        }
+
         return $this->responseSuccess($data);
+    }
+
+    public function stageSubmit(Request $request)
+    {
+        $data = $request->all();
+        $str = collect($data['harnesses_selected'])->groupBy('string')->map(function ($item, $key){
+            return (string)count($item).sprintf('%02d',$key);
+        })->implode(''); //几个几串
+
+        $max_length = sprintf('%03d', collect($data['harnesses_selected'])->max('max_length'));//组串长度最大值
+        $fuse_motors = isset($data['fuse']['motors']) ? collect($data['fuse']['motors'])->sum('number') : 0;
+        $nofuse_motors = isset($data['nofuse']['motors']) ? collect($data['nofuse']['motors'])->sum('number') : 0;
+        $sum_motor = sprintf('%02d', $fuse_motors + $nofuse_motors);//电机长的和
+
+        $data['show_name'] = "VT{$str}{$max_length}{$sum_motor}";
+
+        $typical = Typical::where('show_name', $data['show_name'])->orderBy('id', 'DESC')->first();
+        $data['version'] = $version = sprintf('%02d',$typical ? $typical->version + 1 : 1);
+        $data['name'] = "VT{$str}{$max_length}{$sum_motor}{$version}";
+
+        $res = Typical::create($data);
+
+        return $this->responseSuccess($res);
     }
 
     private function jiSuan(array $data)
