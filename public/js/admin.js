@@ -2038,11 +2038,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       components: [],
       form_data: {
+        have_fuse: '1',
         min_length: '',
         max_length: '',
         fuse: '',
@@ -2052,7 +2061,7 @@ __webpack_require__.r(__webpack_exports__);
         remarks: '',
         components: [{
           id: '',
-          length: 1,
+          length: '',
           quantity: 1,
           remarks: ''
         }]
@@ -2068,6 +2077,19 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   methods: {
+    changeComponent: function changeComponent(id, index) {
+      for (var i in this.components) {
+        if (this.components[i]['id'] == id) {
+          if (this.components[i]['type'] == 2 || this.components[i]['type'] == 3) {
+            this.form_data.components[index]['length'] = 1;
+            $("#component_" + index).attr("disabled", false);
+          } else {
+            this.form_data.components[index]['length'] = '';
+            $("#component_" + index).attr("disabled", true);
+          }
+        }
+      }
+    },
     //添加零件
     addComponent: function addComponent() {
       var end = this.form_data.components[this.form_data.components.length - 1];
@@ -2079,7 +2101,7 @@ __webpack_require__.r(__webpack_exports__);
 
       this.form_data.components.push({
         id: '',
-        length: 1,
+        length: '',
         quantity: 1,
         remarks: ''
       });
@@ -21367,6 +21389,71 @@ var render = function() {
             _vm._v(" "),
             _c("div", { staticClass: "form-group" }, [
               _c("label", { staticClass: "col-sm-2 asterisk control-label" }, [
+                _vm._v("有无 Fuse")
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "col-sm-8 w-200",
+                  staticStyle: { display: "flex" }
+                },
+                [
+                  _c("label", { staticStyle: { display: "flex" } }, [
+                    _vm._v("有"),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form_data.have_fuse,
+                          expression: "form_data.have_fuse"
+                        }
+                      ],
+                      attrs: { name: "have_fuse", type: "radio", value: "1" },
+                      domProps: {
+                        checked: _vm._q(_vm.form_data.have_fuse, "1")
+                      },
+                      on: {
+                        change: function($event) {
+                          return _vm.$set(_vm.form_data, "have_fuse", "1")
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "label",
+                    { staticStyle: { "margin-left": "15px", display: "flex" } },
+                    [
+                      _vm._v("无"),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form_data.have_fuse,
+                            expression: "form_data.have_fuse"
+                          }
+                        ],
+                        attrs: { name: "have_fuse", type: "radio", value: "0" },
+                        domProps: {
+                          checked: _vm._q(_vm.form_data.have_fuse, "0")
+                        },
+                        on: {
+                          change: function($event) {
+                            return _vm.$set(_vm.form_data, "have_fuse", "0")
+                          }
+                        }
+                      })
+                    ]
+                  )
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { staticClass: "col-sm-2 asterisk control-label" }, [
                 _vm._v("Fuse")
               ]),
               _vm._v(" "),
@@ -21541,26 +21628,34 @@ var render = function() {
                                   ],
                                   staticClass: "form-control",
                                   on: {
-                                    change: function($event) {
-                                      var $$selectedVal = Array.prototype.filter
-                                        .call($event.target.options, function(
-                                          o
-                                        ) {
-                                          return o.selected
-                                        })
-                                        .map(function(o) {
-                                          var val =
-                                            "_value" in o ? o._value : o.value
-                                          return val
-                                        })
-                                      _vm.$set(
-                                        item,
-                                        "id",
-                                        $event.target.multiple
-                                          ? $$selectedVal
-                                          : $$selectedVal[0]
-                                      )
-                                    }
+                                    change: [
+                                      function($event) {
+                                        var $$selectedVal = Array.prototype.filter
+                                          .call($event.target.options, function(
+                                            o
+                                          ) {
+                                            return o.selected
+                                          })
+                                          .map(function(o) {
+                                            var val =
+                                              "_value" in o ? o._value : o.value
+                                            return val
+                                          })
+                                        _vm.$set(
+                                          item,
+                                          "id",
+                                          $event.target.multiple
+                                            ? $$selectedVal
+                                            : $$selectedVal[0]
+                                        )
+                                      },
+                                      function($event) {
+                                        return _vm.changeComponent(
+                                          item.id,
+                                          index
+                                        )
+                                      }
+                                    ]
                                   }
                                 },
                                 _vm._l(_vm.components, function(component) {
@@ -21596,7 +21691,11 @@ var render = function() {
                                   }
                                 ],
                                 staticClass: "form-control",
-                                attrs: { type: "number" },
+                                attrs: {
+                                  id: "component_" + index,
+                                  type: "number",
+                                  disabled: ""
+                                },
                                 domProps: { value: item.length },
                                 on: {
                                   input: function($event) {

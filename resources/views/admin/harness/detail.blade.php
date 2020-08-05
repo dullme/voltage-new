@@ -19,6 +19,18 @@
             <div class="fields-group">
 
                 <div class="form-group ">
+                    <label class="col-sm-2 control-label">Image</label>
+                    <div class="col-sm-8">
+                        <div class="box box-solid box-default no-margin box-show">
+                            <!-- /.box-header -->
+                            <div class="box-body">
+                                <img width="100%" src="{{ asset('uploads/'.$harness->image) }}">
+                            </div><!-- /.box-body -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group ">
                     <label class="col-sm-2 control-label">Name</label>
                     <div class="col-sm-8">
                         <div class="box box-solid box-default no-margin box-show">
@@ -90,44 +102,64 @@
                     </div>
                 </div>
 
-            </div>
-
-            @foreach($harness->harnessComponents as $item)
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h3 class="panel-title">
-                        【{{ \App\Enums\PartType::getDescription($item->part_type) }}】{{ $item->component->name }}：{{ $item->component->price }} * {{ $item->quantity }}
-                        @if(in_array($item->part_type, [\App\Enums\PartType::PVWire, \App\Enums\PartType::MVCable]))
-                            <label class="pull-right">Total length：{{ $item->length }}</label>
-                        @endif
-                    </h3>
-                </div>
-                @if(in_array($item->part_type, [\App\Enums\PartType::PVWire, \App\Enums\PartType::MVCable]))
-                <div class="panel-body">
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th>Length</th>
-                            <th>Quantity</th>
-                            <th>Total</th>
-                            <th>Remarks</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($item->details as $detail)
-                            <tr>
-                                <td>{{ $detail['length'] }}</td>
-                                <td>{{ $detail['quantity'] }}</td>
-                                <td>{{ $detail['length'] * $detail['quantity'] }}</td>
-                                <td>{{ $detail['remarks'] }}</td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
+                @if($harness->file)
+                <div class="form-group ">
+                    <label class="col-sm-2 control-label">File</label>
+                    <div class="col-sm-8">
+                        <div class="box box-solid box-default no-margin box-show">
+                            <!-- /.box-header -->
+                            <div class="box-body">
+                                <a href="{{ asset('uploads/'.$harness->file) }}" target="_blank">下载</a>
+                            </div><!-- /.box-body -->
+                        </div>
+                    </div>
                 </div>
                 @endif
+
             </div>
-            @endforeach
+
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-8">
+                    @foreach($harness->harnessComponents as $item)
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">
+                                    【{{ \App\Enums\PartType::getDescription($item->part_type) }}】{{ $item->component->name }}：{{ $item->component->price }} * {{ $item->quantity }}
+                                    @if(in_array($item->part_type, [\App\Enums\PartType::PVWire, \App\Enums\PartType::MVCable]))
+                                        <label class="pull-right">Total length：{{ $item->length }}</label>
+                                    @endif
+                                </h3>
+                            </div>
+                            @if(in_array($item->part_type, [\App\Enums\PartType::PVWire, \App\Enums\PartType::MVCable]))
+                                <div class="panel-body">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th>Length</th>
+                                            <th>Quantity</th>
+                                            <th>Total</th>
+                                            <th>Remarks</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($item->details as $detail)
+                                            <tr>
+                                                <td>{{ $detail['length'] }}</td>
+                                                <td>{{ $detail['quantity'] }}</td>
+                                                <td>{{ $detail['length'] * $detail['quantity'] }}</td>
+                                                <td>{{ $detail['remarks'] }}</td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            @endif
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+
 
         </div>
         <!-- /.box-body -->

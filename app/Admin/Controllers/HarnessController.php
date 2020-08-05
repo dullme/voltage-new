@@ -36,9 +36,12 @@ class HarnessController extends ResponseController
     protected function grid()
     {
         $grid = new Grid(new Harness());
-        $grid->disableActions();
-
-        $grid->column('id', __('Id'));
+        $grid->actions(function (Grid\Displayers\Actions $actions) {
+            $actions->disableView();
+//        $actions->disableEdit();
+            $actions->disableDelete();
+        });
+        $grid->column('image')->lightbox(['width' => 100, 'height' => 100]);
         $grid->column('name', __('Name'))->display(function ($name) {
             $url = url('/admin/harnesses/' . $this->id);
 
@@ -47,6 +50,7 @@ class HarnessController extends ResponseController
         $grid->column('length', __('Length'))->display(function () {
             return "{$this->min_length} ~ {$this->max_length}";
         });
+        $grid->column('have_fuse', __('有无 Fuse'))->bool();
         $grid->column('fuse', __('Fuse'));
         $grid->column('string', __('String'));
         $grid->column('outlet_length', __('Outlet length'));
@@ -89,6 +93,7 @@ EOF
         $validator = Validator::make(request()->all(), [
             'min_length'            => 'required|integer',
             'max_length'            => 'required|integer|gte:min_length',
+            'have_fuse'             => 'required|integer',
             'fuse'                  => 'required|integer',
             'string'                => 'required|integer',
             'outlet_length'         => 'required|integer',
@@ -184,6 +189,7 @@ EOF
                 'version'       => $version,
                 'min_length'    => $data['min_length'],
                 'max_length'    => $data['max_length'],
+                'have_fuse'     => $data['have_fuse'],
                 'fuse'          => $data['fuse'],
                 'string'        => $data['string'],
                 'outlet_length' => $data['outlet_length'],
@@ -246,5 +252,15 @@ EOF
         });
 
         return $this->responseSuccess($harnesses);
+    }
+
+    protected function form()
+    {
+        $form = new Form(new Harness());
+
+        $form->image('image', __('Image'))->removable()->uniqueName()->thumbnail('small', $width = 300, $height = 300);
+        $form->file('file', __('File'))->removable()->uniqueName();
+
+        return $form;
     }
 }

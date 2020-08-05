@@ -106,14 +106,15 @@ class ComponentController extends AdminController
     public function getComponentList()
     {
         $components = Component::orderBy('part_type', 'ASC')->get();
-        $components = $components->map(function ($item){
+        $components = $components->map(function ($item) {
             return [
-                'id' => $item->id,
-                'name' => $item->name,
-                'price' => $item->price,
-                'weight' => $item->weight,
+                'id'        => $item->id,
+                'name'      => $item->name,
+                'price'     => $item->price,
+                'weight'    => $item->weight,
                 'part_type' => PartType::getDescription($item->part_type),
-                'currency' => CURRENCY_MARK[$item->currency],
+                'type'      => $item->part_type,
+                'currency'  => CURRENCY_MARK[$item->currency],
             ];
         });
 

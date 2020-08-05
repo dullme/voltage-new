@@ -13,6 +13,7 @@ class Harness extends BaseModel
         'min_length',
         'max_length',
         'fuse',
+        'have_fuse',
         'string',
         'outlet_length',
         'module',

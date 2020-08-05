@@ -32,6 +32,14 @@
                         </div>
 
                         <div class="form-group">
+                            <label class="col-sm-2 asterisk control-label">有无 Fuse</label>
+                            <div class="col-sm-8 w-200" style="display: flex">
+                                <label style="display: flex">有<input name="have_fuse" type="radio" value="1" v-model="form_data.have_fuse"></label>
+                                <label style="margin-left: 15px;display: flex">无<input name="have_fuse" type="radio" value="0" v-model="form_data.have_fuse"></label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <label class="col-sm-2 asterisk control-label">Fuse</label>
                             <div class="col-sm-8 w-200">
                                 <input class="form-control" v-model="form_data.fuse">
@@ -79,13 +87,13 @@
                                     <tbody>
                                         <tr v-for="(item,index) in form_data.components">
                                             <td>
-                                                <select class="form-control" v-model="item.id">
+                                                <select class="form-control" v-model="item.id" v-on:change="changeComponent(item.id, index)">
                                                     <option :value="component.id" v-for="component in components">
                                                         【{{ component.part_type }}】{{ component.name }}：{{ component.currency }}{{ component.price }}
                                                     </option>
                                                 </select>
                                             </td>
-                                            <td><input type="number" class="form-control" v-model="item.length"></td>
+                                            <td><input :id="'component_'+index" type="number" class="form-control" v-model="item.length" disabled></td>
                                             <td><input type="number" class="form-control" v-model="item.quantity"></td>
                                             <td><input type="text" class="form-control" v-model="item.remarks"></td>
                                             <td style="vertical-align: middle;">
@@ -134,6 +142,7 @@
             return {
                 components:[],
                 form_data:{
+                    have_fuse:'1',
                     min_length:'',
                     max_length:'',
                     fuse:'',
@@ -142,7 +151,7 @@
                     module:'',
                     remarks:'',
                     components:[
-                        {id:'', length:1, quantity:1, remarks:''}
+                        {id:'', length:'', quantity:1, remarks:''}
                     ],
                 },
             }
@@ -155,6 +164,20 @@
             })
         },
         methods: {
+            changeComponent(id, index){
+              for (let i in this.components){
+                  if(this.components[i]['id'] == id){
+                      if(this.components[i]['type'] == 2 || this.components[i]['type'] == 3){
+                          this.form_data.components[index]['length'] = 1
+                          $("#component_"+index).attr("disabled",false);
+                      }else{
+                          this.form_data.components[index]['length'] = ''
+                          $("#component_"+index).attr("disabled",true);
+                      }
+                  }
+              }
+            },
+
             //添加零件
             addComponent(){
                 let end = this.form_data.components[this.form_data.components.length-1]
@@ -162,7 +185,7 @@
                     swal ( "INFO" ,  "请选择零件" ,  "info" )
                     return
                 }
-                this.form_data.components.push({id:'', length:1, quantity:1, remarks:''});
+                this.form_data.components.push({id:'', length:'', quantity:1, remarks:''});
             },
 
             //删除零件
