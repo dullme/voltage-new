@@ -24,7 +24,7 @@
                         <div class="box box-solid box-default no-margin box-show">
                             <!-- /.box-header -->
                             <div class="box-body">
-                                <img width="100%" src="{{ asset('uploads/'.$harness->image) }}">
+                                <img width="35%" src="{{ asset('uploads/'.$harness->image) }}">
                             </div><!-- /.box-body -->
                         </div>
                     </div>
