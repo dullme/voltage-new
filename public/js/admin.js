@@ -2039,13 +2039,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2054,7 +2047,6 @@ __webpack_require__.r(__webpack_exports__);
         have_fuse: '1',
         min_length: '',
         max_length: '',
-        fuse: '',
         string: '',
         outlet_length: '',
         module: '',
@@ -2131,7 +2123,6 @@ __webpack_require__.r(__webpack_exports__);
             _this2.form_data = {
               min_length: '',
               max_length: '',
-              fuse: '',
               string: '',
               outlet_length: '',
               module: '',
@@ -2550,6 +2541,49 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2589,6 +2623,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     searchHarness: function searchHarness() {
       var _this2 = this;
 
+      $('#loading').css('display', 'block');
       var ids = [];
 
       if (this.harnesses_selected.length) {
@@ -2606,8 +2641,12 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
           ids: ids
         }
       }).then(function (response) {
-        _this2.harnesses = response.data.data;
+        setTimeout(function () {
+          $('#loading').css('display', 'none');
+          _this2.harnesses = response.data.data;
+        }, 200);
       })["catch"](function (error) {
+        $('#loading').css('display', 'none');
         toastr.error(error.response.data.message);
       });
     },
@@ -2647,6 +2686,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
                 remarks: _this3.harnesses[key]['remarks'],
                 string: _this3.harnesses[key]['string'],
                 remaining: _this3.harnesses[key]['string'],
+                have_fuse: _this3.harnesses[key]['have_fuse'],
+                image: _this3.harnesses[key]['image'],
                 harness_key: i,
                 color: color
               };
@@ -2974,6 +3015,14 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     unique22: function unique22(arr) {
       var x = new Set(arr);
       return _toConsumableArray(x);
+    },
+    closeImage: function closeImage() {
+      $('#img-mask').css('display', 'none');
+      $('#img-mask .mfp-img').attr('src', '');
+    },
+    showImage: function showImage(url) {
+      $('#img-mask').css('display', 'block');
+      $('#img-mask .mfp-img').attr('src', url);
     }
   }
 });
@@ -3011,7 +3060,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.w-200 {\n    width: 200px;\n}\n.cube {\n    display: flex;\n    width: 25px;\n    height: 25px;\n    border: 1px solid #000000;\n    cursor: pointer;\n    justify-content: center;\n    align-items: center;\n    font-size: 25px;\n    color: #FFFFFF;\n}\n.cube_motor {\n    border-color: #dadada;\n    width: 3px;\n}\n.border_white {\n    border-color: #FFFFFF;\n}\n.border_gray {\n    border-color: #dadada;\n}\n.color_gray {\n    color: #dadada;\n}\n.border_black {\n    border-color: #000000;\n}\n.is_motor {\n    border-color: #000000;\n    background-color: #000000;\n}\n.table-hover > tbody > tr:hover .border_white {\n    border-color: #f5f5f5;\n}\n.stages > tbody > tr > td,\n.stages > tbody > tr > th,\n.stages > tfoot > tr > td,\n.stages > tfoot > tr > th,\n.stages > thead > tr > td,\n.stages > thead > tr > th {\n    padding: 3px;\n}\n", ""]);
+exports.push([module.i, "\n.w-200 {\n    width: 200px;\n}\n.cube {\n    display: flex;\n    width: 25px;\n    height: 25px;\n    border: 1px solid #000000;\n    cursor: pointer;\n    justify-content: center;\n    align-items: center;\n    font-size: 25px;\n    color: #FFFFFF;\n}\n.cube_motor {\n    border-color: #dadada;\n    width: 3px;\n}\n.border_white {\n    border-color: #FFFFFF;\n}\n.border_gray {\n    border-color: #dadada;\n}\n.color_gray {\n    color: #dadada;\n}\n.border_black {\n    border-color: #000000;\n}\n.is_motor {\n    border-color: #000000;\n    background-color: #000000;\n}\n.table-hover > tbody > tr:hover .border_white {\n    border-color: #f5f5f5;\n}\n.stages > tbody > tr > td,\n.stages > tbody > tr > th,\n.stages > tfoot > tr > td,\n.stages > tfoot > tr > th,\n.stages > thead > tr > td,\n.stages > thead > tr > th {\n    padding: 3px;\n}\n.table > tbody > tr > td,\n.table > tbody > tr > th,\n.table > tfoot > tr > td,\n.table > tfoot > tr > th,\n.table > thead > tr > td,\n.table > thead > tr > th {\n    vertical-align: middle;\n}\n", ""]);
 
 // exports
 
@@ -21454,35 +21503,6 @@ var render = function() {
             _vm._v(" "),
             _c("div", { staticClass: "form-group" }, [
               _c("label", { staticClass: "col-sm-2 asterisk control-label" }, [
-                _vm._v("Fuse")
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-sm-8 w-200" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.form_data.fuse,
-                      expression: "form_data.fuse"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  domProps: { value: _vm.form_data.fuse },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.form_data, "fuse", $event.target.value)
-                    }
-                  }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _c("label", { staticClass: "col-sm-2 asterisk control-label" }, [
                 _vm._v("String")
               ]),
               _vm._v(" "),
@@ -21972,6 +21992,27 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("td", [
+                    harness.image
+                      ? _c("img", {
+                          staticStyle: { cursor: "pointer" },
+                          attrs: {
+                            src: harness.image,
+                            width: "50",
+                            height: "50"
+                          },
+                          on: {
+                            click: function($event) {
+                              return _vm.showImage(harness.image)
+                            }
+                          }
+                        })
+                      : _c("i", {
+                          staticClass: "fa fa-image",
+                          staticStyle: { "font-size": "45px", color: "#dedede" }
+                        })
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [
                     _c(
                       "label",
                       {
@@ -21994,6 +22035,12 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(harness.string))]),
+                  _vm._v(" "),
+                  _c("td", [
+                    harness.have_fuse
+                      ? _c("i", { staticClass: "fa fa-check text-success" })
+                      : _c("i", { staticClass: "fa fa-close text-red" })
+                  ]),
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(harness.remaining))]),
                   _vm._v(" "),
@@ -22313,8 +22360,7 @@ var render = function() {
                                           "p",
                                           {
                                             staticStyle: {
-                                              "margin-bottom": "unset",
-                                              cursor: "pointer"
+                                              "margin-bottom": "unset"
                                             }
                                           },
                                           [_vm._v(_vm._s(i.name))]
@@ -23071,11 +23117,9 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
-                  _c(
-                    "label",
-                    { staticClass: "col-sm-3 asterisk control-label" },
-                    [_vm._v("主串长度")]
-                  ),
+                  _c("label", { staticClass: "col-sm-3 control-label" }, [
+                    _vm._v("主串长度")
+                  ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-sm-7" }, [
                     _c("input", {
@@ -23121,9 +23165,39 @@ var render = function() {
                 [
                   _vm._l(_vm.harnesses, function(harness, key) {
                     return _c("tr", [
+                      _c("td", [
+                        harness.image
+                          ? _c("img", {
+                              staticStyle: { cursor: "pointer" },
+                              attrs: {
+                                src: harness.image,
+                                width: "50",
+                                height: "50"
+                              },
+                              on: {
+                                click: function($event) {
+                                  return _vm.showImage(harness.image)
+                                }
+                              }
+                            })
+                          : _c("i", {
+                              staticClass: "fa fa-image",
+                              staticStyle: {
+                                "font-size": "45px",
+                                color: "#dedede"
+                              }
+                            })
+                      ]),
+                      _vm._v(" "),
                       _c("td", [_vm._v(_vm._s(harness.name))]),
                       _vm._v(" "),
                       _c("td", [_vm._v(_vm._s(harness.string))]),
+                      _vm._v(" "),
+                      _c("td", [
+                        harness.have_fuse
+                          ? _c("i", { staticClass: "fa fa-check text-success" })
+                          : _c("i", { staticClass: "fa fa-close text-red" })
+                      ]),
                       _vm._v(" "),
                       _c("td", [
                         _vm._v(
@@ -23173,7 +23247,7 @@ var render = function() {
                               "text-align": "center",
                               color: "#999999"
                             },
-                            attrs: { colspan: "5" }
+                            attrs: { colspan: "6" }
                           },
                           [
                             _c(
@@ -23212,6 +23286,49 @@ var render = function() {
           ])
         ])
       ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticStyle: { display: "none" }, attrs: { id: "img-mask" } }, [
+      _c("div", {
+        staticClass: "mfp-bg mfp-ready",
+        staticStyle: { "z-index": "8888" }
+      }),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "mfp-wrap mfp-close-btn-in mfp-auto-cursor mfp-ready",
+          staticStyle: { overflow: "hidden auto", "z-index": "9999" },
+          attrs: { tabindex: "-1" }
+        },
+        [
+          _c(
+            "div",
+            { staticClass: "mfp-container mfp-s-ready mfp-image-holder" },
+            [
+              _c("div", { staticClass: "mfp-content" }, [
+                _c("div", { staticClass: "mfp-figure" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "mfp-close",
+                      attrs: { title: "Close (Esc)", type: "button" },
+                      on: { click: _vm.closeImage }
+                    },
+                    [_vm._v("×")]
+                  ),
+                  _vm._v(" "),
+                  _vm._m(10)
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "mfp-preloader" }, [
+                _vm._v("Loading...")
+              ])
+            ]
+          )
+        ]
+      )
     ])
   ])
 }
@@ -23282,11 +23399,15 @@ var staticRenderFns = [
       _c("tr", [
         _c("th", [_vm._v("#")]),
         _vm._v(" "),
+        _c("th", [_vm._v("Image")]),
+        _vm._v(" "),
         _c("th", [_vm._v("Name")]),
         _vm._v(" "),
         _c("th", [_vm._v("Color")]),
         _vm._v(" "),
         _c("th", [_vm._v("String")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("有无 Fuse")]),
         _vm._v(" "),
         _c("th", [_vm._v("剩余可摆放数")]),
         _vm._v(" "),
@@ -23376,15 +23497,39 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
+        _c("th", [_vm._v("Image")]),
+        _vm._v(" "),
         _c("th", [_vm._v("Name")]),
         _vm._v(" "),
         _c("th", [_vm._v("String")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("有无 Fuse")]),
         _vm._v(" "),
         _c("th", [_vm._v("Length")]),
         _vm._v(" "),
         _c("th", [_vm._v("Remarks")]),
         _vm._v(" "),
         _c("th", [_vm._v("Action")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("figure", [
+      _c("img", {
+        staticClass: "mfp-img",
+        staticStyle: { "max-height": "596px" },
+        attrs: { alt: "undefined", src: "" }
+      }),
+      _vm._v(" "),
+      _c("figcaption", [
+        _c("div", { staticClass: "mfp-bottom-bar" }, [
+          _c("div", { staticClass: "mfp-title" }),
+          _vm._v(" "),
+          _c("div", { staticClass: "mfp-counter" })
+        ])
       ])
     ])
   }

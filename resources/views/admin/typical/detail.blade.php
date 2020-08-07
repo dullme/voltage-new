@@ -1,6 +1,6 @@
 <div class="box box-info">
     <div class="box-header with-border">
-        <h3 class="box-title">详细</h3>
+        <h3 class="box-title">{{ $typical->name }}</h3>
 
         <div class="box-tools">
             <div class="btn-group pull-right" style="margin-right: 5px">
@@ -32,7 +32,7 @@
                 </tr>
                 @foreach($harnesses as $harness)
                     <tr>
-                        <td style="width: 200px"><label style="cursor: pointer">{{ $harness['name'] }}</label></td>
+                        <td style="width: 200px"><label>{{ $harness['name'] }}</label></td>
                         <td>{{ $harness['count'] }}</td>
                     </tr>
                 @endforeach
@@ -74,7 +74,7 @@
                                 </th>
                                 @foreach($typical->fuse['motors'] as $motor)
                                 <th style="text-align: center;">
-                                    <p style="margin-bottom: unset;cursor: pointer">{{ $motor['name'] }}</p>
+                                    <p style="margin-bottom: unset;">{{ $motor['name'] }}</p>
                                 </th>
                                 @endforeach
                                 <th></th>
@@ -86,7 +86,7 @@
                                 </th>
                                 @foreach($typical->fuse['motors'] as $motor)
                                 <th style="text-align: center;">
-                                    <p style="margin-bottom: unset;cursor: pointer"
+                                    <p style="margin-bottom: unset;"
                                        class="{{ $motor['number'] == 0 ? 'color_gray' :''}}">{{ $motor['number'] }}</p>
                                 </th>
                                 @endforeach
@@ -102,12 +102,12 @@
                                 @foreach($stage as $i_index=>$item)
                                 <td style="text-align: center;vertical-align: middle">
                                     @if($i_index%2 == 0)
-                                    <a class="cube" style="{{ $item['color'] ? 'background-color:'.$item['color'] : '' }}">
-                                        <span class="{{ $item['motor'] ? 'cube cube_motor is_motor' : '' }}">{{ isset($item['harness_key']) ? $item['harness_key'] : '' }}</span>
+                                    <a class="cube" style="cursor: unset;{{ $item['color'] ? 'background-color:'.$item['color'] : '' }} ">
+                                        <span style="cursor: unset" class="{{ $item['motor'] ? 'cube cube_motor is_motor' : '' }}">{{ isset($item['harness_key']) ? $item['harness_key'] : '' }}</span>
                                     </a>
                                     @else
                                     <a style="display: flex;justify-content: center">
-                                        <span class="cube cube_motor {{ $item['motor']?'is_motor':'' }}"></span>
+                                        <span style="cursor: unset" class="cube cube_motor {{ $item['motor']?'is_motor':'' }}"></span>
                                     </a>
                                     @endif
                                 </td>
@@ -154,7 +154,7 @@
                                     </th>
                                     @foreach($typical->nofuse['motors'] as $motor)
                                         <th style="text-align: center;">
-                                            <p style="margin-bottom: unset;cursor: pointer">{{ $motor['name'] }}</p>
+                                            <p style="margin-bottom: unset;">{{ $motor['name'] }}</p>
                                         </th>
                                     @endforeach
                                     <th></th>
@@ -166,7 +166,7 @@
                                     </th>
                                     @foreach($typical->nofuse['motors'] as $motor)
                                         <th style="text-align: center;">
-                                            <p style="margin-bottom: unset;cursor: pointer"
+                                            <p style="margin-bottom: unset;"
                                                class="{{ $motor['number'] == 0 ? 'color_gray' :''}}">{{ $motor['number'] }}</p>
                                         </th>
                                     @endforeach
@@ -182,12 +182,12 @@
                                         @foreach($stage as $i_index=>$item)
                                             <td style="text-align: center;vertical-align: middle">
                                                 @if($i_index%2 == 0)
-                                                    <a class="cube" style="{{ $item['color'] ? 'background-color:'.$item['color'] : '' }}">
-                                                        <span class="{{ $item['motor'] ? 'cube cube_motor is_motor' : '' }}">{{ isset($item['harness_key']) ? $item['harness_key'] : '' }}</span>
+                                                    <a class="cube" style="cursor: unset;{{ $item['color'] ? 'background-color:'.$item['color'] : '' }}">
+                                                        <span style="cursor: unset" class="{{ $item['motor'] ? 'cube cube_motor is_motor' : '' }}">{{ isset($item['harness_key']) ? $item['harness_key'] : '' }}</span>
                                                     </a>
                                                 @else
                                                     <a style="display: flex;justify-content: center">
-                                                        <span class="cube cube_motor {{ $item['motor']?'is_motor':'' }}"></span>
+                                                        <span style="cursor: unset" class="cube cube_motor {{ $item['motor']?'is_motor':'' }}"></span>
                                                     </a>
                                                 @endif
                                             </td>

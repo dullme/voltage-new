@@ -40,13 +40,6 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="col-sm-2 asterisk control-label">Fuse</label>
-                            <div class="col-sm-8 w-200">
-                                <input class="form-control" v-model="form_data.fuse">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
                             <label class="col-sm-2 asterisk control-label">String</label>
                             <div class="col-sm-8 w-200">
                                 <input class="form-control" v-model="form_data.string">
@@ -145,7 +138,6 @@
                     have_fuse:'1',
                     min_length:'',
                     max_length:'',
-                    fuse:'',
                     string:'',
                     outlet_length:'',
                     module:'',
@@ -210,7 +202,6 @@
                             this.form_data = {
                                 min_length:'',
                                 max_length:'',
-                                fuse:'',
                                 string:'',
                                 outlet_length:'',
                                 module:'',

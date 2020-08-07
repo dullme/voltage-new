@@ -26,9 +26,11 @@
                     <thead>
                     <tr>
                         <th>#</th>
+                        <th>Image</th>
                         <th>Name</th>
                         <th>Color</th>
                         <th>String</th>
+                        <th>有无 Fuse</th>
                         <th>剩余可摆放数</th>
                         <th>Length</th>
                         <th>Remarks</th>
@@ -38,6 +40,10 @@
                     <tbody>
                     <tr v-for="(harness,key) in harnesses_selected">
                         <td><input :id="key+'_radio_harness'" type="radio" @click="updateCurrentHarness(key)" name="radio_harness"></td>
+                        <td>
+                            <img style="cursor: pointer" v-if="harness.image" :src="harness.image" width="50" height="50" @click="showImage(harness.image)">
+                            <i v-else class="fa fa-image" style="font-size: 45px;color: #dedede;"></i>
+                        </td>
                         <td><label style="cursor: pointer" :for="key+'_radio_harness'">{{ harness.name }}</label></td>
                         <td>
                             <a class="cube" :style="'background-color:'+ harness.color">
@@ -45,6 +51,10 @@
                             </a>
                         </td>
                         <td>{{ harness.string }}</td>
+                        <td>
+                            <i v-if="harness.have_fuse" class="fa fa-check text-success"></i>
+                            <i v-else class="fa fa-close text-red"></i>
+                        </td>
                         <td>{{ harness.remaining }}</td>
                         <td>{{ harness.min_length }} ~ {{ harness.max_length }}</td>
                         <td>{{ harness.remarks }}</td>
@@ -116,7 +126,7 @@
                                             <p style="margin-bottom: unset">NO.</p>
                                         </th>
                                         <th style="text-align: center;" v-for="(i,index) in motors">
-                                            <p style="margin-bottom: unset;cursor: pointer">{{ i.name }}</p>
+                                            <p style="margin-bottom: unset">{{ i.name }}</p>
                                         </th>
                                     </tr>
                                     <tr>
@@ -318,7 +328,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-sm-3 asterisk control-label">主串长度</label>
+                                    <label class="col-sm-3 control-label">主串长度</label>
                                     <div class="col-sm-7">
                                         <input class="form-control" v-model="length">
                                     </div>
@@ -330,8 +340,10 @@
                         <table class="table">
                             <thead>
                             <tr>
+                                <th>Image</th>
                                 <th>Name</th>
                                 <th>String</th>
+                                <th>有无 Fuse</th>
                                 <th>Length</th>
                                 <th>Remarks</th>
                                 <th>Action</th>
@@ -339,8 +351,16 @@
                             </thead>
                             <tbody>
                             <tr v-for="(harness,key) in harnesses">
+                                <td>
+                                    <img style="cursor: pointer" v-if="harness.image" :src="harness.image" width="50" height="50" @click="showImage(harness.image)">
+                                    <i v-else class="fa fa-image" style="font-size: 45px;color: #dedede;"></i>
+                                </td>
                                 <td>{{ harness.name }}</td>
                                 <td>{{ harness.string }}</td>
+                                <td>
+                                    <i v-if="harness.have_fuse" class="fa fa-check text-success"></i>
+                                    <i v-else class="fa fa-close text-red"></i>
+                                </td>
                                 <td>{{ harness.min_length }} ~ {{ harness.max_length }}</td>
                                 <td>{{ harness.remarks }}</td>
                                 <td>
@@ -350,7 +370,7 @@
                                 </td>
                             </tr>
                             <tr v-if="harnesses.length == 0">
-                                <td colspan="5" class="empty-grid"
+                                <td colspan="6" class="empty-grid"
                                     style="padding: 100px;text-align: center;color: #999999">
                                     <svg t="1562312016538" class="icon" viewBox="0 0 1024 1024" version="1.1"
                                          xmlns="http://www.w3.org/2000/svg" p-id="2076" width="128" height="128"
@@ -368,6 +388,29 @@
                 <!-- /.modal-content -->
             </div>
             <!-- /.modal-dialog -->
+        </div>
+        <div id="img-mask" style="display: none">
+            <div class="mfp-bg mfp-ready" style="z-index: 8888"></div>
+            <div class="mfp-wrap mfp-close-btn-in mfp-auto-cursor mfp-ready" tabindex="-1" style="overflow: hidden auto;z-index: 9999">
+                <div class="mfp-container mfp-s-ready mfp-image-holder">
+                    <div class="mfp-content">
+                        <div class="mfp-figure">
+                            <button title="Close (Esc)" type="button" class="mfp-close" @click="closeImage">×</button>
+                            <figure><img class="mfp-img" alt="undefined"
+                                         src=""
+                                         style="max-height: 596px;">
+                                <figcaption>
+                                    <div class="mfp-bottom-bar">
+                                        <div class="mfp-title"></div>
+                                        <div class="mfp-counter"></div>
+                                    </div>
+                                </figcaption>
+                            </figure>
+                        </div>
+                    </div>
+                    <div class="mfp-preloader">Loading...</div>
+                </div>
+            </div>
         </div>
 
     </div>
@@ -418,6 +461,7 @@
         },
         methods: {
             searchHarness() {
+                $('#loading').css('display', 'block');
                 let ids = [];
                 if (this.harnesses_selected.length) {
                     this.harnesses_selected.forEach((item, key) => {
@@ -433,8 +477,12 @@
                         ids: ids
                     }
                 }).then(response => {
-                    this.harnesses = response.data.data
+                    setTimeout(() => {
+                        $('#loading').css('display', 'none');
+                        this.harnesses = response.data.data
+                    }, 200)
                 }).catch(error => {
+                    $('#loading').css('display', 'none');
                     toastr.error(error.response.data.message)
                 });
             },
@@ -469,6 +517,8 @@
                                     remarks:this.harnesses[key]['remarks'],
                                     string:this.harnesses[key]['string'],
                                     remaining : this.harnesses[key]['string'],
+                                    have_fuse : this.harnesses[key]['have_fuse'],
+                                    image : this.harnesses[key]['image'],
                                     harness_key : i,
                                     color : color
                                 }
@@ -760,6 +810,14 @@
             unique22(arr){
                 let x = new Set(arr);
                 return [...x];
+            },
+            closeImage(){
+                $('#img-mask').css('display', 'none');
+                $('#img-mask .mfp-img').attr('src', '');
+            },
+            showImage(url){
+                $('#img-mask').css('display', 'block');
+                $('#img-mask .mfp-img').attr('src', url);
             }
         },
     }
@@ -818,5 +876,14 @@
     .stages > thead > tr > td,
     .stages > thead > tr > th {
         padding: 3px;
+    }
+
+    .table > tbody > tr > td,
+    .table > tbody > tr > th,
+    .table > tfoot > tr > td,
+    .table > tfoot > tr > th,
+    .table > thead > tr > td,
+    .table > thead > tr > th {
+        vertical-align: middle;
     }
 </style>

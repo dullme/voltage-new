@@ -94,7 +94,6 @@ EOF
             'min_length'            => 'required|integer',
             'max_length'            => 'required|integer|gte:min_length',
             'have_fuse'             => 'required|integer',
-            'fuse'                  => 'required|integer',
             'string'                => 'required|integer',
             'outlet_length'         => 'required|integer',
             'module'                => 'required|integer',
@@ -190,7 +189,6 @@ EOF
                 'min_length'    => $data['min_length'],
                 'max_length'    => $data['max_length'],
                 'have_fuse'     => $data['have_fuse'],
-                'fuse'          => $data['fuse'],
                 'string'        => $data['string'],
                 'outlet_length' => $data['outlet_length'],
                 'module'        => $data['module'],
@@ -226,7 +224,7 @@ EOF
     {
         $validator = Validator::make(request()->all(), [
             'string' => 'required|integer',
-            'length' => 'required|integer',
+            'length' => 'nullable|integer',
             'ids'    => 'nullable|array',
         ]);
 
@@ -237,7 +235,9 @@ EOF
         $validated = $validator->validated();
         $ids = $validated['ids'];
 
-        $harnesses = Harness::where('string', $validated['string'])->where('min_length', '<=', $validated['length'])->where('max_length', '>=', $validated['length'])->get();
+        $harnesses = Harness::where('string', $validated['string'])->when(request('length'), function ($q) {
+            $q->where('min_length', '<=', request('length'))->where('max_length', '>=', request('length'));
+        })->get();
 
         $harnesses = $harnesses->map(function ($item) use ($ids) {
             return [
@@ -248,6 +248,8 @@ EOF
                 'remarks'    => $item['remarks'],
                 'string'     => $item['string'],
                 'checked'    => in_array($item['id'], $ids) ? true : false,
+                'image'      => $item['image'] ? asset('uploads/' . $item['image']) : '',
+                'have_fuse'  => $item['have_fuse'],
             ];
         });
 
@@ -258,7 +260,7 @@ EOF
     {
         $form = new Form(new Harness());
 
-        $form->image('image', __('Image'))->removable()->uniqueName()->thumbnail('small', $width = 300, $height = 300);
+        $form->image('image', __('Image'))->removable()->uniqueName();
         $form->file('file', __('File'))->removable()->uniqueName();
 
         return $form;

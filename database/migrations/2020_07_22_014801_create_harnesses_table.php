@@ -21,7 +21,7 @@ class CreateHarnessesTable extends Migration
             $table->integer('min_length')->comment('最小组串长度');
             $table->integer('max_length')->comment('最大组串长度');
             $table->boolean('have_fuse')->comment('是否有保险丝');
-            $table->integer('fuse')->comment('保险丝安培数');
+            $table->integer('fuse')->default(0)->comment('保险丝安培数');
             $table->integer('string')->comment('几串');
             $table->integer('outlet_length')->comment('出线长度');
             $table->integer('module')->comment('组件');
