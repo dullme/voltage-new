@@ -223,7 +223,7 @@
                                             <span v-for="fuse in saved_data.fuse.res[s_index]">
                                                 <i class="fa fa-circle"
                                                    :style="'font-size:12px;color: '+fuse.color"></i>
-                                                {{ fuse.length + fuse.length * parseInt(margin)/100 }}
+                                                {{ Math.ceil(fuse.length + fuse.length * parseInt(margin)/100) }}
                                             </span>
                                         </td>
                                         <td><input v-if="saved_data.fuse.res[s_index].length" type="checkbox" @click="checkbox('fuse', s_index ,$event)"></td>
@@ -290,7 +290,7 @@
                                             <span v-for="nofuse in saved_data.nofuse.res[s_index]">
                                                 <i class="fa fa-circle"
                                                    :style="'font-size:12px;color: '+nofuse.color"></i>
-                                                {{ nofuse.length + parseInt(margin) }}
+                                                {{ Math.ceil( nofuse.length + nofuse.length * parseInt(margin)/100) }}
                                             </span>
                                         </td>
                                         <td><input v-if="saved_data.nofuse.res[s_index].length" type="checkbox" @click="checkbox('nofuse', s_index ,$event)"></td>

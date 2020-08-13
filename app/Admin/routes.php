@@ -28,4 +28,23 @@ Route::group([
     $router->post('stage-save', 'TypicalController@stageSave');
     $router->post('stage-submit', 'TypicalController@stageSubmit');
 
+    //公司
+    $router->resource('companies', CompanyController::class);
+    $router->get('company-list', "CompanyController@getCompany");
+
+    //公司联系人
+    $router->resource('company-contacts', CompanyContactController::class);
+
+    //太阳能板种类
+    $router->resource('solar-panels', SolarPanelController::class);
+    $router->get('solar-panel-list', 'SolarPanelController@getSolarPanel');
+
+    //支架种类
+    $router->resource('brackets', BracketController::class);
+    $router->get('bracket-list', 'BracketController@getBracket');
+
+    //项目管理
+    $router->resource('projects', ProjectController::class);
+    $router->get('projects/info/{id}', "ProjectController@info");
+    $router->post('projects/search/typical', "ProjectController@searchTypical");
 });

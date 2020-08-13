@@ -2145,6 +2145,647 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CreateProjectComponent.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/CreateProjectComponent.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      brackets: [],
+      solar_panels: [],
+      companies: [],
+      loading: {
+        project: false
+      },
+      checkbox_list: {
+        solar_module: false,
+        length: false,
+        width: false,
+        fuse: false,
+        junction_box_to_rack_1: false,
+        junction_box_to_rack_2: false,
+        module_to_module_extender: false,
+        end_of_extender: false,
+        layout_of_whip: false,
+        row_head_to_cbx_1: false,
+        row_head_to_cbx_2: false,
+        distance_between_poles: false
+      },
+      checkbox_list_remarks: {
+        solar_module: '',
+        length: '',
+        width: '',
+        fuse: '',
+        junction_box_to_rack_1: '',
+        junction_box_to_rack_2: '',
+        module_to_module_extender: '',
+        end_of_extender: '',
+        layout_of_whip: '',
+        row_head_to_cbx_1: '',
+        row_head_to_cbx_2: '',
+        distance_between_poles: ''
+      },
+      project_form: {
+        company_id: '',
+        name: '',
+        address: '',
+        total_quantity: '',
+        //项目Block总数
+        solar_module: '',
+        size_dc: '',
+        length: '',
+        width: '',
+        string_length: '',
+        fuse: '',
+        junction_box_to_rack_1: '',
+        junction_box_to_rack_2: '',
+        module_to_module_extender: '',
+        end_of_extender: 'UNKNOWN',
+        layout_of_whip: '0',
+        row_head_to_cbx_1: '',
+        r_cbx_1_1: 0,
+        r_cbx_1_2: 0,
+        r_cbx_1_3: 0,
+        r_cbx_1_4: 0,
+        row_head_to_cbx_2: '',
+        r_cbx_2_1: 0,
+        r_cbx_2_2: 0,
+        r_cbx_2_3: 0,
+        r_cbx_2_4: 0,
+        distance_between_poles: '',
+        remarks: '',
+        remark_list: {},
+        brackets: [],
+        solar_panels: []
+      }
+    };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    $('#company_id').select2({
+      placeholder: 'Please choose',
+      allowClear: true //选中项可清空
+
+    }).on('change', function (e) {
+      _this.project_form[e.target.name] = $('#company_id').val();
+    });
+    $('#brackets').select2({
+      placeholder: 'Please choose',
+      allowClear: true,
+      //选中项可清空
+      maximumSelectionLength: 10
+    }).on('change', function (e) {
+      _this.project_form[e.target.name] = $('#brackets').val() == null ? [] : $('#brackets').val();
+    });
+    $('#solar_panels').select2({
+      placeholder: 'Please choose',
+      allowClear: true,
+      //选中项可清空
+      maximumSelectionLength: 10
+    }).on('change', function (e) {
+      _this.project_form[e.target.name] = $('#solar_panels').val() == null ? [] : $('#solar_panels').val();
+    });
+    $('#option_one').popover({
+      trigger: 'hover',
+      html: true,
+      content: "<img style='width:80%' src='/images/option_one.png'>"
+    });
+    $('#option_two').popover({
+      trigger: 'hover',
+      //鼠标以上时触发弹出提示框
+      html: true,
+      //开启html 为true的话，data-content里就能放html代码了
+      content: "<img style='width:80%' src='/images/option_two.png'>"
+    });
+    $('#option_cab').popover({
+      trigger: 'hover',
+      html: true,
+      content: "<img style='width:80%' src='/images/option_cab.png'>"
+    });
+    $('#option_trench').popover({
+      trigger: 'hover',
+      //鼠标以上时触发弹出提示框
+      html: true,
+      //开启html 为true的话，data-content里就能放html代码了
+      content: "<img style='width:80%' src='/images/option_trench.png'>"
+    });
+  },
+  created: function created() {
+    var _this2 = this;
+
+    this.$watch('project_form.board_width', function () {
+      _this2.project_form.string_length = '';
+    });
+    this.$watch('project_form.layout_of_whip', function () {
+      if (_this2.project_form.layout_of_whip == '0') {
+        _this2.project_form.row_head_to_cbx_1 = '';
+        _this2.checkbox_list.row_head_to_cbx_1 = false;
+        _this2.checkbox_list_remarks.row_head_to_cbx_1 = '';
+        _this2.project_form.row_head_to_cbx_2 = '';
+        _this2.checkbox_list.row_head_to_cbx_2 = false;
+        _this2.checkbox_list_remarks.row_head_to_cbx_2 = '';
+        _this2.project_form.distance_between_poles = '';
+        _this2.checkbox_list.distance_between_poles = false;
+        _this2.checkbox_list_remarks.distance_between_poles = '';
+      }
+
+      if (_this2.project_form.layout_of_whip == '1') {
+        _this2.project_form.row_head_to_cbx_2 = '';
+        _this2.checkbox_list.row_head_to_cbx_2 = false;
+        _this2.checkbox_list_remarks.row_head_to_cbx_2 = '';
+      }
+    });
+    axios.get('/admin/company-list').then(function (response) {
+      _this2.companies = response.data.data;
+    });
+    axios.get('/admin/bracket-list').then(function (response) {
+      _this2.brackets = response.data.data;
+    });
+    axios.get('/admin/solar-panel-list').then(function (response) {
+      _this2.solar_panels = response.data.data;
+    });
+  },
+  methods: {
+    saveProject: function saveProject() {
+      var _this3 = this;
+
+      this.project_form.remark_list = {};
+
+      for (var i in this.checkbox_list) {
+        if (this.checkbox_list[i]) {
+          if (this.checkbox_list_remarks[i] == '') {
+            toastr.error('The remarks field is required.');
+            this.project_form.remark_list = {};
+            return false;
+          } else {
+            this.project_form.remark_list[i] = this.checkbox_list_remarks[i];
+          }
+        }
+      }
+
+      this.loading.project = true;
+      axios({
+        method: 'post',
+        url: '/admin/projects',
+        data: this.project_form
+      }).then(function (response) {
+        if (response.data.status) {
+          swal("SUCCESS", response.data.message, 'success').then(function () {
+            location.href = '/admin/projects';
+          });
+        } // this.loading.project = false
+
+      })["catch"](function (error) {
+        _this3.loading.project = false;
+        toastr.error(error.response.data.message);
+      });
+    },
+    ceilDecimal: function ceilDecimal(number) {
+      var ceil = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 3;
+      var str = '';
+
+      for (var i = 1; i <= ceil; i++) {
+        str += 0;
+      }
+
+      str = parseInt('1' + str);
+      return Math.ceil(number * str) / str;
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CreateTypicalComponent.vue?vue&type=script&lang=js&":
 /*!*********************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/CreateTypicalComponent.vue?vue&type=script&lang=js& ***!
@@ -3029,6 +3670,282 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ProjectInfoComponent.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ProjectInfoComponent.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      project_info: {},
+      solar_panels: [],
+      string: '',
+      form_data: {
+        solar_panel_id: '',
+        of_module_per_string: '',
+        style: '0',
+        connector: '',
+        fuse: '',
+        junction_box_to_rack1: '',
+        junction_box_to_rack2: '',
+        number_of_string: []
+      }
+    };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    $('#number-of-string').select2({
+      placeholder: 'Please choose',
+      allowClear: true,
+      //选中项可清空
+      maximumSelectionLength: 10
+    }).on('change', function (e) {
+      _this.form_data.number_of_string = $('#number-of-string').val() == null ? [] : $('#number-of-string').val();
+    });
+  },
+  props: ['project'],
+  created: function created() {
+    var _this2 = this;
+
+    this.project_info = JSON.parse(this.project);
+    axios.get('/admin/solar-panel-list').then(function (response) {
+      _this2.solar_panels = response.data.data;
+    });
+    this.$watch('form_data.solar_panel_id', function () {
+      if (_this2.form_data.of_module_per_string != '') {
+        for (var i in _this2.solar_panels) {
+          if (_this2.solar_panels[i]['id'] == _this2.form_data.solar_panel_id) {
+            var length = _this2.form_data.style == '0' ? _this2.solar_panels[i]['length'] : _this2.solar_panels[i]['width'];
+            _this2.string = Math.ceil(_this2.form_data.of_module_per_string * length * 1.03 * 0.0032808);
+          }
+        }
+      } else {
+        _this2.string = '';
+      }
+    });
+    this.$watch('form_data.of_module_per_string', function () {
+      if (_this2.form_data.of_module_per_string != '') {
+        for (var i in _this2.solar_panels) {
+          if (_this2.solar_panels[i]['id'] == _this2.form_data.solar_panel_id) {
+            var length = _this2.form_data.style == '0' ? _this2.solar_panels[i]['length'] : _this2.solar_panels[i]['width'];
+            _this2.string = Math.ceil(_this2.form_data.of_module_per_string * length * 1.03 * 0.0032808);
+          }
+        }
+      } else {
+        _this2.string = '';
+      }
+    });
+    this.$watch('form_data.style', function () {
+      _this2.form_data.solar_panel_id = '';
+      _this2.form_data.connector = '';
+      _this2.form_data.fuse = '';
+      _this2.form_data.junction_box_to_rack1 = '';
+      _this2.form_data.junction_box_to_rack2 = '';
+      _this2.form_data.of_module_per_string = '';
+    });
+  },
+  methods: {
+    search: function search() {
+      axios({
+        method: 'post',
+        url: '/admin/projects/search/typical',
+        data: {
+          solar_panel_id: this.form_data.solar_panel_id,
+          style: this.form_data.style,
+          of_module_per_string: this.form_data.of_module_per_string,
+          number_of_string: this.form_data.number_of_string
+        }
+      }).then(function (response) {
+        if (response.data.status) {
+          swal("SUCCESS", response.data.message, 'success').then(function () {
+            location.href = '/admin/projects';
+          });
+        } // this.loading.project = false
+
+      })["catch"](function (error) {
+        toastr.error(error.response.data.message);
+      });
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CreateHarnessComponent.vue?vue&type=style&index=0&lang=css&":
 /*!****************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader??ref--7-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/CreateHarnessComponent.vue?vue&type=style&index=0&lang=css& ***!
@@ -3048,6 +3965,25 @@ exports.push([module.i, "\n.w-200 {\n    width: 200px;\n}\n", ""]);
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CreateProjectComponent.vue?vue&type=style&index=0&lang=css&":
+/*!****************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--7-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/CreateProjectComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.mb15{\n    margin-bottom: 15px;\n}\n.popover{\n    max-width:unset !important;\n    width: 100%;\n}\n.form-control[readonly]{\n    background-color: #fbfbfb;\n}\n.input-group span.asterisk:before {\n    content: \"* \";\n    color: red;\n}\n.select2{\n    width:100% !important;\n}\n.checked{\n    color: #dd4b39 !important;\n    border-color: #dd4b39 !important;\n}\n.border-red{\n    border-color: #dd4b39 !important;\n}\n.remark-list {\n    margin-bottom: 10px;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CreateTypicalComponent.vue?vue&type=style&index=0&lang=css&":
 /*!****************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader??ref--7-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/CreateTypicalComponent.vue?vue&type=style&index=0&lang=css& ***!
@@ -3061,6 +3997,25 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 // module
 exports.push([module.i, "\n.w-200 {\n    width: 200px;\n}\n.cube {\n    display: flex;\n    width: 25px;\n    height: 25px;\n    border: 1px solid #000000;\n    cursor: pointer;\n    justify-content: center;\n    align-items: center;\n    font-size: 25px;\n    color: #FFFFFF;\n}\n.cube_motor {\n    border-color: #dadada;\n    width: 3px;\n}\n.border_white {\n    border-color: #FFFFFF;\n}\n.border_gray {\n    border-color: #dadada;\n}\n.color_gray {\n    color: #dadada;\n}\n.border_black {\n    border-color: #000000;\n}\n.is_motor {\n    border-color: #000000;\n    background-color: #000000;\n}\n.table-hover > tbody > tr:hover .border_white {\n    border-color: #f5f5f5;\n}\n.stages > tbody > tr > td,\n.stages > tbody > tr > th,\n.stages > tfoot > tr > td,\n.stages > tfoot > tr > th,\n.stages > thead > tr > td,\n.stages > thead > tr > th {\n    padding: 3px;\n}\n.table > tbody > tr > td,\n.table > tbody > tr > th,\n.table > tfoot > tr > td,\n.table > tfoot > tr > th,\n.table > thead > tr > td,\n.table > thead > tr > th {\n    vertical-align: middle;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ProjectInfoComponent.vue?vue&type=style&index=0&id=e8baf17e&scoped=true&lang=css&":
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--7-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ProjectInfoComponent.vue?vue&type=style&index=0&id=e8baf17e&scoped=true&lang=css& ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.input-group[data-v-e8baf17e]{\n    margin-bottom: 10px;\n}\n.mgl10[data-v-e8baf17e]{\n    margin-left: 10px;\n}\n\n", ""]);
 
 // exports
 
@@ -20742,6 +21697,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CreateProjectComponent.vue?vue&type=style&index=0&lang=css&":
+/*!********************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--7-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/CreateProjectComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--7-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--7-2!../../../node_modules/vue-loader/lib??vue-loader-options!./CreateProjectComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CreateProjectComponent.vue?vue&type=style&index=0&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CreateTypicalComponent.vue?vue&type=style&index=0&lang=css&":
 /*!********************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--7-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/CreateTypicalComponent.vue?vue&type=style&index=0&lang=css& ***!
@@ -20751,6 +21736,36 @@ if(false) {}
 
 
 var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--7-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--7-2!../../../node_modules/vue-loader/lib??vue-loader-options!./CreateTypicalComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CreateTypicalComponent.vue?vue&type=style&index=0&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ProjectInfoComponent.vue?vue&type=style&index=0&id=e8baf17e&scoped=true&lang=css&":
+/*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--7-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ProjectInfoComponent.vue?vue&type=style&index=0&id=e8baf17e&scoped=true&lang=css& ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--7-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--7-2!../../../node_modules/vue-loader/lib??vue-loader-options!./ProjectInfoComponent.vue?vue&type=style&index=0&id=e8baf17e&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ProjectInfoComponent.vue?vue&type=style&index=0&id=e8baf17e&scoped=true&lang=css&");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -21948,6 +22963,2453 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CreateProjectComponent.vue?vue&type=template&id=ec3f19aa&":
+/*!*************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/CreateProjectComponent.vue?vue&type=template&id=ec3f19aa& ***!
+  \*************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "row" }, [
+    _c("div", { staticClass: "col-md-12" }, [
+      _c("div", { staticClass: "box box-info" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("form", { staticClass: "form-horizontal" }, [
+          _c("div", { staticClass: "box-body" }, [
+            _c("div", { staticClass: "fields-group" }, [
+              _c("div", { staticClass: "col-md-12" }, [
+                _c("div", { staticClass: "form-group  " }, [
+                  _c(
+                    "label",
+                    { staticClass: "col-sm-2 asterisk control-label" },
+                    [_vm._v("Company")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-8" }, [
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.project_form.company_id,
+                            expression: "project_form.company_id"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { id: "company_id", name: "company_id" },
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              _vm.project_form,
+                              "company_id",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          }
+                        }
+                      },
+                      _vm._l(_vm.companies, function(company) {
+                        return _c(
+                          "option",
+                          { domProps: { value: company.id } },
+                          [_vm._v(_vm._s(company.name))]
+                        )
+                      }),
+                      0
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group  " }, [
+                  _c(
+                    "label",
+                    { staticClass: "col-sm-2 asterisk control-label" },
+                    [_vm._v("Name")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-8" }, [
+                    _c("div", { staticClass: "input-group" }, [
+                      _vm._m(1),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.project_form.name,
+                            expression: "project_form.name"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          required: "1",
+                          type: "text",
+                          id: "name",
+                          name: "name",
+                          value: "",
+                          placeholder: "Input Name"
+                        },
+                        domProps: { value: _vm.project_form.name },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.project_form,
+                              "name",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group  " }, [
+                  _c("label", { staticClass: "col-sm-2 control-label" }, [
+                    _vm._v("Address")
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-8" }, [
+                    _c("div", { staticClass: "input-group" }, [
+                      _vm._m(2),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.project_form.address,
+                            expression: "project_form.address"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          required: "1",
+                          type: "text",
+                          id: "address",
+                          name: "address",
+                          value: "",
+                          placeholder: "Input Address"
+                        },
+                        domProps: { value: _vm.project_form.address },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.project_form,
+                              "address",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group  " }, [
+                  _c(
+                    "label",
+                    { staticClass: "col-sm-2 asterisk control-label" },
+                    [_vm._v("Total Quantity")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-8" }, [
+                    _c("div", { staticClass: "input-group" }, [
+                      _vm._m(3),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.project_form.total_quantity,
+                            expression: "project_form.total_quantity"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          required: "1",
+                          type: "number",
+                          id: "total_block",
+                          name: "total_quantity",
+                          value: "",
+                          placeholder: "Input Total Quantity"
+                        },
+                        domProps: { value: _vm.project_form.total_quantity },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.project_form,
+                              "total_quantity",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group  " }, [
+                  _c(
+                    "label",
+                    { staticClass: "col-sm-2 asterisk control-label" },
+                    [_vm._v("Module Dimension")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-8" }, [
+                    _c("div", { staticClass: "input-group" }, [
+                      _c("label", { staticClass: "input-group-addon" }, [
+                        _vm._v("Size DC")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.project_form.size_dc,
+                            expression: "project_form.size_dc"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "number" },
+                        domProps: { value: _vm.project_form.size_dc },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.project_form,
+                              "size_dc",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "span",
+                        {
+                          staticClass: "input-group-addon",
+                          staticStyle: { "border-left": "unset" }
+                        },
+                        [_vm._v("MW")]
+                      )
+                    ])
+                  ])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticStyle: { clear: "both" } }),
+            _vm._v(" "),
+            _c("div", { staticClass: "panel panel-default" }, [
+              _vm._m(4),
+              _vm._v(" "),
+              _c("div", { staticClass: "panel-body" }, [
+                _c("div", { staticClass: "form-group  " }, [
+                  _c(
+                    "label",
+                    { staticClass: "col-sm-2 asterisk control-label" },
+                    [_vm._v("支架种类")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-8" }, [
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.project_form.brackets,
+                            expression: "project_form.brackets"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          id: "brackets",
+                          name: "brackets",
+                          multiple: "multiple"
+                        },
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              _vm.project_form,
+                              "brackets",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          }
+                        }
+                      },
+                      _vm._l(_vm.brackets, function(specification) {
+                        return _c(
+                          "option",
+                          { domProps: { value: specification.id } },
+                          [_vm._v(_vm._s(specification.name))]
+                        )
+                      }),
+                      0
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group  " }, [
+                  _c(
+                    "label",
+                    { staticClass: "col-sm-2 asterisk control-label" },
+                    [_vm._v("太阳能板种类")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-8" }, [
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.project_form.solar_panels,
+                            expression: "project_form.solar_panels"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          id: "solar_panels",
+                          name: "solar_panels",
+                          multiple: "multiple"
+                        },
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              _vm.project_form,
+                              "solar_panels",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          }
+                        }
+                      },
+                      _vm._l(_vm.solar_panels, function(panel) {
+                        return _c("option", { domProps: { value: panel.id } }, [
+                          _vm._v(_vm._s(panel.name))
+                        ])
+                      }),
+                      0
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group  " }, [
+                  _c(
+                    "label",
+                    { staticClass: "col-sm-2 asterisk control-label" },
+                    [_vm._v("Fuse")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-8" }, [
+                    _c("div", { staticClass: "input-group" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.project_form.fuse,
+                            expression: "project_form.fuse"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        class: _vm.checkbox_list.fuse ? "checked" : "",
+                        attrs: { type: "number" },
+                        domProps: { value: _vm.project_form.fuse },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.project_form,
+                              "fuse",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "span",
+                        {
+                          staticClass: "input-group-addon",
+                          staticStyle: { "border-left": "unset" }
+                        },
+                        [_vm._v("A")]
+                      ),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "input-group-addon" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.checkbox_list.fuse,
+                              expression: "checkbox_list.fuse"
+                            }
+                          ],
+                          attrs: { type: "checkbox" },
+                          domProps: {
+                            checked: Array.isArray(_vm.checkbox_list.fuse)
+                              ? _vm._i(_vm.checkbox_list.fuse, null) > -1
+                              : _vm.checkbox_list.fuse
+                          },
+                          on: {
+                            change: function($event) {
+                              var $$a = _vm.checkbox_list.fuse,
+                                $$el = $event.target,
+                                $$c = $$el.checked ? true : false
+                              if (Array.isArray($$a)) {
+                                var $$v = null,
+                                  $$i = _vm._i($$a, $$v)
+                                if ($$el.checked) {
+                                  $$i < 0 &&
+                                    _vm.$set(
+                                      _vm.checkbox_list,
+                                      "fuse",
+                                      $$a.concat([$$v])
+                                    )
+                                } else {
+                                  $$i > -1 &&
+                                    _vm.$set(
+                                      _vm.checkbox_list,
+                                      "fuse",
+                                      $$a
+                                        .slice(0, $$i)
+                                        .concat($$a.slice($$i + 1))
+                                    )
+                                }
+                              } else {
+                                _vm.$set(_vm.checkbox_list, "fuse", $$c)
+                              }
+                            }
+                          }
+                        })
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group  " }, [
+                  _c(
+                    "label",
+                    { staticClass: "col-sm-2 asterisk control-label" },
+                    [_vm._v("Junction box to rack")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-8" }, [
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-sm-6 mb15" }, [
+                        _c("div", { staticClass: "input-group" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.project_form.junction_box_to_rack_1,
+                                expression:
+                                  "project_form.junction_box_to_rack_1"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: _vm.checkbox_list.junction_box_to_rack_1
+                              ? "checked"
+                              : "",
+                            attrs: { type: "number" },
+                            domProps: {
+                              value: _vm.project_form.junction_box_to_rack_1
+                            },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.project_form,
+                                  "junction_box_to_rack_1",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "span",
+                            {
+                              staticClass: "input-group-addon",
+                              staticStyle: { "border-left": "unset" }
+                            },
+                            [_vm._v("mm")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "span",
+                            {
+                              staticClass: "input-group-addon",
+                              staticStyle: {
+                                "border-left": "unset",
+                                "font-weight": "bold"
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(
+                                  (
+                                    _vm.project_form.junction_box_to_rack_1 /
+                                    25.4 /
+                                    12
+                                  ).toFixed(3)
+                                ) + " ft"
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "input-group-addon" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value:
+                                    _vm.checkbox_list.junction_box_to_rack_1,
+                                  expression:
+                                    "checkbox_list.junction_box_to_rack_1"
+                                }
+                              ],
+                              attrs: { type: "checkbox" },
+                              domProps: {
+                                checked: Array.isArray(
+                                  _vm.checkbox_list.junction_box_to_rack_1
+                                )
+                                  ? _vm._i(
+                                      _vm.checkbox_list.junction_box_to_rack_1,
+                                      null
+                                    ) > -1
+                                  : _vm.checkbox_list.junction_box_to_rack_1
+                              },
+                              on: {
+                                change: function($event) {
+                                  var $$a =
+                                      _vm.checkbox_list.junction_box_to_rack_1,
+                                    $$el = $event.target,
+                                    $$c = $$el.checked ? true : false
+                                  if (Array.isArray($$a)) {
+                                    var $$v = null,
+                                      $$i = _vm._i($$a, $$v)
+                                    if ($$el.checked) {
+                                      $$i < 0 &&
+                                        _vm.$set(
+                                          _vm.checkbox_list,
+                                          "junction_box_to_rack_1",
+                                          $$a.concat([$$v])
+                                        )
+                                    } else {
+                                      $$i > -1 &&
+                                        _vm.$set(
+                                          _vm.checkbox_list,
+                                          "junction_box_to_rack_1",
+                                          $$a
+                                            .slice(0, $$i)
+                                            .concat($$a.slice($$i + 1))
+                                        )
+                                    }
+                                  } else {
+                                    _vm.$set(
+                                      _vm.checkbox_list,
+                                      "junction_box_to_rack_1",
+                                      $$c
+                                    )
+                                  }
+                                }
+                              }
+                            })
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-sm-6 mb15" }, [
+                        _c("div", { staticClass: "input-group" }, [
+                          _c("span", { staticClass: "input-group-addon" }, [
+                            _vm._v("Junction box to rack'")
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.project_form.junction_box_to_rack_2,
+                                expression:
+                                  "project_form.junction_box_to_rack_2"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: _vm.checkbox_list.junction_box_to_rack_2
+                              ? "checked"
+                              : "",
+                            attrs: { type: "number" },
+                            domProps: {
+                              value: _vm.project_form.junction_box_to_rack_2
+                            },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.project_form,
+                                  "junction_box_to_rack_2",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "span",
+                            {
+                              staticClass: "input-group-addon",
+                              staticStyle: { "border-left": "unset" }
+                            },
+                            [_vm._v("mm")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "span",
+                            {
+                              staticClass: "input-group-addon",
+                              staticStyle: {
+                                "border-left": "unset",
+                                "font-weight": "bold"
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(
+                                  (
+                                    _vm.project_form.junction_box_to_rack_2 /
+                                    25.4 /
+                                    12
+                                  ).toFixed(3)
+                                ) + " ft"
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "input-group-addon" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value:
+                                    _vm.checkbox_list.junction_box_to_rack_2,
+                                  expression:
+                                    "checkbox_list.junction_box_to_rack_2"
+                                }
+                              ],
+                              attrs: { type: "checkbox" },
+                              domProps: {
+                                checked: Array.isArray(
+                                  _vm.checkbox_list.junction_box_to_rack_2
+                                )
+                                  ? _vm._i(
+                                      _vm.checkbox_list.junction_box_to_rack_2,
+                                      null
+                                    ) > -1
+                                  : _vm.checkbox_list.junction_box_to_rack_2
+                              },
+                              on: {
+                                change: function($event) {
+                                  var $$a =
+                                      _vm.checkbox_list.junction_box_to_rack_2,
+                                    $$el = $event.target,
+                                    $$c = $$el.checked ? true : false
+                                  if (Array.isArray($$a)) {
+                                    var $$v = null,
+                                      $$i = _vm._i($$a, $$v)
+                                    if ($$el.checked) {
+                                      $$i < 0 &&
+                                        _vm.$set(
+                                          _vm.checkbox_list,
+                                          "junction_box_to_rack_2",
+                                          $$a.concat([$$v])
+                                        )
+                                    } else {
+                                      $$i > -1 &&
+                                        _vm.$set(
+                                          _vm.checkbox_list,
+                                          "junction_box_to_rack_2",
+                                          $$a
+                                            .slice(0, $$i)
+                                            .concat($$a.slice($$i + 1))
+                                        )
+                                    }
+                                  } else {
+                                    _vm.$set(
+                                      _vm.checkbox_list,
+                                      "junction_box_to_rack_2",
+                                      $$c
+                                    )
+                                  }
+                                }
+                              }
+                            })
+                          ])
+                        ])
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group  " }, [
+                  _c(
+                    "label",
+                    { staticClass: "col-sm-2 asterisk control-label" },
+                    [_vm._v("Module to module extender")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-8" }, [
+                    _c("div", { staticClass: "input-group" }, [
+                      _vm._m(5),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.project_form.module_to_module_extender,
+                            expression: "project_form.module_to_module_extender"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        class: _vm.checkbox_list.module_to_module_extender
+                          ? "checked"
+                          : "",
+                        attrs: { type: "number" },
+                        domProps: {
+                          value: _vm.project_form.module_to_module_extender
+                        },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.project_form,
+                              "module_to_module_extender",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "span",
+                        {
+                          staticClass: "input-group-addon",
+                          staticStyle: { "border-left": "unset" }
+                        },
+                        [_vm._v("ft")]
+                      ),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "input-group-addon" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value:
+                                _vm.checkbox_list.module_to_module_extender,
+                              expression:
+                                "checkbox_list.module_to_module_extender"
+                            }
+                          ],
+                          attrs: { type: "checkbox" },
+                          domProps: {
+                            checked: Array.isArray(
+                              _vm.checkbox_list.module_to_module_extender
+                            )
+                              ? _vm._i(
+                                  _vm.checkbox_list.module_to_module_extender,
+                                  null
+                                ) > -1
+                              : _vm.checkbox_list.module_to_module_extender
+                          },
+                          on: {
+                            change: function($event) {
+                              var $$a =
+                                  _vm.checkbox_list.module_to_module_extender,
+                                $$el = $event.target,
+                                $$c = $$el.checked ? true : false
+                              if (Array.isArray($$a)) {
+                                var $$v = null,
+                                  $$i = _vm._i($$a, $$v)
+                                if ($$el.checked) {
+                                  $$i < 0 &&
+                                    _vm.$set(
+                                      _vm.checkbox_list,
+                                      "module_to_module_extender",
+                                      $$a.concat([$$v])
+                                    )
+                                } else {
+                                  $$i > -1 &&
+                                    _vm.$set(
+                                      _vm.checkbox_list,
+                                      "module_to_module_extender",
+                                      $$a
+                                        .slice(0, $$i)
+                                        .concat($$a.slice($$i + 1))
+                                    )
+                                }
+                              } else {
+                                _vm.$set(
+                                  _vm.checkbox_list,
+                                  "module_to_module_extender",
+                                  $$c
+                                )
+                              }
+                            }
+                          }
+                        })
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group  " }, [
+                  _c(
+                    "label",
+                    { staticClass: "col-sm-2 asterisk control-label" },
+                    [_vm._v("End of extender")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-8" }, [
+                    _c("div", { staticClass: "input-group" }, [
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.project_form.end_of_extender,
+                              expression: "project_form.end_of_extender"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          class: _vm.checkbox_list.end_of_extender
+                            ? "checked"
+                            : "",
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.$set(
+                                _vm.project_form,
+                                "end_of_extender",
+                                $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              )
+                            }
+                          }
+                        },
+                        [
+                          _c("option", { attrs: { value: "UNKNOWN" } }, [
+                            _vm._v("UNKNOWN")
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "ROW HEAD" } }, [
+                            _vm._v("ROW HEAD")
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "CBX" } }, [
+                            _vm._v("CBX")
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "INV" } }, [
+                            _vm._v("INV")
+                          ])
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "input-group-addon" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.checkbox_list.end_of_extender,
+                              expression: "checkbox_list.end_of_extender"
+                            }
+                          ],
+                          attrs: { type: "checkbox" },
+                          domProps: {
+                            checked: Array.isArray(
+                              _vm.checkbox_list.end_of_extender
+                            )
+                              ? _vm._i(
+                                  _vm.checkbox_list.end_of_extender,
+                                  null
+                                ) > -1
+                              : _vm.checkbox_list.end_of_extender
+                          },
+                          on: {
+                            change: function($event) {
+                              var $$a = _vm.checkbox_list.end_of_extender,
+                                $$el = $event.target,
+                                $$c = $$el.checked ? true : false
+                              if (Array.isArray($$a)) {
+                                var $$v = null,
+                                  $$i = _vm._i($$a, $$v)
+                                if ($$el.checked) {
+                                  $$i < 0 &&
+                                    _vm.$set(
+                                      _vm.checkbox_list,
+                                      "end_of_extender",
+                                      $$a.concat([$$v])
+                                    )
+                                } else {
+                                  $$i > -1 &&
+                                    _vm.$set(
+                                      _vm.checkbox_list,
+                                      "end_of_extender",
+                                      $$a
+                                        .slice(0, $$i)
+                                        .concat($$a.slice($$i + 1))
+                                    )
+                                }
+                              } else {
+                                _vm.$set(
+                                  _vm.checkbox_list,
+                                  "end_of_extender",
+                                  $$c
+                                )
+                              }
+                            }
+                          }
+                        })
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group  " }, [
+                  _c(
+                    "label",
+                    { staticClass: "col-sm-2 asterisk control-label" },
+                    [_vm._v("Layout of whip")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-8" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "radio-inline",
+                        attrs: {
+                          id: "option_unknown",
+                          "data-placement": "right"
+                        }
+                      },
+                      [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.project_form.layout_of_whip,
+                              expression: "project_form.layout_of_whip"
+                            }
+                          ],
+                          attrs: {
+                            type: "radio",
+                            name: "layout_of_whip",
+                            value: "0"
+                          },
+                          domProps: {
+                            checked: _vm._q(
+                              _vm.project_form.layout_of_whip,
+                              "0"
+                            )
+                          },
+                          on: {
+                            change: function($event) {
+                              return _vm.$set(
+                                _vm.project_form,
+                                "layout_of_whip",
+                                "0"
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" UNKNOWN\n                                    ")
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      {
+                        staticClass: "radio-inline",
+                        attrs: { id: "option_cab", "data-placement": "right" }
+                      },
+                      [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.project_form.layout_of_whip,
+                              expression: "project_form.layout_of_whip"
+                            }
+                          ],
+                          attrs: {
+                            type: "radio",
+                            name: "layout_of_whip",
+                            value: "1"
+                          },
+                          domProps: {
+                            checked: _vm._q(
+                              _vm.project_form.layout_of_whip,
+                              "1"
+                            )
+                          },
+                          on: {
+                            change: function($event) {
+                              return _vm.$set(
+                                _vm.project_form,
+                                "layout_of_whip",
+                                "1"
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" CAB\n                                    ")
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      {
+                        staticClass: "radio-inline",
+                        staticStyle: { "margin-left": "15px" },
+                        attrs: {
+                          id: "option_trench",
+                          "data-placement": "right"
+                        }
+                      },
+                      [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.project_form.layout_of_whip,
+                              expression: "project_form.layout_of_whip"
+                            }
+                          ],
+                          attrs: {
+                            type: "radio",
+                            name: "layout_of_whip",
+                            value: "2"
+                          },
+                          domProps: {
+                            checked: _vm._q(
+                              _vm.project_form.layout_of_whip,
+                              "2"
+                            )
+                          },
+                          on: {
+                            change: function($event) {
+                              return _vm.$set(
+                                _vm.project_form,
+                                "layout_of_whip",
+                                "2"
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" TRENCH\n                                    ")
+                      ]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _vm.project_form.layout_of_whip != 0
+                  ? _c("div", { staticClass: "form-group  " }, [
+                      _c(
+                        "label",
+                        { staticClass: "col-sm-2 asterisk control-label" },
+                        [_vm._v("Rowhead to CBX")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-sm-8" }, [
+                        _c("div", { staticClass: "row" }, [
+                          _c("div", { staticClass: "col-sm-2 mb15" }, [
+                            _c("div", { staticClass: "input-group" }, [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.project_form.r_cbx_1_1,
+                                    expression: "project_form.r_cbx_1_1"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: { type: "number" },
+                                domProps: { value: _vm.project_form.r_cbx_1_1 },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.project_form,
+                                      "r_cbx_1_1",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-sm-2 mb15" }, [
+                            _c("div", { staticClass: "input-group" }, [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.project_form.r_cbx_1_2,
+                                    expression: "project_form.r_cbx_1_2"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: { type: "number" },
+                                domProps: { value: _vm.project_form.r_cbx_1_2 },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.project_form,
+                                      "r_cbx_1_2",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-sm-2 mb15" }, [
+                            _c("div", { staticClass: "input-group" }, [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.project_form.r_cbx_1_3,
+                                    expression: "project_form.r_cbx_1_3"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: { type: "number" },
+                                domProps: { value: _vm.project_form.r_cbx_1_3 },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.project_form,
+                                      "r_cbx_1_3",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-sm-2 mb15" }, [
+                            _c("div", { staticClass: "input-group" }, [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.project_form.r_cbx_1_4,
+                                    expression: "project_form.r_cbx_1_4"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: { type: "number" },
+                                domProps: { value: _vm.project_form.r_cbx_1_4 },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.project_form,
+                                      "r_cbx_1_4",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-sm-1 mb15" }, [
+                            _c("div", { staticClass: "input-group" }, [
+                              _c(
+                                "span",
+                                {
+                                  staticClass: "form-control",
+                                  staticStyle: {
+                                    padding: "6px 0px",
+                                    border: "unset"
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                                    " +
+                                      _vm._s(
+                                        parseInt(_vm.project_form.r_cbx_1_1) +
+                                          parseInt(_vm.project_form.r_cbx_1_2) +
+                                          parseInt(_vm.project_form.r_cbx_1_3) +
+                                          parseInt(_vm.project_form.r_cbx_1_4)
+                                      ) +
+                                      "\n                                                "
+                                  )
+                                ]
+                              )
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-sm-3 mb15" }, [
+                            _c("div", { staticClass: "input-group" }, [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.project_form.row_head_to_cbx_1,
+                                    expression: "project_form.row_head_to_cbx_1"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                class: _vm.checkbox_list.row_head_to_cbx_1
+                                  ? "checked"
+                                  : "",
+                                attrs: { type: "number" },
+                                domProps: {
+                                  value: _vm.project_form.row_head_to_cbx_1
+                                },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.project_form,
+                                      "row_head_to_cbx_1",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "span",
+                                {
+                                  staticClass: "input-group-addon",
+                                  staticStyle: { "border-left": "unset" }
+                                },
+                                [_vm._v("ft")]
+                              ),
+                              _vm._v(" "),
+                              _c("span", { staticClass: "input-group-addon" }, [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value:
+                                        _vm.checkbox_list.row_head_to_cbx_1,
+                                      expression:
+                                        "checkbox_list.row_head_to_cbx_1"
+                                    }
+                                  ],
+                                  attrs: { type: "checkbox" },
+                                  domProps: {
+                                    checked: Array.isArray(
+                                      _vm.checkbox_list.row_head_to_cbx_1
+                                    )
+                                      ? _vm._i(
+                                          _vm.checkbox_list.row_head_to_cbx_1,
+                                          null
+                                        ) > -1
+                                      : _vm.checkbox_list.row_head_to_cbx_1
+                                  },
+                                  on: {
+                                    change: function($event) {
+                                      var $$a =
+                                          _vm.checkbox_list.row_head_to_cbx_1,
+                                        $$el = $event.target,
+                                        $$c = $$el.checked ? true : false
+                                      if (Array.isArray($$a)) {
+                                        var $$v = null,
+                                          $$i = _vm._i($$a, $$v)
+                                        if ($$el.checked) {
+                                          $$i < 0 &&
+                                            _vm.$set(
+                                              _vm.checkbox_list,
+                                              "row_head_to_cbx_1",
+                                              $$a.concat([$$v])
+                                            )
+                                        } else {
+                                          $$i > -1 &&
+                                            _vm.$set(
+                                              _vm.checkbox_list,
+                                              "row_head_to_cbx_1",
+                                              $$a
+                                                .slice(0, $$i)
+                                                .concat($$a.slice($$i + 1))
+                                            )
+                                        }
+                                      } else {
+                                        _vm.$set(
+                                          _vm.checkbox_list,
+                                          "row_head_to_cbx_1",
+                                          $$c
+                                        )
+                                      }
+                                    }
+                                  }
+                                })
+                              ])
+                            ])
+                          ])
+                        ])
+                      ])
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.project_form.layout_of_whip == 2
+                  ? _c("div", { staticClass: "form-group  " }, [
+                      _c(
+                        "label",
+                        { staticClass: "col-sm-2 asterisk control-label" },
+                        [_vm._v("Rowhead to CBX'")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-sm-8" }, [
+                        _c("div", { staticClass: "row" }, [
+                          _c("div", { staticClass: "col-sm-2 mb15" }, [
+                            _c("div", { staticClass: "input-group" }, [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.project_form.r_cbx_2_1,
+                                    expression: "project_form.r_cbx_2_1"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: { type: "number" },
+                                domProps: { value: _vm.project_form.r_cbx_2_1 },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.project_form,
+                                      "r_cbx_2_1",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-sm-2 mb15" }, [
+                            _c("div", { staticClass: "input-group" }, [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.project_form.r_cbx_2_2,
+                                    expression: "project_form.r_cbx_2_2"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: { type: "number" },
+                                domProps: { value: _vm.project_form.r_cbx_2_2 },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.project_form,
+                                      "r_cbx_2_2",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-sm-2 mb15" }, [
+                            _c("div", { staticClass: "input-group" }, [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.project_form.r_cbx_2_3,
+                                    expression: "project_form.r_cbx_2_3"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: { type: "number" },
+                                domProps: { value: _vm.project_form.r_cbx_2_3 },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.project_form,
+                                      "r_cbx_2_3",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-sm-2 mb15" }, [
+                            _c("div", { staticClass: "input-group" }, [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.project_form.r_cbx_2_4,
+                                    expression: "project_form.r_cbx_2_4"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: { type: "number" },
+                                domProps: { value: _vm.project_form.r_cbx_2_4 },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.project_form,
+                                      "r_cbx_2_4",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-sm-1 mb15" }, [
+                            _c("div", { staticClass: "input-group" }, [
+                              _c(
+                                "span",
+                                {
+                                  staticClass: "form-control",
+                                  staticStyle: {
+                                    padding: "6px 0px",
+                                    border: "unset"
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                                    " +
+                                      _vm._s(
+                                        parseInt(_vm.project_form.r_cbx_2_1) +
+                                          parseInt(_vm.project_form.r_cbx_2_2) +
+                                          parseInt(_vm.project_form.r_cbx_2_3) +
+                                          parseInt(_vm.project_form.r_cbx_2_4)
+                                      ) +
+                                      "\n                                                "
+                                  )
+                                ]
+                              )
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-sm-3 mb15" }, [
+                            _c("div", { staticClass: "input-group" }, [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.project_form.row_head_to_cbx_2,
+                                    expression: "project_form.row_head_to_cbx_2"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                class: _vm.checkbox_list.row_head_to_cbx_2
+                                  ? "checked"
+                                  : "",
+                                attrs: { type: "number" },
+                                domProps: {
+                                  value: _vm.project_form.row_head_to_cbx_2
+                                },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.project_form,
+                                      "row_head_to_cbx_2",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "span",
+                                {
+                                  staticClass: "input-group-addon",
+                                  staticStyle: { "border-left": "unset" }
+                                },
+                                [_vm._v("ft")]
+                              ),
+                              _vm._v(" "),
+                              _c("span", { staticClass: "input-group-addon" }, [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value:
+                                        _vm.checkbox_list.row_head_to_cbx_2,
+                                      expression:
+                                        "checkbox_list.row_head_to_cbx_2"
+                                    }
+                                  ],
+                                  attrs: { type: "checkbox" },
+                                  domProps: {
+                                    checked: Array.isArray(
+                                      _vm.checkbox_list.row_head_to_cbx_2
+                                    )
+                                      ? _vm._i(
+                                          _vm.checkbox_list.row_head_to_cbx_2,
+                                          null
+                                        ) > -1
+                                      : _vm.checkbox_list.row_head_to_cbx_2
+                                  },
+                                  on: {
+                                    change: function($event) {
+                                      var $$a =
+                                          _vm.checkbox_list.row_head_to_cbx_2,
+                                        $$el = $event.target,
+                                        $$c = $$el.checked ? true : false
+                                      if (Array.isArray($$a)) {
+                                        var $$v = null,
+                                          $$i = _vm._i($$a, $$v)
+                                        if ($$el.checked) {
+                                          $$i < 0 &&
+                                            _vm.$set(
+                                              _vm.checkbox_list,
+                                              "row_head_to_cbx_2",
+                                              $$a.concat([$$v])
+                                            )
+                                        } else {
+                                          $$i > -1 &&
+                                            _vm.$set(
+                                              _vm.checkbox_list,
+                                              "row_head_to_cbx_2",
+                                              $$a
+                                                .slice(0, $$i)
+                                                .concat($$a.slice($$i + 1))
+                                            )
+                                        }
+                                      } else {
+                                        _vm.$set(
+                                          _vm.checkbox_list,
+                                          "row_head_to_cbx_2",
+                                          $$c
+                                        )
+                                      }
+                                    }
+                                  }
+                                })
+                              ])
+                            ])
+                          ])
+                        ])
+                      ])
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.project_form.layout_of_whip != 0
+                  ? _c("div", { staticClass: "form-group " }, [
+                      _c(
+                        "label",
+                        { staticClass: "col-sm-2 asterisk control-label" },
+                        [_vm._v("Distance between poles")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-sm-8" }, [
+                        _c("div", { staticClass: "input-group" }, [
+                          _vm._m(6),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.project_form.distance_between_poles,
+                                expression:
+                                  "project_form.distance_between_poles"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: _vm.checkbox_list.distance_between_poles
+                              ? "checked"
+                              : "",
+                            attrs: { type: "number" },
+                            domProps: {
+                              value: _vm.project_form.distance_between_poles
+                            },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.project_form,
+                                  "distance_between_poles",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "span",
+                            {
+                              staticClass: "input-group-addon",
+                              staticStyle: { "border-left": "unset" }
+                            },
+                            [_vm._v("ft")]
+                          ),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "input-group-addon" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value:
+                                    _vm.checkbox_list.distance_between_poles,
+                                  expression:
+                                    "checkbox_list.distance_between_poles"
+                                }
+                              ],
+                              attrs: { type: "checkbox" },
+                              domProps: {
+                                checked: Array.isArray(
+                                  _vm.checkbox_list.distance_between_poles
+                                )
+                                  ? _vm._i(
+                                      _vm.checkbox_list.distance_between_poles,
+                                      null
+                                    ) > -1
+                                  : _vm.checkbox_list.distance_between_poles
+                              },
+                              on: {
+                                change: function($event) {
+                                  var $$a =
+                                      _vm.checkbox_list.distance_between_poles,
+                                    $$el = $event.target,
+                                    $$c = $$el.checked ? true : false
+                                  if (Array.isArray($$a)) {
+                                    var $$v = null,
+                                      $$i = _vm._i($$a, $$v)
+                                    if ($$el.checked) {
+                                      $$i < 0 &&
+                                        _vm.$set(
+                                          _vm.checkbox_list,
+                                          "distance_between_poles",
+                                          $$a.concat([$$v])
+                                        )
+                                    } else {
+                                      $$i > -1 &&
+                                        _vm.$set(
+                                          _vm.checkbox_list,
+                                          "distance_between_poles",
+                                          $$a
+                                            .slice(0, $$i)
+                                            .concat($$a.slice($$i + 1))
+                                        )
+                                    }
+                                  } else {
+                                    _vm.$set(
+                                      _vm.checkbox_list,
+                                      "distance_between_poles",
+                                      $$c
+                                    )
+                                  }
+                                }
+                              }
+                            })
+                          ])
+                        ])
+                      ])
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _c("div"),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group  " }, [
+                  _c(
+                    "label",
+                    { staticClass: "col-sm-2 asterisk control-label" },
+                    [_vm._v("Remarks")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-8" }, [
+                    _vm.checkbox_list.solar_module
+                      ? _c("div", { staticClass: "row" }, [
+                          _c("div", { staticClass: "col-sm-6 mb15" }, [
+                            _c("div", { staticClass: "input-group" }, [
+                              _c(
+                                "span",
+                                { staticClass: "input-group-addon asterisk" },
+                                [_vm._v("Solar Module")]
+                              ),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value:
+                                      _vm.checkbox_list_remarks.solar_module,
+                                    expression:
+                                      "checkbox_list_remarks.solar_module"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: { type: "text" },
+                                domProps: {
+                                  value: _vm.checkbox_list_remarks.solar_module
+                                },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.checkbox_list_remarks,
+                                      "solar_module",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ])
+                          ])
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.checkbox_list.length || _vm.checkbox_list.width
+                      ? _c("div", { staticClass: "row" }, [
+                          _c("div", { staticClass: "col-sm-6 mb15" }, [
+                            _vm.checkbox_list.length
+                              ? _c("div", { staticClass: "input-group" }, [
+                                  _c(
+                                    "span",
+                                    {
+                                      staticClass: "input-group-addon asterisk"
+                                    },
+                                    [_vm._v("Length")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.checkbox_list_remarks.length,
+                                        expression:
+                                          "checkbox_list_remarks.length"
+                                      }
+                                    ],
+                                    staticClass: "form-control",
+                                    attrs: { type: "text" },
+                                    domProps: {
+                                      value: _vm.checkbox_list_remarks.length
+                                    },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.checkbox_list_remarks,
+                                          "length",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  })
+                                ])
+                              : _vm._e()
+                          ]),
+                          _vm._v(" "),
+                          _vm.checkbox_list.width
+                            ? _c("div", { staticClass: "col-sm-6 mb15" }, [
+                                _c("div", { staticClass: "input-group" }, [
+                                  _c(
+                                    "span",
+                                    {
+                                      staticClass: "input-group-addon asterisk"
+                                    },
+                                    [_vm._v("Width")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.checkbox_list_remarks.width,
+                                        expression:
+                                          "checkbox_list_remarks.width"
+                                      }
+                                    ],
+                                    staticClass: "form-control",
+                                    attrs: { type: "text" },
+                                    domProps: {
+                                      value: _vm.checkbox_list_remarks.width
+                                    },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.checkbox_list_remarks,
+                                          "width",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  })
+                                ])
+                              ])
+                            : _vm._e()
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.checkbox_list.connector || _vm.checkbox_list.fuse
+                      ? _c("div", { staticClass: "row" }, [
+                          _vm.checkbox_list.fuse
+                            ? _c("div", { staticClass: "col-sm-12 mb15" }, [
+                                _c("div", { staticClass: "input-group" }, [
+                                  _c(
+                                    "span",
+                                    {
+                                      staticClass: "input-group-addon asterisk"
+                                    },
+                                    [_vm._v("Fuse")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.checkbox_list_remarks.fuse,
+                                        expression: "checkbox_list_remarks.fuse"
+                                      }
+                                    ],
+                                    staticClass: "form-control",
+                                    attrs: { type: "text" },
+                                    domProps: {
+                                      value: _vm.checkbox_list_remarks.fuse
+                                    },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.checkbox_list_remarks,
+                                          "fuse",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  })
+                                ])
+                              ])
+                            : _vm._e()
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.checkbox_list.junction_box_to_rack_1 ||
+                    _vm.checkbox_list.junction_box_to_rack_2
+                      ? _c("div", { staticClass: "row" }, [
+                          _c("div", { staticClass: "col-sm-6 mb15" }, [
+                            _vm.checkbox_list.junction_box_to_rack_1
+                              ? _c("div", { staticClass: "input-group" }, [
+                                  _c(
+                                    "span",
+                                    {
+                                      staticClass: "input-group-addon asterisk"
+                                    },
+                                    [_vm._v("Junction box to rack")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value:
+                                          _vm.checkbox_list_remarks
+                                            .junction_box_to_rack_1,
+                                        expression:
+                                          "checkbox_list_remarks.junction_box_to_rack_1"
+                                      }
+                                    ],
+                                    staticClass: "form-control",
+                                    attrs: { type: "text" },
+                                    domProps: {
+                                      value:
+                                        _vm.checkbox_list_remarks
+                                          .junction_box_to_rack_1
+                                    },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.checkbox_list_remarks,
+                                          "junction_box_to_rack_1",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  })
+                                ])
+                              : _vm._e()
+                          ]),
+                          _vm._v(" "),
+                          _vm.checkbox_list.junction_box_to_rack_2
+                            ? _c("div", { staticClass: "col-sm-6 mb15" }, [
+                                _c("div", { staticClass: "input-group" }, [
+                                  _c(
+                                    "span",
+                                    {
+                                      staticClass: "input-group-addon asterisk"
+                                    },
+                                    [_vm._v("Junction box to rack'")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value:
+                                          _vm.checkbox_list_remarks
+                                            .junction_box_to_rack_2,
+                                        expression:
+                                          "checkbox_list_remarks.junction_box_to_rack_2"
+                                      }
+                                    ],
+                                    staticClass: "form-control",
+                                    attrs: { type: "text" },
+                                    domProps: {
+                                      value:
+                                        _vm.checkbox_list_remarks
+                                          .junction_box_to_rack_2
+                                    },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.checkbox_list_remarks,
+                                          "junction_box_to_rack_2",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  })
+                                ])
+                              ])
+                            : _vm._e()
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.checkbox_list.module_to_module_extender
+                      ? _c("div", { staticClass: "input-group remark-list" }, [
+                          _c(
+                            "span",
+                            { staticClass: "input-group-addon asterisk" },
+                            [_vm._v("Module to module extender")]
+                          ),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value:
+                                  _vm.checkbox_list_remarks
+                                    .module_to_module_extender,
+                                expression:
+                                  "checkbox_list_remarks.module_to_module_extender"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: { type: "text" },
+                            domProps: {
+                              value:
+                                _vm.checkbox_list_remarks
+                                  .module_to_module_extender
+                            },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.checkbox_list_remarks,
+                                  "module_to_module_extender",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          })
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.checkbox_list.end_of_extender
+                      ? _c("div", { staticClass: "input-group remark-list" }, [
+                          _c(
+                            "span",
+                            { staticClass: "input-group-addon asterisk" },
+                            [_vm._v("End of extender")]
+                          ),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value:
+                                  _vm.checkbox_list_remarks.end_of_extender,
+                                expression:
+                                  "checkbox_list_remarks.end_of_extender"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: { type: "text" },
+                            domProps: {
+                              value: _vm.checkbox_list_remarks.end_of_extender
+                            },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.checkbox_list_remarks,
+                                  "end_of_extender",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          })
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.checkbox_list.row_head_to_cbx_1 ||
+                    _vm.checkbox_list.row_head_to_cbx_2
+                      ? _c("div", { staticClass: "row" }, [
+                          _c("div", { staticClass: "col-sm-6 mb15" }, [
+                            _vm.checkbox_list.row_head_to_cbx_1
+                              ? _c("div", { staticClass: "input-group" }, [
+                                  _c(
+                                    "span",
+                                    {
+                                      staticClass: "input-group-addon asterisk"
+                                    },
+                                    [_vm._v("Rowhead to CBX")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value:
+                                          _vm.checkbox_list_remarks
+                                            .row_head_to_cbx_1,
+                                        expression:
+                                          "checkbox_list_remarks.row_head_to_cbx_1"
+                                      }
+                                    ],
+                                    staticClass: "form-control",
+                                    attrs: { type: "text" },
+                                    domProps: {
+                                      value:
+                                        _vm.checkbox_list_remarks
+                                          .row_head_to_cbx_1
+                                    },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.checkbox_list_remarks,
+                                          "row_head_to_cbx_1",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  })
+                                ])
+                              : _vm._e()
+                          ]),
+                          _vm._v(" "),
+                          _vm.checkbox_list.row_head_to_cbx_2
+                            ? _c("div", { staticClass: "col-sm-6 mb15" }, [
+                                _c("div", { staticClass: "input-group" }, [
+                                  _c(
+                                    "span",
+                                    {
+                                      staticClass: "input-group-addon asterisk"
+                                    },
+                                    [_vm._v("Rowhead to CBX'")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value:
+                                          _vm.checkbox_list_remarks
+                                            .row_head_to_cbx_2,
+                                        expression:
+                                          "checkbox_list_remarks.row_head_to_cbx_2"
+                                      }
+                                    ],
+                                    staticClass: "form-control",
+                                    attrs: { type: "text" },
+                                    domProps: {
+                                      value:
+                                        _vm.checkbox_list_remarks
+                                          .row_head_to_cbx_2
+                                    },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.checkbox_list_remarks,
+                                          "row_head_to_cbx_2",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  })
+                                ])
+                              ])
+                            : _vm._e()
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.checkbox_list.distance_between_poles
+                      ? _c("div", { staticClass: "input-group remark-list" }, [
+                          _c(
+                            "span",
+                            { staticClass: "input-group-addon asterisk" },
+                            [_vm._v("Distance between poles")]
+                          ),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value:
+                                  _vm.checkbox_list_remarks
+                                    .distance_between_poles,
+                                expression:
+                                  "checkbox_list_remarks.distance_between_poles"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: { type: "text" },
+                            domProps: {
+                              value:
+                                _vm.checkbox_list_remarks.distance_between_poles
+                            },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.checkbox_list_remarks,
+                                  "distance_between_poles",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          })
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c("textarea", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.project_form.remarks,
+                          expression: "project_form.remarks"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { rows: "10", placeholder: "Remarks" },
+                      domProps: { value: _vm.project_form.remarks },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.project_form,
+                            "remarks",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    })
+                  ])
+                ])
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "box-footer" }, [
+            _c("div", { staticClass: "col-md-2" }),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-8" }, [
+              _c("div", { staticClass: "btn-group pull-right" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: { type: "button", disabled: _vm.loading.project },
+                    on: { click: _vm.saveProject }
+                  },
+                  [
+                    _vm._v("Submit "),
+                    _vm.loading.project
+                      ? _c("i", { staticClass: "fa fa-spinner fa-spin" })
+                      : _vm._e()
+                  ]
+                )
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "box-header with-border" }, [
+      _c("h3", { staticClass: "box-title" }, [_vm._v("Create")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "box-tools" }, [
+        _c(
+          "div",
+          {
+            staticClass: "btn-group pull-right",
+            staticStyle: { "margin-right": "5px" }
+          },
+          [
+            _c(
+              "a",
+              {
+                staticClass: "btn btn-sm btn-default",
+                attrs: {
+                  href: "/admin/projects",
+                  title: "List",
+                  target: "_self"
+                }
+              },
+              [
+                _c("i", { staticClass: "fa fa-list" }),
+                _c("span", { staticClass: "hidden-xs" }, [_vm._v(" List")])
+              ]
+            )
+          ]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "input-group-addon" }, [
+      _c("i", { staticClass: "fa fa-pencil fa-fw" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "input-group-addon" }, [
+      _c("i", { staticClass: "fa fa-pencil fa-fw" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "input-group-addon" }, [
+      _c("i", { staticClass: "fa fa-pencil fa-fw" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "panel-heading" }, [
+      _c("h3", { staticClass: "panel-title" }, [_vm._v("Info Analysis")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "input-group-addon" }, [
+      _c("i", { staticClass: "fa fa-pencil fa-fw" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "input-group-addon" }, [
+      _c("i", { staticClass: "fa fa-pencil fa-fw" })
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CreateTypicalComponent.vue?vue&type=template&id=93a0c058&":
 /*!*************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/CreateTypicalComponent.vue?vue&type=template&id=93a0c058& ***!
@@ -22756,10 +26218,12 @@ var render = function() {
                                             _vm._v(
                                               "\n                                            " +
                                                 _vm._s(
-                                                  fuse.length +
-                                                    (fuse.length *
-                                                      parseInt(_vm.margin)) /
-                                                      100
+                                                  Math.ceil(
+                                                    fuse.length +
+                                                      (fuse.length *
+                                                        parseInt(_vm.margin)) /
+                                                        100
+                                                  )
                                                 ) +
                                                 "\n                                        "
                                             )
@@ -23020,8 +26484,12 @@ var render = function() {
                                             _vm._v(
                                               "\n                                            " +
                                                 _vm._s(
-                                                  nofuse.length +
-                                                    parseInt(_vm.margin)
+                                                  Math.ceil(
+                                                    nofuse.length +
+                                                      (nofuse.length *
+                                                        parseInt(_vm.margin)) /
+                                                        100
+                                                  )
                                                 ) +
                                                 "\n                                        "
                                             )
@@ -23531,6 +26999,598 @@ var staticRenderFns = [
           _c("div", { staticClass: "mfp-counter" })
         ])
       ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ProjectInfoComponent.vue?vue&type=template&id=e8baf17e&scoped=true&":
+/*!***********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ProjectInfoComponent.vue?vue&type=template&id=e8baf17e&scoped=true& ***!
+  \***********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "box box-info" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("form", { staticClass: "form-horizontal" }, [
+      _c("div", { staticClass: "box-body" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { staticClass: "col-sm-2 control-label" }, [
+            _vm._v("Company")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-8" }, [
+            _c("span", { staticClass: "form-control" }, [
+              _vm._v(_vm._s(_vm.project_info.company.name))
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { staticClass: "col-sm-2 control-label" }, [
+            _vm._v("Name")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-8" }, [
+            _c("span", { staticClass: "form-control" }, [
+              _vm._v(_vm._s(_vm.project_info.name))
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { staticClass: "col-sm-2 control-label" }, [
+            _vm._v("Address")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-8" }, [
+            _c("span", { staticClass: "form-control" }, [
+              _vm._v(_vm._s(_vm.project_info.address))
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { staticClass: "col-sm-2 control-label" }, [
+            _vm._v("Total Quantity")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-8" }, [
+            _c("span", { staticClass: "form-control" }, [
+              _vm._v(_vm._s(_vm.project_info.total_quantity))
+            ])
+          ])
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "modal fade in", attrs: { id: "projectInfo" } }, [
+      _c("div", { staticClass: "modal-dialog modal-lg" }, [
+        _c("div", { staticClass: "modal-content" }, [
+          _vm._m(1),
+          _vm._v(" "),
+          _c("div", { staticClass: "modal-body" }, [
+            _c("div", { staticClass: "form-horizontal" }, [
+              _c("div", { staticClass: "col-md-12" }, [
+                _c("div", { staticClass: "input-group" }, [
+                  _c("span", [_vm._v("摆放方式")]),
+                  _vm._v(" "),
+                  _c("label", { staticClass: "mgl10" }, [
+                    _vm._v("横着"),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form_data.style,
+                          expression: "form_data.style"
+                        }
+                      ],
+                      attrs: { type: "radio", name: "type", value: "0" },
+                      domProps: { checked: _vm._q(_vm.form_data.style, "0") },
+                      on: {
+                        change: function($event) {
+                          return _vm.$set(_vm.form_data, "style", "0")
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("label", { staticClass: "mgl10" }, [
+                    _vm._v("竖着"),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form_data.style,
+                          expression: "form_data.style"
+                        }
+                      ],
+                      attrs: { type: "radio", name: "type", value: "1" },
+                      domProps: { checked: _vm._q(_vm.form_data.style, "1") },
+                      on: {
+                        change: function($event) {
+                          return _vm.$set(_vm.form_data, "style", "1")
+                        }
+                      }
+                    })
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-6" }, [
+                _c("div", { staticClass: "input-group" }, [
+                  _c("span", { staticClass: "input-group-addon" }, [
+                    _vm._v("太阳能板")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form_data.solar_panel_id,
+                          expression: "form_data.solar_panel_id"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            _vm.form_data,
+                            "solar_panel_id",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        }
+                      }
+                    },
+                    _vm._l(this.solar_panels, function(item) {
+                      return _c("option", { domProps: { value: item.id } }, [
+                        _vm.form_data.style == "0"
+                          ? _c("span", [
+                              _vm._v(
+                                _vm._s(item.name) +
+                                  "(length:" +
+                                  _vm._s(item.length) +
+                                  ")"
+                              )
+                            ])
+                          : _c("span", [
+                              _vm._v(
+                                _vm._s(item.name) +
+                                  "(width:" +
+                                  _vm._s(item.width) +
+                                  ")"
+                              )
+                            ])
+                      ])
+                    }),
+                    0
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "input-group" }, [
+                  _c("span", { staticClass: "input-group-addon" }, [
+                    _vm._v("Connector")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form_data.connector,
+                        expression: "form_data.connector"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    domProps: { value: _vm.form_data.connector },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.form_data,
+                          "connector",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "input-group" }, [
+                  _c("span", { staticClass: "input-group-addon" }, [
+                    _vm._v("Fuse")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form_data.fuse,
+                        expression: "form_data.fuse"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    domProps: { value: _vm.form_data.fuse },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.form_data, "fuse", $event.target.value)
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "input-group" }, [
+                  _c("span", { staticClass: "input-group-addon" }, [
+                    _vm._v("Junction box to rack")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form_data.junction_box_to_rack1,
+                        expression: "form_data.junction_box_to_rack1"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    domProps: { value: _vm.form_data.junction_box_to_rack1 },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.form_data,
+                          "junction_box_to_rack1",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "input-group" }, [
+                  _c("span", { staticClass: "input-group-addon" }, [
+                    _vm._v("Junction box to rack'")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form_data.junction_box_to_rack2,
+                        expression: "form_data.junction_box_to_rack2"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    domProps: { value: _vm.form_data.junction_box_to_rack2 },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.form_data,
+                          "junction_box_to_rack2",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "input-group" }, [
+                  _c("span", { staticClass: "input-group-addon" }, [
+                    _vm._v("Of module per string")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form_data.of_module_per_string,
+                        expression: "form_data.of_module_per_string"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    domProps: { value: _vm.form_data.of_module_per_string },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.form_data,
+                          "of_module_per_string",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "input-group" }, [
+                  _c("span", { staticClass: "input-group-addon" }, [
+                    _vm._v("String")
+                  ]),
+                  _vm._v(" "),
+                  _c("div", {
+                    staticClass: "form-control",
+                    staticStyle: { "background-color": "#eee" },
+                    domProps: {
+                      textContent: _vm._s(_vm.string ? _vm.string + "ft" : "")
+                    }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-6" }, [
+                _vm._m(2),
+                _vm._v(" "),
+                _vm._m(3),
+                _vm._v(" "),
+                _vm._m(4),
+                _vm._v(" "),
+                _vm._m(5),
+                _vm._v(" "),
+                _c("div", { staticClass: "input-group" }, [
+                  _c("span", { staticClass: "input-group-addon" }, [
+                    _vm._v("串数")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form_data.number_of_string,
+                          expression: "form_data.number_of_string"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        id: "number-of-string",
+                        name: "number_of_string",
+                        multiple: "multiple"
+                      },
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            _vm.form_data,
+                            "number_of_string",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        }
+                      }
+                    },
+                    _vm._l(50, function(i) {
+                      return _c("option", { domProps: { value: i } }, [
+                        _vm._v(_vm._s(i) + "串")
+                      ])
+                    }),
+                    0
+                  )
+                ]),
+                _vm._v(" "),
+                _vm._m(6)
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-12" }, [
+                _c("div", [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary pull-right",
+                      attrs: { type: "button" },
+                      on: { click: _vm.search }
+                    },
+                    [_vm._v("查询")]
+                  )
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticStyle: { clear: "both" } })
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "box-header with-border" }, [
+      _c("h3", { staticClass: "box-title" }, [_vm._v("Info")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "box-tools" }, [
+        _c(
+          "div",
+          {
+            staticClass: "btn-group pull-right",
+            staticStyle: { "margin-right": "5px" }
+          },
+          [
+            _c(
+              "a",
+              {
+                staticClass: "btn btn-sm btn-default",
+                attrs: { href: "/admin/projects", title: "List" }
+              },
+              [
+                _c("i", { staticClass: "fa fa-list" }),
+                _c("span", { staticClass: "hidden-xs" }, [_vm._v(" List")])
+              ]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "btn-group pull-right",
+            staticStyle: { "margin-right": "5px" }
+          },
+          [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-sm btn-success",
+                attrs: {
+                  type: "button",
+                  "data-toggle": "modal",
+                  "data-target": "#projectInfo"
+                }
+              },
+              [
+                _c("i", { staticClass: "fa fa-plus" }),
+                _c("span", { staticClass: "hidden-xs" }, [_vm._v("  Add")])
+              ]
+            )
+          ]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      ),
+      _vm._v(" "),
+      _c("h4", { staticClass: "modal-title" }, [
+        _vm._v("Project Info："),
+        _c("span", { staticClass: "po_client_no" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group" }, [
+      _c("span", { staticClass: "input-group-addon" }, [_vm._v("支架")]),
+      _vm._v(" "),
+      _c("select", { staticClass: "form-control" }, [
+        _c("option", [_vm._v("1")]),
+        _vm._v(" "),
+        _c("option", [_vm._v("2")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group" }, [
+      _c("span", { staticClass: "input-group-addon" }, [_vm._v("Drive")]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: { value: "123123", disabled: "" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group" }, [
+      _c("span", { staticClass: "input-group-addon" }, [
+        _vm._v("End of extender")
+      ]),
+      _vm._v(" "),
+      _c("input", { staticClass: "form-control" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group" }, [
+      _c("span", { staticClass: "input-group-addon" }, [
+        _vm._v("Module to module extender")
+      ]),
+      _vm._v(" "),
+      _c("input", { staticClass: "form-control" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group" }, [
+      _c("span", { staticClass: "input-group-addon" }, [_vm._v("Remarks")]),
+      _vm._v(" "),
+      _c("textarea", {
+        staticClass: "form-control",
+        staticStyle: { "min-height": "78px" },
+        attrs: { rows: "3" }
+      })
     ])
   }
 ]
@@ -35719,6 +39779,8 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 Vue.component('harness-create', __webpack_require__(/*! ./components/CreateHarnessComponent */ "./resources/js/components/CreateHarnessComponent.vue")["default"]);
 Vue.component('typical-create', __webpack_require__(/*! ./components/CreateTypicalComponent */ "./resources/js/components/CreateTypicalComponent.vue")["default"]);
+Vue.component('project-create', __webpack_require__(/*! ./components/CreateProjectComponent */ "./resources/js/components/CreateProjectComponent.vue")["default"]);
+Vue.component('project-info', __webpack_require__(/*! ./components/ProjectInfoComponent */ "./resources/js/components/ProjectInfoComponent.vue")["default"]);
 
 /***/ }),
 
@@ -35841,6 +39903,93 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/CreateProjectComponent.vue":
+/*!************************************************************!*\
+  !*** ./resources/js/components/CreateProjectComponent.vue ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _CreateProjectComponent_vue_vue_type_template_id_ec3f19aa___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CreateProjectComponent.vue?vue&type=template&id=ec3f19aa& */ "./resources/js/components/CreateProjectComponent.vue?vue&type=template&id=ec3f19aa&");
+/* harmony import */ var _CreateProjectComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CreateProjectComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/CreateProjectComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _CreateProjectComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CreateProjectComponent.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/CreateProjectComponent.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _CreateProjectComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _CreateProjectComponent_vue_vue_type_template_id_ec3f19aa___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _CreateProjectComponent_vue_vue_type_template_id_ec3f19aa___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/CreateProjectComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/CreateProjectComponent.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/components/CreateProjectComponent.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateProjectComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./CreateProjectComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CreateProjectComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateProjectComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/CreateProjectComponent.vue?vue&type=style&index=0&lang=css&":
+/*!*********************************************************************************************!*\
+  !*** ./resources/js/components/CreateProjectComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \*********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateProjectComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--7-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--7-2!../../../node_modules/vue-loader/lib??vue-loader-options!./CreateProjectComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CreateProjectComponent.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateProjectComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateProjectComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateProjectComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateProjectComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateProjectComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/CreateProjectComponent.vue?vue&type=template&id=ec3f19aa&":
+/*!*******************************************************************************************!*\
+  !*** ./resources/js/components/CreateProjectComponent.vue?vue&type=template&id=ec3f19aa& ***!
+  \*******************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateProjectComponent_vue_vue_type_template_id_ec3f19aa___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./CreateProjectComponent.vue?vue&type=template&id=ec3f19aa& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CreateProjectComponent.vue?vue&type=template&id=ec3f19aa&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateProjectComponent_vue_vue_type_template_id_ec3f19aa___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateProjectComponent_vue_vue_type_template_id_ec3f19aa___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/CreateTypicalComponent.vue":
 /*!************************************************************!*\
   !*** ./resources/js/components/CreateTypicalComponent.vue ***!
@@ -35923,6 +40072,93 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateTypicalComponent_vue_vue_type_template_id_93a0c058___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateTypicalComponent_vue_vue_type_template_id_93a0c058___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/ProjectInfoComponent.vue":
+/*!**********************************************************!*\
+  !*** ./resources/js/components/ProjectInfoComponent.vue ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ProjectInfoComponent_vue_vue_type_template_id_e8baf17e_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ProjectInfoComponent.vue?vue&type=template&id=e8baf17e&scoped=true& */ "./resources/js/components/ProjectInfoComponent.vue?vue&type=template&id=e8baf17e&scoped=true&");
+/* harmony import */ var _ProjectInfoComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ProjectInfoComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/ProjectInfoComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _ProjectInfoComponent_vue_vue_type_style_index_0_id_e8baf17e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ProjectInfoComponent.vue?vue&type=style&index=0&id=e8baf17e&scoped=true&lang=css& */ "./resources/js/components/ProjectInfoComponent.vue?vue&type=style&index=0&id=e8baf17e&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _ProjectInfoComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ProjectInfoComponent_vue_vue_type_template_id_e8baf17e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ProjectInfoComponent_vue_vue_type_template_id_e8baf17e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "e8baf17e",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/ProjectInfoComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/ProjectInfoComponent.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/ProjectInfoComponent.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ProjectInfoComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./ProjectInfoComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ProjectInfoComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ProjectInfoComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/ProjectInfoComponent.vue?vue&type=style&index=0&id=e8baf17e&scoped=true&lang=css&":
+/*!*******************************************************************************************************************!*\
+  !*** ./resources/js/components/ProjectInfoComponent.vue?vue&type=style&index=0&id=e8baf17e&scoped=true&lang=css& ***!
+  \*******************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ProjectInfoComponent_vue_vue_type_style_index_0_id_e8baf17e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--7-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--7-2!../../../node_modules/vue-loader/lib??vue-loader-options!./ProjectInfoComponent.vue?vue&type=style&index=0&id=e8baf17e&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ProjectInfoComponent.vue?vue&type=style&index=0&id=e8baf17e&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ProjectInfoComponent_vue_vue_type_style_index_0_id_e8baf17e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ProjectInfoComponent_vue_vue_type_style_index_0_id_e8baf17e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ProjectInfoComponent_vue_vue_type_style_index_0_id_e8baf17e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ProjectInfoComponent_vue_vue_type_style_index_0_id_e8baf17e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ProjectInfoComponent_vue_vue_type_style_index_0_id_e8baf17e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/ProjectInfoComponent.vue?vue&type=template&id=e8baf17e&scoped=true&":
+/*!*****************************************************************************************************!*\
+  !*** ./resources/js/components/ProjectInfoComponent.vue?vue&type=template&id=e8baf17e&scoped=true& ***!
+  \*****************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProjectInfoComponent_vue_vue_type_template_id_e8baf17e_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./ProjectInfoComponent.vue?vue&type=template&id=e8baf17e&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ProjectInfoComponent.vue?vue&type=template&id=e8baf17e&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProjectInfoComponent_vue_vue_type_template_id_e8baf17e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProjectInfoComponent_vue_vue_type_template_id_e8baf17e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

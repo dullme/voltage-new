@@ -10,3 +10,5 @@ window.Vue = require('vue');
 
 Vue.component('harness-create', require('./components/CreateHarnessComponent').default);
 Vue.component('typical-create', require('./components/CreateTypicalComponent').default);
+Vue.component('project-create', require('./components/CreateProjectComponent').default);
+Vue.component('project-info', require('./components/ProjectInfoComponent').default);
