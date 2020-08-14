@@ -81,7 +81,7 @@ class BracketController extends ResponseController
 
     public function getBracket()
     {
-        $brackets = Bracket::select('id', 'name')->get();
+        $brackets = Bracket::select('id', 'name', 'driver')->get();
 
         return $this->responseSuccess($brackets);
     }

@@ -3848,21 +3848,186 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      typical: [],
       project_info: {},
+      brackets: [],
       solar_panels: [],
       string: '',
       form_data: {
+        project_id: '',
         solar_panel_id: '',
         of_module_per_string: '',
         style: '0',
         connector: '',
         fuse: '',
         junction_box_to_rack1: '',
+        junction_box_to_rack1_remark: '',
         junction_box_to_rack2: '',
-        number_of_string: []
+        junction_box_to_rack2_remark: '',
+        number_of_string: [],
+        typical: [],
+        bracket_id: '',
+        end_of_extender: '',
+        module_to_module_extender: '',
+        remarks: ''
       }
     };
   },
@@ -3883,8 +4048,12 @@ __webpack_require__.r(__webpack_exports__);
     var _this2 = this;
 
     this.project_info = JSON.parse(this.project);
+    this.form_data.project_id = this.project_info.id;
     axios.get('/admin/solar-panel-list').then(function (response) {
       _this2.solar_panels = response.data.data;
+    });
+    axios.get('/admin/bracket-list').then(function (response) {
+      _this2.brackets = response.data.data;
     });
     this.$watch('form_data.solar_panel_id', function () {
       if (_this2.form_data.of_module_per_string != '') {
@@ -3917,10 +4086,26 @@ __webpack_require__.r(__webpack_exports__);
       _this2.form_data.junction_box_to_rack1 = '';
       _this2.form_data.junction_box_to_rack2 = '';
       _this2.form_data.of_module_per_string = '';
+      _this2.typical = [];
+    });
+    this.$watch('form_data.of_module_per_string', function () {
+      _this2.typical = [];
+    });
+    this.$watch('form_data.solar_panel_id', function () {
+      _this2.typical = [];
+    });
+    this.$watch('form_data.number_of_string', function () {
+      _this2.typical = [];
     });
   },
   methods: {
+    checkbox: function checkbox(index, e) {
+      this.typical[index]['checked'] = e.target.checked;
+    },
     search: function search() {
+      var _this3 = this;
+
+      this.typical = [];
       axios({
         method: 'post',
         url: '/admin/projects/search/typical',
@@ -3932,15 +4117,41 @@ __webpack_require__.r(__webpack_exports__);
         }
       }).then(function (response) {
         if (response.data.status) {
-          swal("SUCCESS", response.data.message, 'success').then(function () {
-            location.href = '/admin/projects';
-          });
+          _this3.typical = response.data.data;
         } // this.loading.project = false
 
       })["catch"](function (error) {
         toastr.error(error.response.data.message);
       });
-    }
+    },
+    save: function save() {
+      this.form_data.typical = [];
+
+      for (var i in this.typical) {
+        if (this.typical[i]['checked'] == true) {
+          this.form_data.typical.push(this.typical[i]['id']);
+        }
+      }
+
+      if (this.form_data.typical.length <= 0) {
+        toastr.error('请选择 Typical');
+      } else {
+        axios({
+          method: 'post',
+          url: '/admin/projects/save/typical',
+          data: this.form_data
+        }).then(function (response) {
+          if (response.data.status) {
+            swal('SUCCESS', '添加成功', 'success').then(function () {
+              location.reload();
+            });
+          }
+        })["catch"](function (error) {
+          toastr.error(error.response.data.message);
+        });
+      }
+    },
+    deleteInfo: function deleteInfo(id) {}
   }
 });
 
@@ -27027,61 +27238,405 @@ var render = function() {
     _vm._m(0),
     _vm._v(" "),
     _c("form", { staticClass: "form-horizontal" }, [
-      _c("div", { staticClass: "box-body" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { staticClass: "col-sm-2 control-label" }, [
-            _vm._v("Company")
+      _c(
+        "div",
+        { staticClass: "box-body" },
+        [
+          _c("div", { staticClass: "col-md-12" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { staticClass: "col-sm-2 control-label" }, [
+                _vm._v("Company")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-sm-8" }, [
+                _c("span", { staticClass: "form-control" }, [
+                  _vm._v(_vm._s(_vm.project_info.company.name))
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { staticClass: "col-sm-2 control-label" }, [
+                _vm._v("Name")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-sm-8" }, [
+                _c("span", { staticClass: "form-control" }, [
+                  _vm._v(_vm._s(_vm.project_info.name))
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { staticClass: "col-sm-2 control-label" }, [
+                _vm._v("Address")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-sm-8" }, [
+                _c("span", { staticClass: "form-control" }, [
+                  _vm._v(_vm._s(_vm.project_info.address))
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { staticClass: "col-sm-2 control-label" }, [
+                _vm._v("Total Quantity")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-sm-8" }, [
+                _c("span", { staticClass: "form-control" }, [
+                  _vm._v(_vm._s(_vm.project_info.total_quantity))
+                ])
+              ])
+            ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-sm-8" }, [
-            _c("span", { staticClass: "form-control" }, [
-              _vm._v(_vm._s(_vm.project_info.company.name))
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { staticClass: "col-sm-2 control-label" }, [
-            _vm._v("Name")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-sm-8" }, [
-            _c("span", { staticClass: "form-control" }, [
-              _vm._v(_vm._s(_vm.project_info.name))
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { staticClass: "col-sm-2 control-label" }, [
-            _vm._v("Address")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-sm-8" }, [
-            _c("span", { staticClass: "form-control" }, [
-              _vm._v(_vm._s(_vm.project_info.address))
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { staticClass: "col-sm-2 control-label" }, [
-            _vm._v("Total Quantity")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-sm-8" }, [
-            _c("span", { staticClass: "form-control" }, [
-              _vm._v(_vm._s(_vm.project_info.total_quantity))
-            ])
-          ])
-        ])
-      ])
+          _vm._l(_vm.project_info.project_infos, function(info) {
+            return _c(
+              "div",
+              {
+                staticClass: "col-md-6",
+                staticStyle: { "margin-top": "50px" }
+              },
+              [
+                _c(
+                  "div",
+                  {
+                    staticClass: "form-horizontal",
+                    staticStyle: {
+                      border: "2px solid #e3e3e3",
+                      padding: "30px 20px",
+                      display: "flow-root"
+                    }
+                  },
+                  [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "col-md-12",
+                        staticStyle: { "margin-bottom": "20px" }
+                      },
+                      [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-danger btn-xs pull-right",
+                            on: {
+                              click: function($event) {
+                                return _vm.deleteInfo(_vm.id)
+                              }
+                            }
+                          },
+                          [_c("i", { staticClass: "fa fa-trash" })]
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-12" }, [
+                      _c("div", { staticClass: "input-group" }, [
+                        _c("span", { staticClass: "input-group-addon" }, [
+                          _vm._v("摆放方式")
+                        ]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "form-control" }, [
+                          _vm._v(_vm._s(info.style == 0 ? "横着" : "竖着"))
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-6" }, [
+                      _c("div", { staticClass: "input-group" }, [
+                        _c("span", { staticClass: "input-group-addon" }, [
+                          _vm._v("太阳能板")
+                        ]),
+                        _vm._v(" "),
+                        info.style == "0"
+                          ? _c("span", { staticClass: "form-control" }, [
+                              _vm._v(
+                                _vm._s(info.solar_panel.name) +
+                                  "(length:" +
+                                  _vm._s(info.solar_panel.length) +
+                                  ")"
+                              )
+                            ])
+                          : _c("span", { staticClass: "form-control" }, [
+                              _vm._v(
+                                _vm._s(info.solar_panel.name) +
+                                  "(width:" +
+                                  _vm._s(info.solar_panel.width) +
+                                  ")"
+                              )
+                            ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "input-group" }, [
+                        _c("span", { staticClass: "input-group-addon" }, [
+                          _vm._v("Connector")
+                        ]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "form-control" }, [
+                          _vm._v(_vm._s(info.connector))
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "input-group" }, [
+                        _c("span", { staticClass: "input-group-addon" }, [
+                          _vm._v("Fuse")
+                        ]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "form-control" }, [
+                          _vm._v(_vm._s(info.fuse))
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "input-group" }, [
+                        _c("span", { staticClass: "input-group-addon" }, [
+                          _vm._v("Junction box to rack")
+                        ]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "form-control" }, [
+                          _vm._v(_vm._s(info.junction_box_to_rack1))
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "span",
+                          {
+                            staticClass: "input-group-addon",
+                            staticStyle: { "border-left": "unset" }
+                          },
+                          [_vm._v("mm")]
+                        ),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "input-group-addon" }, [
+                          _vm._v(
+                            _vm._s(
+                              Math.round(
+                                info.junction_box_to_rack1 * 0.0032808 * 100
+                              ) / 100
+                            ) + " ft"
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "input-group" }, [
+                        _c("span", { staticClass: "input-group-addon" }, [
+                          _vm._v("Remark")
+                        ]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "form-control" }, [
+                          _vm._v(_vm._s(info.junction_box_to_rack1_remark))
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "input-group" }, [
+                        _c("span", { staticClass: "input-group-addon" }, [
+                          _vm._v("Junction box to rack'")
+                        ]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "form-control" }, [
+                          _vm._v(_vm._s(info.junction_box_to_rack2))
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "span",
+                          {
+                            staticClass: "input-group-addon",
+                            staticStyle: { "border-left": "unset" }
+                          },
+                          [_vm._v("mm")]
+                        ),
+                        _vm._v(" "),
+                        info.junction_box_to_rack2
+                          ? _c("span", { staticClass: "input-group-addon" }, [
+                              _vm._v(
+                                _vm._s(
+                                  Math.round(
+                                    info.junction_box_to_rack2 * 0.0032808 * 100
+                                  ) / 100
+                                ) + " ft"
+                              )
+                            ])
+                          : _vm._e()
+                      ]),
+                      _vm._v(" "),
+                      info.junction_box_to_rack2
+                        ? _c("div", { staticClass: "input-group" }, [
+                            _c("span", { staticClass: "input-group-addon" }, [
+                              _vm._v("Remark")
+                            ]),
+                            _vm._v(" "),
+                            _c("span", { staticClass: "form-control" }, [
+                              _vm._v(_vm._s(info.junction_box_to_rack2_remark))
+                            ])
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "input-group" }, [
+                        _c("span", { staticClass: "input-group-addon" }, [
+                          _vm._v("Of module per string")
+                        ]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "form-control" }, [
+                          _vm._v(_vm._s(info.of_module_per_string))
+                        ]),
+                        _vm._v(" "),
+                        _c("span", {
+                          staticClass: "input-group-addon",
+                          staticStyle: {
+                            "font-size": "14px",
+                            "font-weight": "bold"
+                          },
+                          domProps: { textContent: _vm._s(info.string + " ft") }
+                        })
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-6" }, [
+                      _c("div", { staticClass: "input-group" }, [
+                        _c("span", { staticClass: "input-group-addon" }, [
+                          _vm._v("支架")
+                        ]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "form-control" }, [
+                          _vm._v(
+                            _vm._s(info.bracket.name) +
+                              " : " +
+                              _vm._s(
+                                info.bracket.driver
+                                  ? info.bracket.driver
+                                  : "unset"
+                              )
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "input-group" }, [
+                        _c("span", { staticClass: "input-group-addon" }, [
+                          _vm._v("End of extender")
+                        ]),
+                        _vm._v(" "),
+                        info.end_of_extender == "0"
+                          ? _c("span", { staticClass: "form-control" }, [
+                              _vm._v("UNKNOWN")
+                            ])
+                          : info.end_of_extender == "1"
+                          ? _c("span", { staticClass: "form-control" }, [
+                              _vm._v("ROW HEAD")
+                            ])
+                          : info.end_of_extender == "2"
+                          ? _c("span", { staticClass: "form-control" }, [
+                              _vm._v("CBX")
+                            ])
+                          : _c("span", { staticClass: "form-control" }, [
+                              _vm._v("INV")
+                            ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "input-group" }, [
+                        _c("span", { staticClass: "input-group-addon" }, [
+                          _vm._v("Module to module extender")
+                        ]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "form-control" }, [
+                          _vm._v(_vm._s(info.module_to_module_extender))
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "input-group" }, [
+                        _c("span", { staticClass: "input-group-addon" }, [
+                          _vm._v("串数")
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "span",
+                          { staticClass: "form-control" },
+                          _vm._l(info.number_of_string, function(item) {
+                            return _c("span", [
+                              _c(
+                                "span",
+                                { staticClass: "label label-primary" },
+                                [_vm._v(_vm._s(item) + "串")]
+                              ),
+                              _vm._v(" \n                                ")
+                            ])
+                          }),
+                          0
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "input-group" }, [
+                        _c("span", { staticClass: "input-group-addon" }, [
+                          _vm._v("Remarks")
+                        ]),
+                        _vm._v(" "),
+                        _c("textarea", {
+                          staticClass: "form-control",
+                          style: info.junction_box_to_rack2
+                            ? "min-height: 166px"
+                            : "min-height: 124px",
+                          attrs: { rows: "3" },
+                          domProps: { textContent: _vm._s(info.remarks) }
+                        })
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-12" }, [
+                      _c("table", { staticClass: "table table-hover" }, [
+                        _vm._m(1, true),
+                        _vm._v(" "),
+                        _c(
+                          "tbody",
+                          _vm._l(info.typical, function(item) {
+                            return _c("tr", [
+                              _c("td", [_vm._v(_vm._s(item.name))]),
+                              _vm._v(" "),
+                              _c(
+                                "td",
+                                _vm._l(item.harnesses_selected, function(
+                                  harness
+                                ) {
+                                  return _c("span", [
+                                    _c(
+                                      "span",
+                                      { staticClass: "label label-success" },
+                                      [
+                                        _vm._v(
+                                          _vm._s(harness.string) +
+                                            "：" +
+                                            _vm._s(harness.min_length) +
+                                            "～" +
+                                            _vm._s(harness.max_length)
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(
+                                      " \n                                            "
+                                    )
+                                  ])
+                                }),
+                                0
+                              )
+                            ])
+                          }),
+                          0
+                        )
+                      ])
+                    ])
+                  ]
+                )
+              ]
+            )
+          })
+        ],
+        2
+      )
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "modal fade in", attrs: { id: "projectInfo" } }, [
       _c("div", { staticClass: "modal-dialog modal-lg" }, [
         _c("div", { staticClass: "modal-content" }, [
-          _vm._m(1),
+          _vm._m(2),
           _vm._v(" "),
           _c("div", { staticClass: "modal-body" }, [
             _c("div", { staticClass: "form-horizontal" }, [
@@ -27282,6 +27837,62 @@ var render = function() {
                         )
                       }
                     }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "span",
+                    {
+                      staticClass: "input-group-addon",
+                      staticStyle: { "border-left": "unset" }
+                    },
+                    [_vm._v("mm")]
+                  ),
+                  _vm._v(" "),
+                  _vm.form_data.junction_box_to_rack1
+                    ? _c("span", { staticClass: "input-group-addon" }, [
+                        _vm._v(
+                          _vm._s(
+                            Math.round(
+                              _vm.form_data.junction_box_to_rack1 *
+                                0.0032808 *
+                                100
+                            ) / 100
+                          ) + " ft"
+                        )
+                      ])
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "input-group" }, [
+                  _c("span", { staticClass: "input-group-addon" }, [
+                    _vm._v("Remark")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form_data.junction_box_to_rack1_remark,
+                        expression: "form_data.junction_box_to_rack1_remark"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    domProps: {
+                      value: _vm.form_data.junction_box_to_rack1_remark
+                    },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.form_data,
+                          "junction_box_to_rack1_remark",
+                          $event.target.value
+                        )
+                      }
+                    }
                   })
                 ]),
                 _vm._v(" "),
@@ -27313,8 +27924,66 @@ var render = function() {
                         )
                       }
                     }
-                  })
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "span",
+                    {
+                      staticClass: "input-group-addon",
+                      staticStyle: { "border-left": "unset" }
+                    },
+                    [_vm._v("mm")]
+                  ),
+                  _vm._v(" "),
+                  _vm.form_data.junction_box_to_rack2
+                    ? _c("span", { staticClass: "input-group-addon" }, [
+                        _vm._v(
+                          _vm._s(
+                            Math.round(
+                              _vm.form_data.junction_box_to_rack2 *
+                                0.0032808 *
+                                100
+                            ) / 100
+                          ) + " ft"
+                        )
+                      ])
+                    : _vm._e()
                 ]),
+                _vm._v(" "),
+                _vm.form_data.junction_box_to_rack2
+                  ? _c("div", { staticClass: "input-group" }, [
+                      _c("span", { staticClass: "input-group-addon" }, [
+                        _vm._v("Remark")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form_data.junction_box_to_rack2_remark,
+                            expression: "form_data.junction_box_to_rack2_remark"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        domProps: {
+                          value: _vm.form_data.junction_box_to_rack2_remark
+                        },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.form_data,
+                              "junction_box_to_rack2_remark",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  : _vm._e(),
                 _vm._v(" "),
                 _c("div", { staticClass: "input-group" }, [
                   _c("span", { staticClass: "input-group-addon" }, [
@@ -27344,32 +28013,159 @@ var render = function() {
                         )
                       }
                     }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "input-group" }, [
-                  _c("span", { staticClass: "input-group-addon" }, [
-                    _vm._v("String")
-                  ]),
+                  }),
                   _vm._v(" "),
-                  _c("div", {
-                    staticClass: "form-control",
-                    staticStyle: { "background-color": "#eee" },
-                    domProps: {
-                      textContent: _vm._s(_vm.string ? _vm.string + "ft" : "")
-                    }
-                  })
+                  _vm.string
+                    ? _c("span", {
+                        staticClass: "input-group-addon",
+                        staticStyle: {
+                          "font-size": "14px",
+                          "font-weight": "bold"
+                        },
+                        domProps: { textContent: _vm._s(_vm.string + " ft") }
+                      })
+                    : _vm._e()
                 ])
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "col-md-6" }, [
-                _vm._m(2),
+                _c("div", { staticClass: "input-group" }, [
+                  _c("span", { staticClass: "input-group-addon" }, [
+                    _vm._v("支架")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form_data.bracket_id,
+                          expression: "form_data.bracket_id"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            _vm.form_data,
+                            "bracket_id",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        }
+                      }
+                    },
+                    _vm._l(_vm.brackets, function(item) {
+                      return _c("option", { domProps: { value: item.id } }, [
+                        _c("span", [
+                          _vm._v(
+                            _vm._s(item.name) +
+                              " : " +
+                              _vm._s(item.driver ? item.driver : "unset")
+                          )
+                        ])
+                      ])
+                    }),
+                    0
+                  )
+                ]),
                 _vm._v(" "),
-                _vm._m(3),
+                _c("div", { staticClass: "input-group" }, [
+                  _c("span", { staticClass: "input-group-addon" }, [
+                    _vm._v("End of extender")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form_data.end_of_extender,
+                          expression: "form_data.end_of_extender"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            _vm.form_data,
+                            "end_of_extender",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        }
+                      }
+                    },
+                    [
+                      _c("option", { attrs: { value: "0" } }, [
+                        _vm._v("UNKNOWN")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "1" } }, [
+                        _vm._v("ROW HEAD")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "2" } }, [_vm._v("CBX")]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "3" } }, [_vm._v("INV")])
+                    ]
+                  )
+                ]),
                 _vm._v(" "),
-                _vm._m(4),
-                _vm._v(" "),
-                _vm._m(5),
+                _c("div", { staticClass: "input-group" }, [
+                  _c("span", { staticClass: "input-group-addon" }, [
+                    _vm._v("Module to module extender")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form_data.module_to_module_extender,
+                        expression: "form_data.module_to_module_extender"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    domProps: {
+                      value: _vm.form_data.module_to_module_extender
+                    },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.form_data,
+                          "module_to_module_extender",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  })
+                ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "input-group" }, [
                   _c("span", { staticClass: "input-group-addon" }, [
@@ -27422,7 +28218,36 @@ var render = function() {
                   )
                 ]),
                 _vm._v(" "),
-                _vm._m(6)
+                _c("div", { staticClass: "input-group" }, [
+                  _c("span", { staticClass: "input-group-addon" }, [
+                    _vm._v("Remarks")
+                  ]),
+                  _vm._v(" "),
+                  _c("textarea", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form_data.remarks,
+                        expression: "form_data.remarks"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    style: _vm.form_data.junction_box_to_rack2
+                      ? "min-height: 168px"
+                      : "min-height: 124px",
+                    attrs: { rows: "3" },
+                    domProps: { value: _vm.form_data.remarks },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.form_data, "remarks", $event.target.value)
+                      }
+                    }
+                  })
+                ])
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "col-md-12" }, [
@@ -27437,7 +28262,80 @@ var render = function() {
                     [_vm._v("查询")]
                   )
                 ])
-              ])
+              ]),
+              _vm._v(" "),
+              _vm.typical.length
+                ? _c("div", { staticClass: "col-md-12" }, [
+                    _c("table", { staticClass: "table table-hover" }, [
+                      _vm._m(3),
+                      _vm._v(" "),
+                      _c(
+                        "tbody",
+                        _vm._l(_vm.typical, function(item, index) {
+                          return _c("tr", [
+                            _c("td", [_vm._v(_vm._s(item.name))]),
+                            _vm._v(" "),
+                            _c(
+                              "td",
+                              _vm._l(item.harnesses_selected, function(
+                                harness
+                              ) {
+                                return _c("span", [
+                                  _c(
+                                    "span",
+                                    { staticClass: "label label-success" },
+                                    [
+                                      _vm._v(
+                                        _vm._s(harness.string) +
+                                          "：" +
+                                          _vm._s(harness.min_length) +
+                                          "～" +
+                                          _vm._s(harness.max_length)
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(
+                                    " \n                                            "
+                                  )
+                                ])
+                              }),
+                              0
+                            ),
+                            _vm._v(" "),
+                            _c("td", [
+                              _c("input", {
+                                attrs: { type: "checkbox" },
+                                domProps: { checked: item.checked },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.checkbox(index, $event)
+                                  }
+                                }
+                              })
+                            ])
+                          ])
+                        }),
+                        0
+                      )
+                    ])
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.typical.length
+                ? _c("div", { staticClass: "col-md-12" }, [
+                    _c("div", [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-success pull-right",
+                          attrs: { type: "button" },
+                          on: { click: _vm.save }
+                        },
+                        [_vm._v("保存")]
+                      )
+                    ])
+                  ])
+                : _vm._e()
             ]),
             _vm._v(" "),
             _c("div", { staticStyle: { clear: "both" } })
@@ -27508,6 +28406,18 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("Name")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("组成：组串长度范围")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "modal-header" }, [
       _c(
         "button",
@@ -27532,65 +28442,14 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "input-group" }, [
-      _c("span", { staticClass: "input-group-addon" }, [_vm._v("支架")]),
-      _vm._v(" "),
-      _c("select", { staticClass: "form-control" }, [
-        _c("option", [_vm._v("1")]),
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("Name")]),
         _vm._v(" "),
-        _c("option", [_vm._v("2")])
+        _c("th", [_vm._v("组成：组串长度范围")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Action")])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "input-group" }, [
-      _c("span", { staticClass: "input-group-addon" }, [_vm._v("Drive")]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { value: "123123", disabled: "" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "input-group" }, [
-      _c("span", { staticClass: "input-group-addon" }, [
-        _vm._v("End of extender")
-      ]),
-      _vm._v(" "),
-      _c("input", { staticClass: "form-control" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "input-group" }, [
-      _c("span", { staticClass: "input-group-addon" }, [
-        _vm._v("Module to module extender")
-      ]),
-      _vm._v(" "),
-      _c("input", { staticClass: "form-control" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "input-group" }, [
-      _c("span", { staticClass: "input-group-addon" }, [_vm._v("Remarks")]),
-      _vm._v(" "),
-      _c("textarea", {
-        staticClass: "form-control",
-        staticStyle: { "min-height": "78px" },
-        attrs: { rows: "3" }
-      })
     ])
   }
 ]

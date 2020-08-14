@@ -23,4 +23,9 @@ class Project extends BaseModel
     {
         return $this->belongsTo(Company::class);
     }
+
+    public function projectInfos()
+    {
+        return $this->hasMany(ProjectInfo::class);
+    }
 }

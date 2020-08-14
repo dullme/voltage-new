@@ -47,4 +47,5 @@ Route::group([
     $router->resource('projects', ProjectController::class);
     $router->get('projects/info/{id}', "ProjectController@info");
     $router->post('projects/search/typical', "ProjectController@searchTypical");
+    $router->post('projects/save/typical', "ProjectController@saveTypical");
 });
