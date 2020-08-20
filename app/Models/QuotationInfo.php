@@ -4,11 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ProjectInfo extends BaseModel
+class QuotationInfo extends BaseModel
 {
+
     protected $fillable = [
-        'project_id',
-        'solar_panel_id',
+        'quotation_id',
         'of_module_per_string',
         'style',
         'connector',
@@ -19,6 +19,7 @@ class ProjectInfo extends BaseModel
         'junction_box_to_rack2_remark',
         'number_of_string',
         'typical',
+        'solar_panels',
         'bracket_id',
         'end_of_extender',
         'module_to_module_extender',
@@ -28,7 +29,8 @@ class ProjectInfo extends BaseModel
 
     protected $casts = [
         'number_of_string' => 'array',
-        'typical' => 'array'
+        'typical'          => 'array',
+        'solar_panels'     => 'array'
     ];
 
     public function solarPanel()
@@ -39,5 +41,10 @@ class ProjectInfo extends BaseModel
     public function bracket()
     {
         return $this->belongsTo(Bracket::class);
+    }
+
+    public function quotation()
+    {
+        return $this->belongsTo(Quotation::class);
     }
 }

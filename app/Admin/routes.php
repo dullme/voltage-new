@@ -48,4 +48,11 @@ Route::group([
     $router->get('projects/info/{id}', "ProjectController@info");
     $router->post('projects/search/typical', "ProjectController@searchTypical");
     $router->post('projects/save/typical', "ProjectController@saveTypical");
+    $router->post('projects/delete/typical/{id}', "ProjectController@deleteTypical");
+    $router->post('projects/save/quotation', "ProjectController@saveQuotation");
+    $router->post('projects/delete/quotation/{id}', "ProjectController@deleteQuotation");
+    $router->get('projects/show/quotation/{id}', "ProjectController@showQuotation");
+    $router->post('projects/finish/typical/{id}', "ProjectController@finishQuotation");
+    $router->post('projects/save/block', "ProjectController@saveBlock");
+    $router->post('projects/delete/block/{id}', "ProjectController@deleteBlock");
 });

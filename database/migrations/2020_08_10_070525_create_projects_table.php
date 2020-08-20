@@ -19,12 +19,7 @@ class CreateProjectsTable extends Migration
             $table->string('code')->unique()->comment('项目编号');
             $table->string('name')->unique()->comment('项目名称');
             $table->string('address')->nullable()->comment('项目地址');
-            $table->integer('total_quantity')->nullable();
             $table->decimal('size_dc', 10, 3)->nullable();
-
-            $table->integer('layout_of_whip')->nullable();
-            $table->integer('distance_between_poles')->nullable();
-            $table->text('remarks')->nullable();
 
             $table->timestamps();
         });

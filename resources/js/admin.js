@@ -12,3 +12,4 @@ Vue.component('harness-create', require('./components/CreateHarnessComponent').d
 Vue.component('typical-create', require('./components/CreateTypicalComponent').default);
 Vue.component('project-create', require('./components/CreateProjectComponent').default);
 Vue.component('project-info', require('./components/ProjectInfoComponent').default);
+Vue.component('quotation-info', require('./components/QuotationInfoComponent').default);

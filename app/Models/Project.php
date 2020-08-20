@@ -24,8 +24,8 @@ class Project extends BaseModel
         return $this->belongsTo(Company::class);
     }
 
-    public function projectInfos()
+    public function quotations()
     {
-        return $this->hasMany(ProjectInfo::class);
+        return $this->hasMany(Quotation::class);
     }
 }

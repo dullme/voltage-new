@@ -35,7 +35,7 @@ class TypicalController extends ResponseController
         $grid->column('name', __('Name'))->display(function ($name) {
             $url = url('/admin/typicals/' . $this->id);
 
-            return "<a href='{$url}'>{$name}</a>";
+            return "<a data-toggle='tooltip' data-placement='top' title='VT-【几个几串】-【组串长度最大值】-【电机长的和】-【版本号】' href='{$url}'>{$name}</a>";
         });
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
@@ -143,10 +143,12 @@ EOF
         $nofuse_motors = isset($data['nofuse']['motors']) ? collect($data['nofuse']['motors'])->sum('number') : 0;
         $sum_motor = sprintf('%02d', $fuse_motors + $nofuse_motors);//电机长的和
 
-        $data['show_name'] = "VT{$str}{$max_length}{$sum_motor}";
+        $data['show_name'] = "VT-{$str}-{$max_length}-{$sum_motor}";
 
         $typical = Typical::where('show_name', $data['show_name'])->orderBy('id', 'DESC')->first();
         $data['version'] = $version = sprintf('%02d', $typical ? $typical->version + 1 : 1);
+
+        //VT-【几个几串】-【组串长度最大值】-【电机长的和】-【版本号】
         $data['name'] = "VT-{$str}-{$max_length}-{$sum_motor}-{$version}";
         $data['margin'] = intval($data['margin']);
 

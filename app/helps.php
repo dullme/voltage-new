@@ -24,3 +24,22 @@ function ceilDecimal($number, $ceil = 3){
 
     return ceil($number * $str) / $str;
 }
+
+function _unsetNull($arr){
+    if($arr !== null){
+        if(is_array($arr)){
+            if(!empty($arr)){
+                foreach($arr as $key => $value){
+                    if($value === null){
+                        $arr[$key] = '';
+                    }else{
+                        $arr[$key] = _unsetNull($value);      //递归再去执行
+                    }
+                }
+            }
+        }else{
+            if($arr === null){ $arr = ''; }         //注意三个等号
+        }
+    }else{ $arr = ''; }
+    return $arr;
+}

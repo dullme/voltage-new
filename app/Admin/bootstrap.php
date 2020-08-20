@@ -18,6 +18,8 @@
  *
  */
 
+include_once 'helpers.php';
+
 use Encore\Admin\Grid;
 use Encore\Admin\Form;
 
@@ -66,3 +68,7 @@ Form::init(function (Form $form) {
 //        $tools->disableList();
     });
 });
+
+ignore_pjax_paths([
+    'projects\/.*',
+]);

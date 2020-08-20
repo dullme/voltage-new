@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProjectInfosTable extends Migration
+class CreateQuotationInfosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateProjectInfosTable extends Migration
      */
     public function up()
     {
-        Schema::create('project_infos', function (Blueprint $table) {
+        Schema::create('quotation_infos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('project_id');
-            $table->unsignedBigInteger('solar_panel_id');
+            $table->unsignedBigInteger('quotation_id');
             $table->unsignedBigInteger('bracket_id');
             $table->integer('string');
             $table->integer('style')->comment('摆放方式');
@@ -31,6 +30,7 @@ class CreateProjectInfosTable extends Migration
             $table->integer('module_to_module_extender');
             $table->string('number_of_string');
             $table->string('typical');
+            $table->string('solar_panels');
             $table->text('remarks');
             $table->timestamps();
         });
@@ -43,6 +43,6 @@ class CreateProjectInfosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('project_infos');
+        Schema::dropIfExists('quotation_infos');
     }
 }
