@@ -32,7 +32,7 @@
                 </tr>
                 @foreach($harnesses as $harness)
                     <tr>
-                        <td style="width: 200px"><label>{{ $harness['name'] }}</label></td>
+                        <td style="width: 200px"><a href="/admin/harnesses/{{ $harness['id'] }}">{{ $harness['name'] }}</a></td>
                         <td>{{ $harness['count'] }}</td>
                     </tr>
                 @endforeach
