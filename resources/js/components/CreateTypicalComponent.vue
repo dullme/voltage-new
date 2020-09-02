@@ -227,6 +227,11 @@
                                             </span>
                                         </td>
                                         <td><input v-if="saved_data.fuse.res[s_index].length" type="checkbox" @click="checkbox('fuse', s_index ,$event)"></td>
+                                        <td>
+                                            <select v-if="saved_data.fuse.res[s_index].length" v-model="saved_data.fuse['check_list'][s_index]['component_comb']">
+                                                <option :value="comb.id" v-for="comb in component_combs">{{ comb.name }}</option>
+                                            </select>
+                                        </td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -294,6 +299,11 @@
                                             </span>
                                         </td>
                                         <td><input v-if="saved_data.nofuse.res[s_index].length" type="checkbox" @click="checkbox('nofuse', s_index ,$event)"></td>
+                                        <td>
+                                            <select v-if="saved_data.nofuse.res[s_index].length" v-model="saved_data.nofuse['check_list'][s_index]['component_comb']">
+                                                <option :value="comb.id" v-for="comb in component_combs">{{ comb.name }}</option>
+                                            </select>
+                                        </td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -428,6 +438,7 @@
                         'ids':[],
                     }
                 },
+                component_combs:[],
                 pos_neg: 'fuse',
                 current_harness_key: undefined,
                 harnesses: [],
@@ -455,8 +466,8 @@
         mounted() {
         },
         created() {
-            axios.get('/admin/component-list').then(response => {
-                this.components = response.data
+            axios.get('/admin/component-comb-list').then(response => {
+                this.component_combs = response.data.data
             })
         },
         methods: {
@@ -804,7 +815,7 @@
             },
 
             checkbox(name, index, e){
-                this.saved_data[name]['check_list'][index] = e.target.checked
+                this.saved_data[name]['check_list'][index]['checked'] = e.target.checked
             },
 
             unique22(arr){

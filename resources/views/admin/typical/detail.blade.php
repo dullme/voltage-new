@@ -123,8 +123,13 @@
                                     @endif
                                 </td>
                                 <td>
-                                    @if($typical->fuse['check_list'][$s_index])
+                                    @if($typical->fuse['check_list'][$s_index]['checked'])
                                     <i class="fa fa-check text-success"></i>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if($typical->fuse['check_list'][$s_index]['checked'])
+                                        {{ $component_combs[$typical->fuse['check_list'][$s_index]['component_comb']] }}
                                     @endif
                                 </td>
                             </tr>
@@ -203,7 +208,7 @@
                                             @endif
                                         </td>
                                         <td>
-                                            @if($typical->nofuse['check_list'][$s_index])
+                                            @if($typical->nofuse['check_list'][$s_index]['checked'])
                                                 <i class="fa fa-check text-success"></i>
                                             @endif
                                         </td>

@@ -3225,6 +3225,16 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3236,6 +3246,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
           'ids': []
         }
       },
+      component_combs: [],
       pos_neg: 'fuse',
       current_harness_key: undefined,
       harnesses: [],
@@ -3256,8 +3267,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   created: function created() {
     var _this = this;
 
-    axios.get('/admin/component-list').then(function (response) {
-      _this.components = response.data;
+    axios.get('/admin/component-comb-list').then(function (response) {
+      _this.component_combs = response.data.data;
     });
   },
   methods: {
@@ -3651,7 +3662,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       });
     },
     checkbox: function checkbox(name, index, e) {
-      this.saved_data[name]['check_list'][index] = e.target.checked;
+      this.saved_data[name]['check_list'][index]['checked'] = e.target.checked;
     },
     unique22: function unique22(arr) {
       var x = new Set(arr);
@@ -27452,6 +27463,70 @@ var render = function() {
                                             }
                                           })
                                         : _vm._e()
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", [
+                                      _vm.saved_data.fuse.res[s_index].length
+                                        ? _c(
+                                            "select",
+                                            {
+                                              directives: [
+                                                {
+                                                  name: "model",
+                                                  rawName: "v-model",
+                                                  value:
+                                                    _vm.saved_data.fuse[
+                                                      "check_list"
+                                                    ][s_index][
+                                                      "component_comb"
+                                                    ],
+                                                  expression:
+                                                    "saved_data.fuse['check_list'][s_index]['component_comb']"
+                                                }
+                                              ],
+                                              on: {
+                                                change: function($event) {
+                                                  var $$selectedVal = Array.prototype.filter
+                                                    .call(
+                                                      $event.target.options,
+                                                      function(o) {
+                                                        return o.selected
+                                                      }
+                                                    )
+                                                    .map(function(o) {
+                                                      var val =
+                                                        "_value" in o
+                                                          ? o._value
+                                                          : o.value
+                                                      return val
+                                                    })
+                                                  _vm.$set(
+                                                    _vm.saved_data.fuse[
+                                                      "check_list"
+                                                    ][s_index],
+                                                    "component_comb",
+                                                    $event.target.multiple
+                                                      ? $$selectedVal
+                                                      : $$selectedVal[0]
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            _vm._l(
+                                              _vm.component_combs,
+                                              function(comb) {
+                                                return _c(
+                                                  "option",
+                                                  {
+                                                    domProps: { value: comb.id }
+                                                  },
+                                                  [_vm._v(_vm._s(comb.name))]
+                                                )
+                                              }
+                                            ),
+                                            0
+                                          )
+                                        : _vm._e()
                                     ])
                                   ],
                                   2
@@ -27717,6 +27792,70 @@ var render = function() {
                                               }
                                             }
                                           })
+                                        : _vm._e()
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", [
+                                      _vm.saved_data.nofuse.res[s_index].length
+                                        ? _c(
+                                            "select",
+                                            {
+                                              directives: [
+                                                {
+                                                  name: "model",
+                                                  rawName: "v-model",
+                                                  value:
+                                                    _vm.saved_data.nofuse[
+                                                      "check_list"
+                                                    ][s_index][
+                                                      "component_comb"
+                                                    ],
+                                                  expression:
+                                                    "saved_data.nofuse['check_list'][s_index]['component_comb']"
+                                                }
+                                              ],
+                                              on: {
+                                                change: function($event) {
+                                                  var $$selectedVal = Array.prototype.filter
+                                                    .call(
+                                                      $event.target.options,
+                                                      function(o) {
+                                                        return o.selected
+                                                      }
+                                                    )
+                                                    .map(function(o) {
+                                                      var val =
+                                                        "_value" in o
+                                                          ? o._value
+                                                          : o.value
+                                                      return val
+                                                    })
+                                                  _vm.$set(
+                                                    _vm.saved_data.nofuse[
+                                                      "check_list"
+                                                    ][s_index],
+                                                    "component_comb",
+                                                    $event.target.multiple
+                                                      ? $$selectedVal
+                                                      : $$selectedVal[0]
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            _vm._l(
+                                              _vm.component_combs,
+                                              function(comb) {
+                                                return _c(
+                                                  "option",
+                                                  {
+                                                    domProps: { value: comb.id }
+                                                  },
+                                                  [_vm._v(_vm._s(comb.name))]
+                                                )
+                                              }
+                                            ),
+                                            0
+                                          )
                                         : _vm._e()
                                     ])
                                   ],

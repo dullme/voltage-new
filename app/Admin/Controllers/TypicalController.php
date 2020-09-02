@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use App\Models\ComponentComb;
 use App\Models\Harness;
 use App\Models\Typical;
 use Encore\Admin\Admin;
@@ -11,6 +12,7 @@ use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class TypicalController extends ResponseController
 {
@@ -71,7 +73,7 @@ class TypicalController extends ResponseController
         $fuse = [];
         if(isset($typical->fuse['res'])){
             foreach ($typical->fuse['check_list'] as $key=>$item){
-                if($item){ //如果这行被选中
+                if($item['checked']){ //如果这行被选中
                     $fuse[] = $typical->fuse['res'][$key];
                 }
             }
@@ -80,7 +82,7 @@ class TypicalController extends ResponseController
         $nofuse = [];
         if(isset($typical->nofuse['res'])){
             foreach ($typical->nofuse['check_list'] as $key=>$item){
-                if($item){ //如果这行被选中
+                if($item['checked']){ //如果这行被选中
                     $nofuse[] = $typical->nofuse['res'][$key];
                 }
             }
@@ -94,10 +96,13 @@ class TypicalController extends ResponseController
             ];
         })->values()->toArray();
 
+        $combs = collect($typical->fuse['check_list'])->pluck('component_comb')->whereNotNull()->unique()->toArray();
+        $component_combs = ComponentComb::whereIn('id', $combs)->get()->pluck('name', 'id');
+
         return $content
             ->title($this->title())
             ->description($this->description['create'] ?? trans('admin.create'))
-            ->body(view('admin.typical.detail', compact('typical', 'harnesses', 'res_fuses')));
+            ->body(view('admin.typical.detail', compact('typical', 'harnesses', 'res_fuses', 'component_combs')));
     }
 
     public function create(Content $content)
@@ -125,7 +130,10 @@ EOF
         $data['ids'] = collect($data['stages'])->flatten(1)->pluck('id')->unique()->filter()->values()->toArray();
         $data['check_list'] = [];
         for ($i = 0; $i < count($data['res']); $i++) {
-            $data['check_list'][$i] = false;
+            $data['check_list'][$i] = [
+                'checked' => false,
+                'component_comb' => '',
+            ];
         }
 
         return $this->responseSuccess($data);
@@ -133,6 +141,26 @@ EOF
 
     public function stageSubmit(Request $request)
     {
+        $fuse = $request->input('fuse');
+        $nofuse = $request->input('nofuse');
+        if(isset($fuse['check_list'])){
+            foreach ($fuse['check_list'] as $fuse){
+                if($fuse['checked'] && $fuse['component_comb']==''){
+                    return $this->setStatusCode(422)->responseError('请选择零件组合');
+                }
+            }
+        }
+
+        if(isset($nofuse['check_list'])){
+            foreach ($nofuse['check_list'] as $nofuse){
+                if($nofuse['checked'] && $nofuse['component_comb']==''){
+                    return $this->setStatusCode(422)->responseError('请选择零件组合');
+                }
+            }
+        }
+
+
+
         $data = $request->all();
         $str = collect($data['harnesses_selected'])->groupBy('string')->map(function ($item, $key) {
             return (string) count($item) . sprintf('%02d', $key);
