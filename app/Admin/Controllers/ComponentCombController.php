@@ -30,8 +30,8 @@ class ComponentCombController extends ResponseController
 
         $grid->column('name', __('Name'));
         $grid->lineId()->name('Line');
-        $grid->maleId()->name('Male Connector');
-        $grid->femaleId()->name('Female Connector');
+        $grid->maleId()->name('Connector1');
+        $grid->femaleId()->name('Connector2');
         $grid->column('created_at', __('Created at'));
 
         return $grid;
@@ -68,8 +68,8 @@ class ComponentCombController extends ResponseController
 
         $form->text('name', __('Name'))->required();
         $form->select('line_id', __('Line'))->options(Component::whereIn('part_type', [PartType::PVWire, PartType::MVCable])->pluck('name', 'id'))->required();
-        $form->select('male_id', __('MaleConnector'))->options(Component::where('part_type', PartType::MaleConnector)->pluck('name', 'id'))->rules('required_without:female_id');
-        $form->select('female_id', __('FemaleConnector'))->options(Component::where('part_type', PartType::FemaleConnector)->pluck('name', 'id'))->rules('required_without:male_id');
+        $form->select('male_id', __('Connector1'))->options(Component::whereIn('part_type', [PartType::MaleConnector,PartType::FemaleConnector])->pluck('name', 'id'))->rules('required_without:female_id');
+        $form->select('female_id', __('Connector2'))->options(Component::whereIn('part_type', [PartType::MaleConnector,PartType::FemaleConnector])->pluck('name', 'id'))->rules('required_without:male_id');
 
         return $form;
     }
@@ -77,7 +77,7 @@ class ComponentCombController extends ResponseController
     public function getComponentCombList()
     {
         $components = ComponentComb::with('lineId', 'maleId', 'femaleId')->get();
-    
+
         return $this->responseSuccess($components);
     }
 }
