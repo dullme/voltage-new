@@ -17,6 +17,11 @@ Route::group([
     $router->resource('components', ComponentController::class);
     $router->get('component-list', 'ComponentController@getComponentList');
 
+    //零件组合
+    $router->resource('component-combs', ComponentCombController::class);
+    $router->get('component-comb-list', 'ComponentCombController@getComponentCombList');
+
+
     //线束设计
     $router->resource('harnesses', HarnessController::class);
     $router->get('harnesses/{harness}', 'HarnessController@detailInfo');
@@ -55,4 +60,10 @@ Route::group([
     $router->post('projects/finish/typical/{id}', "ProjectController@finishQuotation");
     $router->post('projects/save/block', "ProjectController@saveBlock");
     $router->post('projects/delete/block/{id}', "ProjectController@deleteBlock");
+
+    $router->get('projects/show/whip/{id}', "ProjectController@showWhip");
+    $router->post('projects/save/whip', "ProjectController@saveWhip");
+    $router->post('projects/save/setting/{id}', "ProjectController@saveSetting");
+    $router->post('projects/delete/quotation/{qid}/whip/{wid}', "ProjectController@deleteWhip");
+    $router->post('projects/save/whip/block', "ProjectController@saveWhipBlock");
 });

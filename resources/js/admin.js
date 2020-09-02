@@ -13,3 +13,4 @@ Vue.component('typical-create', require('./components/CreateTypicalComponent').d
 Vue.component('project-create', require('./components/CreateProjectComponent').default);
 Vue.component('project-info', require('./components/ProjectInfoComponent').default);
 Vue.component('quotation-info', require('./components/QuotationInfoComponent').default);
+Vue.component('whip-info', require('./components/WhipInfoComponent').default);

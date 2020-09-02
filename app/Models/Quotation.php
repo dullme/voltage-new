@@ -13,6 +13,7 @@ class Quotation extends BaseModel
         'total_quantity',
         'layout_of_whip',
         'distance_between_poles',
+        'buffer',
         'remarks',
         'typical'
     ];
@@ -34,5 +35,10 @@ class Quotation extends BaseModel
     public function blocks()
     {
         return $this->hasMany(Block::class);
+    }
+
+    public function whips()
+    {
+        return $this->hasMany(Whip::class);
     }
 }

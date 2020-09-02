@@ -10,6 +10,12 @@
                     </a>
                 </div>
 
+                <div class="btn-group pull-right" style="margin-right: 5px">
+                    <a :href="'/admin/projects/show/whip/'+quotation_info.id" class="btn btn-sm btn-success">
+                        <i class="fa fa-plus"></i><span class="hidden-xs">&nbsp;&nbsp;Add whip</span>
+                    </a>
+                </div>
+
                 <div class="btn-group pull-right" style="margin-right: 5px" v-if="quotation_info.status == 1">
                     <button type="button" class="btn btn-sm btn-success" data-toggle="modal"
                             data-target="#projectInfo">
@@ -18,7 +24,7 @@
                 </div>
 
 
-                <div class="btn-group pull-right" style="margin-right: 5px" v-if="quotation_info.status == 1">
+                <div class="btn-group pull-right" style="margin-right: 5px" v-if="quotation_info.status == 1 && quotation_info.quotation_infos.length > 0">
                     <button type="button" class="btn btn-sm btn-success" @click="finishTypical">Finish</button>
                 </div>
 
@@ -712,7 +718,7 @@ export default {
 
         deleteBlock(id){
             swal({
-                title: '确定删除该 Block ?',
+                title: '删除 Block 同时删除 Whip ?',
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonText: 'Confirm',
