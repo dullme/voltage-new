@@ -113,21 +113,34 @@
             data: {
                 code:code,
                 id:id,
-            }
+            },
+            timeout: 5000,
         }).then(response => {
-            if(response.data.oneway=="1"){
-                $('.message').css('color','green')
-                $('.message').html('抢到啦！！！！！！！！！！！！！！！！！！！')
-                $('.start').val('还想抢')
-                is_start = false
-                $('.loading').html('成功！！！')
-            }else{
-                if(response.data.message == "操作频繁，请过几秒钟后再次尝试" || response.data.message == '一分钟内只能操作50次' || response.data.msg == '请求页面返回请重新登录并且不要频繁发送打印请求!'){
-
+            if(response.data){
+                if(response.data.oneway=="1"){
+                    $('.message').css('color','green')
+                    $('.message').html('抢到啦！！！！！！！！！！！！！！！！！！！')
+                    $('.start').val('还想抢')
+                    is_start = false
+                    $('.loading').html('成功！！！')
                 }else{
-                    i++
-                    $('.message').html("<p>第 <span style='font-size: 40px;color: #cb2027'>" + i + "</span> 次请求"+response.data.message+"</p>")
+                    if(response.data.message == "操作频繁，请过几秒钟后再次尝试" || response.data.message == '一分钟内只能操作50次' || response.data.msg == '请求页面返回请重新登录并且不要频繁发送打印请求!'){
+
+                    }else{
+                        i++
+                        $('.message').html("<p>第 <span style='font-size: 40px;color: #cb2027'>" + i + "</span> 次请求"+response.data.message+"</p>")
+                    }
+                    let rrrrr = Math.floor(Math.random()*5+1)
+                    $('#yanchi').html('随机延迟了 '+ rrrrr + ' 秒')
+                    if(is_start){
+                        setTimeout(function (){
+                            start()
+                        }, rrrrr * 1000)
+                    }
                 }
+                console.log(response.data)
+            }else{
+                console.log('请求超时了')
                 let rrrrr = Math.floor(Math.random()*5+1)
                 $('#yanchi').html('随机延迟了 '+ rrrrr + ' 秒')
                 if(is_start){
@@ -136,10 +149,13 @@
                     }, rrrrr * 1000)
                 }
             }
-
-            console.log(response.data)
         }).catch(error => {
-            console.log(error.response.data)
+            console.log('出错了')
+            let rrrrr = Math.floor(Math.random()*5+1)
+            $('#yanchi').html('随机延迟了 '+ rrrrr + ' 秒')
+            setTimeout(function (){
+                start()
+            }, rrrrr * 1000)
         });
     }
 </script>

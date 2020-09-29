@@ -29,7 +29,7 @@ class IndexController
         }
         $client = new \GuzzleHttp\Client();
 
-        $res = $client->request('GET', $url);
+        $res = $client->request('GET', $url, ['timeout' => 5]);
 
         return $res->getBody()->getContents();
     }
