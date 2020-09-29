@@ -69,8 +69,8 @@
 </head>
 <body style="padding: 30px">
 <div class="m-b-md">
-    <input type="text" placeholder="按票刷箱" id="id" style="width: 400px; height: 20px;margin-bottom: 10px" value="c2515519-9557-45a2-8236-45ff21f59b72">
-    <input type="text" placeholder="按箱刷箱" id="code" style="width: 400px; height: 20px" value="f491a6e8-d5e0-4b43-a551-cacf3231b9be">
+    <input type="text" placeholder="按票刷箱" id="id" style="width: 400px; height: 20px;margin-bottom: 10px" autocomplete="on">
+    <input type="text" placeholder="按箱刷箱" id="code" style="width: 400px; height: 20px" autocomplete="on">
     <input type="button" class="start" value="开始" onclick="change()">
 </div>
 
