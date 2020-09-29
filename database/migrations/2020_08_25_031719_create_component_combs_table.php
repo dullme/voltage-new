@@ -19,6 +19,7 @@ class CreateComponentCombsTable extends Migration
             $table->unsignedBigInteger('line_id');
             $table->unsignedBigInteger('male_id')->nullable();
             $table->unsignedBigInteger('female_id')->nullable();
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

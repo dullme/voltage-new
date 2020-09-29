@@ -98,7 +98,10 @@
                 <div class="col-sm-12">
                     <div class="panel" :class="whips[0]['have_s'] == 1 ? 'panel-info' : 'panel-default'" v-for="whips in quotation_info.whips">
                         <div class="panel-heading" style="display: flex;justify-content: space-between;padding: 6px 23px">
-                            <h3 class="panel-title" style="line-height: 28px"><span v-if="whips[0]['have_s'] == 1">S </span>{{ whips[0]['component_comb']['name'] }}</h3>
+                            <h3 class="panel-title" style="line-height: 28px">
+                                <i v-if="whips[0]['component_comb']['image']" @click="showImage('/uploads/'+whips[0]['component_comb']['image'])" style="cursor: pointer" class="fa fa-image"></i>
+                                <span v-if="whips[0]['have_s'] == 1">S </span>{{ whips[0]['component_comb']['name'] }}
+                            </h3>
                             <a class="btn btn-default btn-sm" @click="showAddWhip(whips[0]['have_s'],whips[0]['component_comb_id'])"><i class="fa fa-plus text-success"></i></a>
                         </div>
                         <div class="panel-body">
@@ -226,12 +229,28 @@
                                     <tbody>
                                         <tr>
                                             <th v-if="form_data.have_s == '1'">Form</th>
+                                            <th v-if="form_data.have_s == '1'">未知</th>
                                             <th v-if="form_data.have_s == '0'">Multiple</th>
                                             <th style="width: 60px">Action</th>
                                         </tr>
                                         <tr v-for="(list,index) in form_data.list">
-                                            <td v-if="form_data.have_s == '1'"><input class="form-control" v-model="list.form"></td>
-                                            <td v-if="form_data.have_s == '0'"><input class="form-control" v-model="list.multiple" oninput="this.value = this.value.replace(/[^0-9]/g, '');"></td>
+                                            <template v-if="form_data.have_s == '1'">
+                                                <td>
+                                                    <input class="form-control" v-model="list.form">
+                                                </td>
+                                                <td >
+                                                    <div class="input-group" style="margin-bottom: unset">
+                                                        <input class="form-control" v-model="list.digital_a">
+                                                        <span class="input-group-addon" style="border-left: unset;border-right: unset"><i class="fa fa-plus"></i></span>
+                                                        <span class="input-group-addon">{{ quotation_info.distance_between_poles }}</span>
+                                                        <span class="input-group-addon" style="border-left: unset;border-right: unset"><i class="fa fa-remove"></i></span>
+                                                        <input class="form-control" v-model="list.digital_b">
+                                                    </div>
+                                                </td>
+                                            </template>
+                                            <td v-if="form_data.have_s == '0'">
+                                                <input class="form-control" v-model="list.multiple" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+                                            </td>
                                             <td>
                                                 <a class="btn btn-sm btn-danger table-field-remove" @click="deleteList(index)"><i class="fa fa-trash"></i></a>
                                             </td>
@@ -253,7 +272,29 @@
             </div>
             <!-- /.modal-dialog -->
         </div>
-
+        <div id="img-mask" style="display: none">
+            <div class="mfp-bg mfp-ready" style="z-index: 8888"></div>
+            <div class="mfp-wrap mfp-close-btn-in mfp-auto-cursor mfp-ready" tabindex="-1" style="overflow: hidden auto;z-index: 9999">
+                <div class="mfp-container mfp-s-ready mfp-image-holder">
+                    <div class="mfp-content">
+                        <div class="mfp-figure">
+                            <button title="Close (Esc)" type="button" class="mfp-close" @click="closeImage">×</button>
+                            <figure><img class="mfp-img" alt="undefined"
+                                         src=""
+                                         style="max-height: 596px;">
+                                <figcaption>
+                                    <div class="mfp-bottom-bar">
+                                        <div class="mfp-title"></div>
+                                        <div class="mfp-counter"></div>
+                                    </div>
+                                </figcaption>
+                            </figure>
+                        </div>
+                    </div>
+                    <div class="mfp-preloader">Loading...</div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -296,8 +337,16 @@ export default {
         })
     },
     methods: {
+        closeImage(){
+            $('#img-mask').css('display', 'none');
+            $('#img-mask .mfp-img').attr('src', '');
+        },
+        showImage(url){
+            $('#img-mask').css('display', 'block');
+            $('#img-mask .mfp-img').attr('src', url);
+        },
         addList(){
-            this.form_data.list.push({form:'', multiple:''})
+            this.form_data.list.push({form:'', multiple:'', digital_a:'', digital_b:''})
         },
 
         deleteList(index){

@@ -4909,6 +4909,47 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4947,10 +4988,20 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   methods: {
+    closeImage: function closeImage() {
+      $('#img-mask').css('display', 'none');
+      $('#img-mask .mfp-img').attr('src', '');
+    },
+    showImage: function showImage(url) {
+      $('#img-mask').css('display', 'block');
+      $('#img-mask .mfp-img').attr('src', url);
+    },
     addList: function addList() {
       this.form_data.list.push({
         form: '',
-        multiple: ''
+        multiple: '',
+        digital_a: '',
+        digital_b: ''
       });
     },
     deleteList: function deleteList(index) {
@@ -31163,10 +31214,28 @@ var render = function() {
                         staticStyle: { "line-height": "28px" }
                       },
                       [
+                        whips[0]["component_comb"]["image"]
+                          ? _c("i", {
+                              staticClass: "fa fa-image",
+                              staticStyle: { cursor: "pointer" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.showImage(
+                                    "/uploads/" +
+                                      whips[0]["component_comb"]["image"]
+                                  )
+                                }
+                              }
+                            })
+                          : _vm._e(),
+                        _vm._v(" "),
                         whips[0]["have_s"] == 1
                           ? _c("span", [_vm._v("S ")])
                           : _vm._e(),
-                        _vm._v(_vm._s(whips[0]["component_comb"]["name"]))
+                        _vm._v(
+                          _vm._s(whips[0]["component_comb"]["name"]) +
+                            "\n                        "
+                        )
                       ]
                     ),
                     _vm._v(" "),
@@ -31654,6 +31723,10 @@ var render = function() {
                             ? _c("th", [_vm._v("Form")])
                             : _vm._e(),
                           _vm._v(" "),
+                          _vm.form_data.have_s == "1"
+                            ? _c("th", [_vm._v("未知")])
+                            : _vm._e(),
+                          _vm._v(" "),
                           _vm.form_data.have_s == "0"
                             ? _c("th", [_vm._v("Multiple")])
                             : _vm._e(),
@@ -31664,85 +31737,173 @@ var render = function() {
                         ]),
                         _vm._v(" "),
                         _vm._l(_vm.form_data.list, function(list, index) {
-                          return _c("tr", [
-                            _vm.form_data.have_s == "1"
-                              ? _c("td", [
-                                  _c("input", {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: list.form,
-                                        expression: "list.form"
-                                      }
-                                    ],
-                                    staticClass: "form-control",
-                                    domProps: { value: list.form },
-                                    on: {
-                                      input: function($event) {
-                                        if ($event.target.composing) {
-                                          return
+                          return _c(
+                            "tr",
+                            [
+                              _vm.form_data.have_s == "1"
+                                ? [
+                                    _c("td", [
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: list.form,
+                                            expression: "list.form"
+                                          }
+                                        ],
+                                        staticClass: "form-control",
+                                        domProps: { value: list.form },
+                                        on: {
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.$set(
+                                              list,
+                                              "form",
+                                              $event.target.value
+                                            )
+                                          }
                                         }
-                                        _vm.$set(
-                                          list,
-                                          "form",
-                                          $event.target.value
-                                        )
-                                      }
-                                    }
-                                  })
-                                ])
-                              : _vm._e(),
-                            _vm._v(" "),
-                            _vm.form_data.have_s == "0"
-                              ? _c("td", [
-                                  _c("input", {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: list.multiple,
-                                        expression: "list.multiple"
-                                      }
-                                    ],
-                                    staticClass: "form-control",
-                                    attrs: {
-                                      oninput:
-                                        "this.value = this.value.replace(/[^0-9]/g, '');"
-                                    },
-                                    domProps: { value: list.multiple },
-                                    on: {
-                                      input: function($event) {
-                                        if ($event.target.composing) {
-                                          return
+                                      })
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass: "input-group",
+                                          staticStyle: {
+                                            "margin-bottom": "unset"
+                                          }
+                                        },
+                                        [
+                                          _c("input", {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value: list.digital_a,
+                                                expression: "list.digital_a"
+                                              }
+                                            ],
+                                            staticClass: "form-control",
+                                            domProps: { value: list.digital_a },
+                                            on: {
+                                              input: function($event) {
+                                                if ($event.target.composing) {
+                                                  return
+                                                }
+                                                _vm.$set(
+                                                  list,
+                                                  "digital_a",
+                                                  $event.target.value
+                                                )
+                                              }
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _vm._m(3, true),
+                                          _vm._v(" "),
+                                          _c(
+                                            "span",
+                                            {
+                                              staticClass: "input-group-addon"
+                                            },
+                                            [
+                                              _vm._v(
+                                                _vm._s(
+                                                  _vm.quotation_info
+                                                    .distance_between_poles
+                                                )
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _vm._m(4, true),
+                                          _vm._v(" "),
+                                          _c("input", {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value: list.digital_b,
+                                                expression: "list.digital_b"
+                                              }
+                                            ],
+                                            staticClass: "form-control",
+                                            domProps: { value: list.digital_b },
+                                            on: {
+                                              input: function($event) {
+                                                if ($event.target.composing) {
+                                                  return
+                                                }
+                                                _vm.$set(
+                                                  list,
+                                                  "digital_b",
+                                                  $event.target.value
+                                                )
+                                              }
+                                            }
+                                          })
+                                        ]
+                                      )
+                                    ])
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm.form_data.have_s == "0"
+                                ? _c("td", [
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: list.multiple,
+                                          expression: "list.multiple"
                                         }
-                                        _vm.$set(
-                                          list,
-                                          "multiple",
-                                          $event.target.value
-                                        )
+                                      ],
+                                      staticClass: "form-control",
+                                      attrs: {
+                                        oninput:
+                                          "this.value = this.value.replace(/[^0-9]/g, '');"
+                                      },
+                                      domProps: { value: list.multiple },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            list,
+                                            "multiple",
+                                            $event.target.value
+                                          )
+                                        }
+                                      }
+                                    })
+                                  ])
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _c("td", [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass:
+                                      "btn btn-sm btn-danger table-field-remove",
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.deleteList(index)
                                       }
                                     }
-                                  })
-                                ])
-                              : _vm._e(),
-                            _vm._v(" "),
-                            _c("td", [
-                              _c(
-                                "a",
-                                {
-                                  staticClass:
-                                    "btn btn-sm btn-danger table-field-remove",
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.deleteList(index)
-                                    }
-                                  }
-                                },
-                                [_c("i", { staticClass: "fa fa-trash" })]
-                              )
-                            ])
-                          ])
+                                  },
+                                  [_c("i", { staticClass: "fa fa-trash" })]
+                                )
+                              ])
+                            ],
+                            2
+                          )
                         })
                       ],
                       2
@@ -31776,6 +31937,49 @@ var render = function() {
           ])
         ])
       ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticStyle: { display: "none" }, attrs: { id: "img-mask" } }, [
+      _c("div", {
+        staticClass: "mfp-bg mfp-ready",
+        staticStyle: { "z-index": "8888" }
+      }),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "mfp-wrap mfp-close-btn-in mfp-auto-cursor mfp-ready",
+          staticStyle: { overflow: "hidden auto", "z-index": "9999" },
+          attrs: { tabindex: "-1" }
+        },
+        [
+          _c(
+            "div",
+            { staticClass: "mfp-container mfp-s-ready mfp-image-holder" },
+            [
+              _c("div", { staticClass: "mfp-content" }, [
+                _c("div", { staticClass: "mfp-figure" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "mfp-close",
+                      attrs: { title: "Close (Esc)", type: "button" },
+                      on: { click: _vm.closeImage }
+                    },
+                    [_vm._v("×")]
+                  ),
+                  _vm._v(" "),
+                  _vm._m(5)
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "mfp-preloader" }, [
+                _vm._v("Loading...")
+              ])
+            ]
+          )
+        ]
+      )
     ])
   ])
 }
@@ -31852,6 +32056,52 @@ var staticRenderFns = [
       _c("h4", { staticClass: "modal-title" }, [
         _vm._v("Whip："),
         _c("span", { staticClass: "po_client_no" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "span",
+      {
+        staticClass: "input-group-addon",
+        staticStyle: { "border-left": "unset", "border-right": "unset" }
+      },
+      [_c("i", { staticClass: "fa fa-plus" })]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "span",
+      {
+        staticClass: "input-group-addon",
+        staticStyle: { "border-left": "unset", "border-right": "unset" }
+      },
+      [_c("i", { staticClass: "fa fa-remove" })]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("figure", [
+      _c("img", {
+        staticClass: "mfp-img",
+        staticStyle: { "max-height": "596px" },
+        attrs: { alt: "undefined", src: "" }
+      }),
+      _vm._v(" "),
+      _c("figcaption", [
+        _c("div", { staticClass: "mfp-bottom-bar" }, [
+          _c("div", { staticClass: "mfp-title" }),
+          _vm._v(" "),
+          _c("div", { staticClass: "mfp-counter" })
+        ])
       ])
     ])
   }

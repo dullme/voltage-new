@@ -417,6 +417,8 @@ EOF
             'list'              => 'required|array',
             'list.*.form'       => 'nullable|required_if:have_s,1',
             'list.*.multiple'   => 'nullable|required_if:have_s,0|integer',
+            'list.*.digital_a'  => 'nullable|required_if:have_s,1|integer',
+            'list.*.digital_b'  => 'nullable|required_if:have_s,1|integer',
         ]);
 
         if ($validator->fails()) {
@@ -427,10 +429,11 @@ EOF
 
         $multiples = collect($data['list'])->pluck('multiple')->unique()->toArray();
         if (count($multiples) != count($data['list'])) {
-            return $this->setStatusCode(422)->responseError('存在相同的编号');
+
+            return $this->setStatusCode(422)->responseError('存在相同的编号-' . count($multiples) . '???-' . count($data['list']));
         }
 
-        $whips = Whip::where(['have_s' => $data['have_s'], 'component_comb_id' => $data['component_comb_id']])->whereIn('multiple', $multiples)->get();
+        $whips = Whip::where(['quotation_id' => $data['quotation_id'], 'have_s' => $data['have_s'], 'component_comb_id' => $data['component_comb_id']])->whereIn('multiple', $multiples)->get();
 
         if ($whips->count()) {
             return $this->setStatusCode(422)->responseError('已存在相同的编号');
@@ -444,6 +447,8 @@ EOF
                 'rowhead_to'        => 123,
                 'multiple'          => $item['multiple'],
                 'remarks'           => $item['form'],
+                'digital_a'         => $item['digital_a'],
+                'digital_b'         => $item['digital_b'],
             ]);
 
             return $whips->id;
@@ -575,7 +580,11 @@ EOF
 
                 return $item->map(function ($item) use ($quotation) {
                     $item = $item->toArray();
-                    $item['cl'] = $item['multiple'] * $quotation->distance_between_poles;
+                    $item['cl'] = $item['multiple'] * $quotation->distance_between_poles;//没S
+                    if ($item['have_s']) { //有S
+                        $item['cl'] = $quotation->distance_between_poles * 2;//还有加上其他的数据 -》》》》》》》》》》》》这里需要修改
+                    }
+
 
                     if ($quotation->layout_of_whip == 1) { //CAB
                         $item['rtc'] = $quotation->rtc1 ? $quotation->rtc1 : ($quotation->rtc1_1 + $quotation->rtc1_2 + $quotation->rtc1_3 + $quotation->rtc1_4);
@@ -608,6 +617,7 @@ EOF
                 'index'  => $index,
                 'have_s' => $item['have_s'],
                 'name'   => $item['component_comb']['name'],
+                'image'  => $item['component_comb']['image'],
                 'length' => $item['total_length'],
             ];
         });

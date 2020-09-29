@@ -28,6 +28,7 @@ class ComponentCombController extends ResponseController
     {
         $grid = new Grid(new ComponentComb());
 
+        $grid->column('image')->lightbox(['width' => 100, 'height' => 100]);
         $grid->column('name', __('Name'));
         $grid->lineId()->name('Line');
         $grid->maleId()->name('Connector1');
@@ -70,6 +71,7 @@ class ComponentCombController extends ResponseController
         $form->select('line_id', __('Line'))->options(Component::whereIn('part_type', [PartType::PVWire, PartType::MVCable])->pluck('name', 'id'))->required();
         $form->select('male_id', __('Connector1'))->options(Component::whereIn('part_type', [PartType::MaleConnector,PartType::FemaleConnector])->pluck('name', 'id'))->rules('required_without:female_id');
         $form->select('female_id', __('Connector2'))->options(Component::whereIn('part_type', [PartType::MaleConnector,PartType::FemaleConnector])->pluck('name', 'id'))->rules('required_without:male_id');
+        $form->image('image', __('Image'))->removable();
 
         return $form;
     }

@@ -17,19 +17,21 @@
         <div class="box-body">
 
             <div class="fields-group">
-
+                @if($harness->image)
                 <div class="form-group ">
                     <label class="col-sm-2 control-label">Image</label>
                     <div class="col-sm-8">
                         <div class="box box-solid box-default no-margin box-show">
                             <!-- /.box-header -->
                             <div class="box-body">
+
                                 <img width="35%" src="{{ asset('uploads/'.$harness->image) }}">
+
                             </div><!-- /.box-body -->
                         </div>
                     </div>
                 </div>
-
+                @endif
                 <div class="form-group ">
                     <label class="col-sm-2 control-label">Name</label>
                     <div class="col-sm-8">

@@ -21,6 +21,8 @@ class CreateWhipsTable extends Migration
             $table->integer('rowhead_to');
             $table->integer('multiple')->nullable();
             $table->text('remarks')->nullable();
+            $table->integer('digital_a')->nullable();
+            $table->integer('digital_b')->nullable();
             $table->timestamps();
         });
     }

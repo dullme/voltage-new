@@ -12,7 +12,9 @@ class Whip extends BaseModel
         'component_comb_id',
         'multiple',
         'rowhead_to',
-        'remarks'
+        'remarks',
+        'digital_a',
+        'digital_b'
     ];
 
     public function componentComb()

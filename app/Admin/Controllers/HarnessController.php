@@ -42,11 +42,13 @@ class HarnessController extends ResponseController
             $actions->disableDelete();
         });
         $grid->column('image')->lightbox(['width' => 100, 'height' => 100]);
+
         $grid->column('name', __('Name'))->display(function ($name) {
             $url = url('/admin/harnesses/' . $this->id);
 
-            return "<a href='{$url}'>{$name}</a>";
+            return "<a data-toggle='tooltip' data-placement='top' title='【VH】【String】【Module】【线号+线长】【版本号】' href='{$url}'>{$name}</a>";
         });
+
         $grid->column('length', __('Length'))->display(function () {
             return "{$this->min_length} ~ {$this->max_length}";
         });
