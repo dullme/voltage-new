@@ -44295,6 +44295,7 @@ Vue.component('project-create', __webpack_require__(/*! ./components/CreateProje
 Vue.component('project-info', __webpack_require__(/*! ./components/ProjectInfoComponent */ "./resources/js/components/ProjectInfoComponent.vue")["default"]);
 Vue.component('quotation-info', __webpack_require__(/*! ./components/QuotationInfoComponent */ "./resources/js/components/QuotationInfoComponent.vue")["default"]);
 Vue.component('whip-info', __webpack_require__(/*! ./components/WhipInfoComponent */ "./resources/js/components/WhipInfoComponent.vue")["default"]);
+Vue.component('test', __webpack_require__(/*! ./components/TestComponent */ "./resources/js/components/TestComponent.vue")["default"]);
 
 /***/ }),
 
@@ -44762,6 +44763,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_QuotationInfoComponent_vue_vue_type_template_id_2e5e6f24_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+
+/***/ }),
+
+/***/ "./resources/js/components/TestComponent.vue":
+/*!***************************************************!*\
+  !*** ./resources/js/components/TestComponent.vue ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed (from ./node_modules/vue-loader/lib/index.js):\nError: ENOENT: no such file or directory, open '/Users/dullme/Code/new/resources/js/components/TestComponent.vue'");
 
 /***/ }),
 
