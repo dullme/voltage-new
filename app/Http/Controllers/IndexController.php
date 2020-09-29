@@ -30,6 +30,10 @@ class IndexController
         $client = new \GuzzleHttp\Client();
 
         $res = $client->request('GET', $url);
+        $data = json_decode($res->getBody()->getContents(),true);
+        $data['oneway'] = 1;
+
+        return response()->json($data);
         return $res->getBody()->getContents();
     }
 }

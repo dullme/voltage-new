@@ -118,6 +118,9 @@
             if(response.data.oneway=="1"){
                 $('.message').css('color','green')
                 $('.message').html('抢到啦！！！！！！！！！！！！！！！！！！！')
+                $('.start').val('还想抢')
+                is_start = false
+                $('.loading').html('成功！！！')
             }else{
                 if(response.data.message == "操作频繁，请过几秒钟后再次尝试" || response.data.message == '一分钟内只能操作50次' || response.data.msg == '请求页面返回请重新登录并且不要频繁发送打印请求!'){
 
