@@ -15,6 +15,7 @@ class CreateHarnessesTable extends Migration
     {
         Schema::create('harnesses', function (Blueprint $table) {
             $table->id();
+            $table->string('no')->unique()->comment('微软的编号');
             $table->string('name')->unique()->comment('名称');
             $table->string('show_name')->comment('显示名称');
             $table->integer('version')->comment('版本');

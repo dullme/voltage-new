@@ -15,9 +15,10 @@ class CreateComponentsTable extends Migration
     {
         Schema::create('components', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique()->comment('零件名称');
+            $table->string('no')->unique()->comment('微软编号');
+            $table->string('name')->comment('零件名称');
             $table->unsignedTinyInteger('part_type')->comment('零件类型');
-            $table->integer('wire_size')->nullable()->unsigned()->unique()->comment('线号');
+            $table->integer('wire_size')->nullable()->unsigned()->comment('线号');
             $table->integer('match_wire_size')->nullable()->unsigned()->comment('匹配线号');
             $table->integer('currency')->unsigned()->comment('币种');
             $table->decimal('price', 10, 3)->unsigned()->comment('单价/rmb');
