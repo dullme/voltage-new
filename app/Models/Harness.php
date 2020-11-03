@@ -8,6 +8,7 @@ class Harness extends BaseModel
 {
     protected $fillable = [
         'name',
+        'no',
         'show_name',
         'version',
         'min_length',

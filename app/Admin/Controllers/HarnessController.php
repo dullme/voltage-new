@@ -186,6 +186,7 @@ EOF
 
             $harness = Harness::create([
                 'name'          => $name . sprintf('%02d', $version),
+                'no'     => time(),
                 'show_name'     => $name,
                 'version'       => $version,
                 'min_length'    => $data['min_length'],

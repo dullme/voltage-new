@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Block;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +15,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    $quotation = \App\Models\Quotation::with('blocks')->find(4);
+    $total_typical= $quotation->blocks->pluck('total_typical');
+    $all_block = collect($quotation->typical)->map(function ($item, $key) use($total_typical){
+        return [
+            'typical_id' => $item,
+            'count' => $total_typical->sum($key),
+        ];
+    });
+dd($all_block);
 
     return view('welcome');
 

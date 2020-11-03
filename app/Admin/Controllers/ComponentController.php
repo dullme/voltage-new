@@ -84,6 +84,7 @@ class ComponentController extends AdminController
 
         if ($form->isCreating()) {
             $form->text('name', __('Name'));
+            $form->text('no', __('No'))->required();
             $form->select('part_type', __('Part type'))->options(PartType::toSelectArray());
             $form->select('wire_size', __('Wire size'))->options(LINE_NUMBER);
             $form->select('match_wire_size', __('Match wire size'))->options(LINE_NUMBER);

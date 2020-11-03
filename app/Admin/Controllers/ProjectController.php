@@ -655,4 +655,9 @@ EOF
 
         return $quotation;
     }
+
+    public function makeQuotation($quotation_id)
+    {
+        Block::where('quotation_id', $quotation_id)->get();
+    }
 }
