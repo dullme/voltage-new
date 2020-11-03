@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\HarnessComponent;
 use DB;
+use Log;
 use App\Models\Component;
 use App\Models\Harness;
 use Carbon\Carbon;
@@ -75,22 +76,30 @@ class UpdateItems extends Command
         });
 
         $component = Component::whereIn('no', $data->pluck('no'))->get(); //查询是否存在Item
-        if($component->count()){ //存在Item 更新
-            $update_data = $data->whereIn('no', $component->pluck('no'))->map(function ($item){
-                unset($item['created_at']);
-                return $item;
-            });
+        DB::beginTransaction();
+        try {
+            if($component->count()){ //存在Item 更新
+                $update_data = $data->whereIn('no', $component->pluck('no'))->map(function ($item){
+                    unset($item['created_at']);
+                    return $item;
+                });
 
-            $updated = updateBatch('components', $update_data->toArray());//需要更新
-            info("更新了{$updated}条记录",$component->toArray());
+                $updated = updateBatch('components', $update_data->toArray());//需要更新
+                Log::info("更新{$updated}【Component】",$component->toArray());
 
-            $need_created = $data->whereNotIn('no', $component->pluck('no')->toArray())->values()->toArray();
-            Component::insert($need_created);//需要新增
-            info("新增了".count($need_created)."条记录",$need_created);
-        }else{ //否则全部新增
-            Component::insert($data->toArray());
-            info("新增了{$data->count()}条记录",$data->toArray());
+                $need_created = $data->whereNotIn('no', $component->pluck('no')->toArray())->values()->toArray();
+                Component::insert($need_created);//需要新增
+                Log::info("新增".count($need_created)."【Component】",$need_created);
+            }else{ //否则全部新增
+                Component::insert($data->toArray());
+                Log::info("新增{$data->count()}【Component】",$data->toArray());
+            }
+            DB::commit();
+        }catch (\Exception $exception){
+            Log::warning($exception->getMessage());
+            DB::rollBack();
         }
+
 
         $this->updateHarness();
         echo 'SUCCESS';
@@ -157,36 +166,46 @@ class UpdateItems extends Command
             ];
         });
 
+        DB::beginTransaction();
+        try{
+            $harness = Harness::whereIn('no', $data->pluck('no'))->pluck('id', 'no')->toArray();
+            $create_or_update = $data->map(function ($item)use($harness){
+                $items = $item['items'];
+                unset($item['items']);
 
-        $harness = Harness::whereIn('no', $data->pluck('no'))->get();
-        if($harness->count()) { //存在有Bom 的 Item 需要更新
-            //部分更新
-            //部分新增
-        }else{ //全部新增
-            DB::beginTransaction();
-            try{
-                $data->map(function ($item){
-                    $items = $item['items'];
-                    unset($item['items']);
+                if(isset($harness[$item['no']])){ //如果存在该item
+                    $create_or_update = ['new' => 0, 'update' => 1];
+                    $harness_id = $harness[$item['no']];
+                    Harness::where('id', $harness_id)->update($item);//更新item
+                    HarnessComponent::where('harness_id', $harness[$item['no']])->delete(); //删除所有的关联
+                }else{ //新增Item
+                    $create_or_update = ['new' => 1, 'update' => 0];
                     $harness_id = Harness::insertGetId($item);
-                    $component = Component::whereIn('no', $items->pluck('no'))->pluck('id', 'no')->toArray();
-                    if(count($component) != $items->count()){
-                        throw new \Exception('系统中找不到对应的BOM-itemno:'.$item['no']);
-                    }
+                }
 
-                    $res = $items->map(function ($item) use($harness_id, $component){
-                        $item['harness_id'] = $harness_id;
-                        $item['component_id'] = $component[$item['no']];
-                        unset($item['no']);
-                        return $item;
-                    });
-                    $res = HarnessComponent::insert($res->toArray());
+                $component = Component::whereIn('no', $items->pluck('no'))->pluck('id', 'no')->toArray();
+                if(count($component) != $items->count()){
+                    throw new \Exception('系统中找不到对应的BOM-itemno:'.$item['no']);
+                }
+
+                $res = $items->map(function ($item) use($harness_id, $component){
+                    $item['harness_id'] = $harness_id;
+                    $item['component_id'] = $component[$item['no']];
+                    unset($item['no']);
+                    return $item;
                 });
-                DB::commit();
-            }catch (\Exception $exception){
-                dd($exception->getMessage());
-                DB::rollBack();
-            }
+                HarnessComponent::insert($res->toArray()); //新增BOM
+
+                return $create_or_update;
+            });
+
+            DB::commit();
+            Log::info('新增'.$create_or_update->sum('new').',更新'.$create_or_update->sum('update').'【Harness】');
+        }catch (\Exception $exception){
+            Log::warning($exception->getMessage());
+            DB::rollBack();
         }
+
+
     }
 }
