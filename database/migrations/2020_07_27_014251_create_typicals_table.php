@@ -23,6 +23,7 @@ class CreateTypicalsTable extends Migration
             $table->text('motors');
             $table->text('fuse');
             $table->text('nofuse');
+            $table->text('res_fuses');
             $table->timestamps();
         });
     }

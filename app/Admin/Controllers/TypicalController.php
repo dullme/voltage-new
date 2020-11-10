@@ -179,10 +179,51 @@ EOF
         //VT-【几个几串】-【组串长度最大值】-【电机长的和】-【版本号】
         $data['name'] = "VT-{$str}-{$max_length}-{$sum_motor}-{$version}";
         $data['margin'] = intval($data['margin']);
+        $data['res_fuses'] = $this->getResFuses($data);
 
         $res = Typical::create($data);
 
         return $this->responseSuccess($res);
+    }
+
+    private function getResFuses($data){
+        $fuse = [];
+        if(isset($data['fuse']['res'])){
+            foreach ($data['fuse']['check_list'] as $key=>$item){
+                if($item['checked']){ //如果这行被选中
+                    foreach ($data['fuse']['res'][$key] as $j=>$res){
+                        $res['component_comb'] = $data['fuse']['check_list'][$key]['component_comb'];
+                        $data['fuse']['res'][$key][$j] = $res;
+                    }
+                    $fuse[] = $data['fuse']['res'][$key];
+                }
+            }
+        }
+
+        $nofuse = [];
+        if(isset($data['nofuse']['res'])){
+            foreach ($data['nofuse']['check_list'] as $key=>$item){
+                if($item['checked']){ //如果这行被选中
+                    foreach ($data['nofuse']['res'][$key] as $j=>$res){
+                        $res['component_comb'] = $data['nofuse']['check_list'][$key]['component_comb'];
+                        $data['nofuse']['res'][$key][$j] = $res;
+                    }
+                    $nofuse[] = $data['nofuse']['res'][$key];
+                }
+            }
+        }
+
+        return collect(array_merge($fuse, $nofuse))->flatten(1)->groupBy('component_comb')->map(function ($item){
+            return [
+                'attributes' => $item->groupBy('length')->map(function ($item){
+                    return [
+                        'length' => $item[0]['length'],
+                        'count' => count($item)
+                    ];
+                })->values()->toArray(),
+                'component_comb' => $item[0]['component_comb']
+            ];
+        })->values()->toArray();
     }
 
     private function jiSuan(array $data)

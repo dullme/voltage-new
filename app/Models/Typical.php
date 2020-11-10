@@ -16,6 +16,7 @@ class Typical extends BaseModel
         'nofuse',
         'motors',
         'margin',
+        'res_fuses',
     ];
 
     protected $casts = [
@@ -24,5 +25,6 @@ class Typical extends BaseModel
         'nofuse'             => 'array',
         'motors'             => 'array',
         'margin'             => 'array',
+        'res_fuses'             => 'array',
     ];
 }
