@@ -15,7 +15,7 @@ class DesignController extends Controller
         }
 
         $quotation = \App\Models\Quotation::with('blocks')->find($request->input('code'));
-        $total_typical= $quotation->blocks->pluck('total_typical');
+        $total_typical= optional($quotation->blocks)->pluck('total_typical');
         $all_block = collect($quotation->typical)->map(function ($item, $key) use($total_typical){
             return [
                 'typical_id' => $item,
