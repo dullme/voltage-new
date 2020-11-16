@@ -19,4 +19,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::middleware('client')->get('/design_info/{code}', 'DesignController@index');
+Route::middleware('client')->post('/design_info', 'DesignController@index');

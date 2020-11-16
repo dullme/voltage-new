@@ -22,3 +22,9 @@ Route::get('/', function () {
 Route::get('login', function (){
     return response()->json('You need login first!', 403);
 })->name('login');
+
+Route::get('/test',function(){
+    return view('test');
+});
+
+Route::post('/test','IndexController@index');

@@ -7,9 +7,14 @@ use Illuminate\Http\Request;
 class DesignController extends Controller
 {
 
-    public function index($code)
+    public function index(Request $request)
     {
-        $quotation = \App\Models\Quotation::with('blocks')->find($code);
+        $code = $request->input('code');
+        if(is_null($code)){
+            return response()->json('Code is required', 422);
+        }
+
+        $quotation = \App\Models\Quotation::with('blocks')->find($request->input('code'));
         $total_typical= $quotation->blocks->pluck('total_typical');
         $all_block = collect($quotation->typical)->map(function ($item, $key) use($total_typical){
             return [
