@@ -116,10 +116,11 @@
             },
             timeout: 5000,
         }).then(response => {
+            console.log(response.data)
             if(response.data){
-                if(response.data.oneway=="1"){
+                if(response.data.oneway=="1" || response.data.flag == "F"){
                     $('.message').css('color','green')
-                    $('.message').html('抢到啦！！！！！！！！！！！！！！！！！！！')
+                    $('.message').html('刷箱成功啦！！！！！！！！！！！！！！！！！！！')
                     $('.start').val('还想抢')
                     is_start = false
                     $('.loading').html('成功！！！')
