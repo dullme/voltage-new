@@ -118,7 +118,7 @@
         }).then(response => {
             console.log(response.data)
             if(response.data){
-                if(response.data.oneway=="1" || response.data.flag == "F"){
+                if(response.data.oneway=="1" || response.data.oneway == 1){
                     $('.message').css('color','green')
                     $('.message').html('刷箱成功啦！！！！！！！！！！！！！！！！！！！')
                     $('.start').val('还想抢')
