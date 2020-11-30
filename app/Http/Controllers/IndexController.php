@@ -79,7 +79,7 @@ class IndexController
 
         return response()->json([
             'Global Quote'=>[
-                '01. symbol' => 'COPPER',
+                '01. symbol' => 'COP',
                 '02. open' => '1764.5400',
                 '03. high' => '1797.0100',
                 '04. low' => '1764.5400',
@@ -137,7 +137,7 @@ class IndexController
 
         return response()->json([
             'Global Quote'=>[
-                '01. symbol' => 'ALUMINUM',
+                '01. symbol' => 'ALU',
                 '02. open' => '1764.5400',
                 '03. high' => '1797.0100',
                 '04. low' => '1764.5400',
