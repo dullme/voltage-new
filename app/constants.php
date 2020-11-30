@@ -19,6 +19,15 @@ define('LINE_NUMBER_LETTER', [
     14 => 'E'
 ]);
 
+define('DYNAMICS', [
+    ''          => 2,
+    'CABLE'     => 2,
+    'CONNECTOR' => 4,
+    'FUSE'      => 6,
+    'INJECTION' => 9,
+    'OTHER'     => 10,
+]);
+
 //币种
 define('CURRENCY', [
     1 => 'RMB',
@@ -31,6 +40,6 @@ define('CURRENCY_MARK', [
     2 => '$',
 ]);
 
-define('COLOR',[
-    '#E3170A','#E16036', '#D6A99A', '#6EBFB5', '#ff165d', '#99ddcc', '#521262', '#ffd460', '#8ef6e4', '#a1eafb', '#a1eafb'
+define('COLOR', [
+    '#E3170A', '#E16036', '#D6A99A', '#6EBFB5', '#ff165d', '#99ddcc', '#521262', '#ffd460', '#8ef6e4', '#a1eafb', '#a1eafb'
 ]);

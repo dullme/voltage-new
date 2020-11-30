@@ -147,7 +147,7 @@ EOF
             if (in_array($item[0]['part_type'], [PartType::PVWire, PartType::MVCable])) {
                 $length = $data->sum('total');
                 $quantity = 1;
-                $other_name = LINE_NUMBER_LETTER[$item[0]['wire_size']] . sprintf('%03d', ceil($length));
+                $other_name = LINE_NUMBER_LETTER[$item[0]['wire_size']]??'undefine' . sprintf('%03d', ceil($length));
             }
 
             return [

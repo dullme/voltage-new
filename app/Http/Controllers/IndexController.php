@@ -33,4 +33,120 @@ class IndexController
 
         return $res->getBody()->getContents();
     }
+
+    public function copper()
+    {
+        $today = \Carbon\Carbon::today()->toDateString();
+        $month = \Carbon\Carbon::today()->subMonth()->toDateString();
+
+        $tong = \App\Models\Awtrix::where('type', 0)->first();
+        if($tong){
+            //如果今天没更新 并且今天已经是9点50之后了
+            if($today != $tong->date && \Carbon\Carbon::now()->gt(\Carbon\Carbon::parse($today.' 09:50:00'))){
+                if(\Carbon\Carbon::now()->gt($tong->updated_at->addMinutes(10))){
+                    $client = new Client();
+                    $url = "https://m.smm.cn/get_old_price_chart?priceType=products&ID=201102250376&startTime={$month}&endTime={$today}";
+                    $response = $client->get($url);
+                    $data = json_decode($response->getBody()->getContents(), true);
+                    $lastPrice = array_pop($data['Data']);
+                    $tong = \App\Models\Awtrix::updateOrCreate(
+                        ['type' => '0'],
+                        [
+                            'value' => $lastPrice['Average'],
+                            'date' => $lastPrice['RenewDate'],
+                            'updated_at' => \Carbon\Carbon::now()
+                        ]
+                    );
+                }
+            }
+        }else{
+            $client = new Client();
+            $url = "https://m.smm.cn/get_old_price_chart?priceType=products&ID=201102250376&startTime={$month}&endTime={$today}";
+            $response = $client->get($url);
+            $data = json_decode($response->getBody()->getContents(), true);
+            $lastPrice = array_pop($data['Data']);
+
+            $tong = \App\Models\Awtrix::updateOrCreate(
+                ['type' => '0'],
+                [
+                    'value' => $lastPrice['Average'],
+                    'date' => $lastPrice['RenewDate'],
+                    'updated_at' => \Carbon\Carbon::now()
+                ]
+            );
+        }
+
+        return response()->json([
+            'Global Quote'=>[
+                '01. symbol' => 'COPPER',
+                '02. open' => '1764.5400',
+                '03. high' => '1797.0100',
+                '04. low' => '1764.5400',
+                '05. price' => '1787.0200',
+                '06. volume' => '739507',
+                '07. latest trading day' => '2020-11-27',
+                '08. previous close' => '1764.1300',
+                '09. change' => '22.8900',
+                '10. change percent' => '1.2975%',
+            ]
+        ]);
+    }
+
+    public function aluminum()
+    {
+        $today = \Carbon\Carbon::today()->toDateString();
+        $month = \Carbon\Carbon::today()->subMonth()->toDateString();
+
+        $tong = \App\Models\Awtrix::where('type', 1)->first();
+        if($tong){
+            //如果今天没更新 并且今天已经是9点50之后了
+            if($today != $tong->date && \Carbon\Carbon::now()->gt(\Carbon\Carbon::parse($today.' 09:50:00'))){
+                if(\Carbon\Carbon::now()->gt($tong->updated_at->addMinutes(10))){
+                    $client = new Client();
+                    $url = "https://m.smm.cn/get_old_price_chart?priceType=products&ID=201102250311&startTime={$month}&endTime={$today}";
+                    $response = $client->get($url);
+                    $data = json_decode($response->getBody()->getContents(), true);
+                    $lastPrice = array_pop($data['Data']);
+                    $tong = \App\Models\Awtrix::updateOrCreate(
+                        ['type' => '1'],
+                        [
+                            'value' => $lastPrice['Average'],
+                            'date' => $lastPrice['RenewDate'],
+                            'updated_at' => \Carbon\Carbon::now()
+                        ]
+                    );
+                }
+            }
+        }else{
+            $client = new Client();
+            $url = "https://m.smm.cn/get_old_price_chart?priceType=products&ID=201102250311&startTime={$month}&endTime={$today}";
+            $response = $client->get($url);
+            $data = json_decode($response->getBody()->getContents(), true);
+            $lastPrice = array_pop($data['Data']);
+
+            $tong = \App\Models\Awtrix::updateOrCreate(
+                ['type' => '1'],
+                [
+                    'value' => $lastPrice['Average'],
+                    'date' => $lastPrice['RenewDate'],
+                    'updated_at' => \Carbon\Carbon::now()
+                ]
+            );
+        }
+
+        return response()->json([
+            'Global Quote'=>[
+                '01. symbol' => 'ALUMINUM',
+                '02. open' => '1764.5400',
+                '03. high' => '1797.0100',
+                '04. low' => '1764.5400',
+                '05. price' => '1787.0200',
+                '06. volume' => '739507',
+                '07. latest trading day' => '2020-11-27',
+                '08. previous close' => '1764.1300',
+                '09. change' => '22.8900',
+                '10. change percent' => '1.2975%',
+            ]
+        ]);
+    }
 }

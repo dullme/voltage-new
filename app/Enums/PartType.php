@@ -24,8 +24,9 @@ final class PartType extends Enum implements LocalizedEnum
     const MVCable = 3; //线
     const MaleConnector = 4; //公头
     const FemaleConnector = 5; //母头
-    const FuseGTE30 = 6; //保险丝
+    const FuseGTE30 = 6; //保险丝 1个够了
     const FuseLt30 = 7; //保险丝
     const DustCap = 8; //防尘塞
     const Molding = 9; //注塑件
+    const Other = 10; //其他
 }

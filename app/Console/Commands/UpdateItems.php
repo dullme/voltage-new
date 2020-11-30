@@ -48,14 +48,14 @@ class UpdateItems extends Command
         $date = '2020-10-22'; //测试日期
         $bom = 'false'; //true 表示有 BOM 的 Item，false 表示没有 BOM 的 Item
         $client = new Client();
-        $item = "http://49.233.206.202:8048/BC140/ODataV4/Company('Voltage')/VoltageItem";
+        $item = "http://40.73.31.249:8048/Voltage/ODataV4/Company('Voltage')/VoltageItem";
         $response = $client->request('GET', $item, [
             'query' => [
                 '$filter' => "Date gt {$date} and BOM eq {$bom}"
             ],
             'auth' => [
-                'Administrator',
-                'Welcome123456',
+                'admin_puguang',
+                'Puguang@202011',
                 'ntlm'
             ]
         ]);
@@ -64,7 +64,7 @@ class UpdateItems extends Command
             return [
                 'no' => $item['No'],
                 'name' => $item['Description'],
-                'part_type' => '2',
+                'part_type' => DYNAMICS[$item['Item_Category_Code']] ?? 10,
                 'wire_size' => $item['Wire_Size'],
                 'match_wire_size' => $item['Match_Wire_Size'],
                 'currency' => '1',//币种
@@ -111,26 +111,26 @@ class UpdateItems extends Command
         $date = '2020-10-22'; //测试日期
         $bom = 'true'; //true 表示有 BOM 的 Item，false 表示没有 BOM 的 Item
         $client = new Client();
-        $item = "http://49.233.206.202:8048/BC140/ODataV4/Company('Voltage')/VoltageItem";
+        $item = "http://40.73.31.249:8048/Voltage/ODataV4/Company('Voltage')/VoltageItem";
         $response = $client->request('GET', $item, [
             'query' => [
                 '$filter' => "Date gt {$date} and BOM eq {$bom}"
             ],
             'auth' => [
-                'Administrator',
-                'Welcome123456',
+                'admin_puguang',
+                'Puguang@202011',
                 'ntlm'
             ]
         ]);
         $data = json_decode($response->getBody()->getContents(), true);
         $data = collect($data['value'])->map(function ($item) use($client){
-            $response = $client->request('GET', "http://49.233.206.202:8048/BC140/ODataV4/Company('Voltage')/VoltageBOM", [
+            $response = $client->request('GET', "http://40.73.31.249:8048/Voltage/ODataV4/Company('Voltage')/VoltageBOM", [
                 'query' => [
                     '$filter' => "itemno eq '{$item['No']}'"
                 ],
                 'auth' => [
-                    'Administrator',
-                    'Welcome123456',
+                    'admin_puguang',
+                    'Puguang@202011',
                     'ntlm'
                 ]
             ]);
