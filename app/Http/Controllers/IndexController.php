@@ -88,7 +88,7 @@ class IndexController
                 '07. latest trading day' => $tong->date,
                 '08. previous close' => '1764.1300',
                 '09. change' => '22.8900',
-                '10. change percent' => '1.2975%',
+                '10. change percent' => '0.2975%',
             ]
         ]);
     }
@@ -146,7 +146,7 @@ class IndexController
                 '07. latest trading day' => $tong->date,
                 '08. previous close' => '1764.1300',
                 '09. change' => '22.8900',
-                '10. change percent' => '1.2975%',
+                '10. change percent' => '2.3347%',
             ]
         ]);
     }
