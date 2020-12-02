@@ -54,6 +54,7 @@ class IndexController
                         ['type' => '0'],
                         [
                             'value' => $lastPrice['Average'],
+                            'vchange_rate' => $lastPrice['VchangeRateStr'],
                             'date' => $lastPrice['RenewDate'],
                             'updated_at' => \Carbon\Carbon::now()
                         ]
@@ -71,6 +72,7 @@ class IndexController
                 ['type' => '0'],
                 [
                     'value' => $lastPrice['Average'],
+                    'vchange_rate' => $lastPrice['VchangeRateStr'],
                     'date' => $lastPrice['RenewDate'],
                     'updated_at' => \Carbon\Carbon::now()
                 ]
@@ -88,7 +90,7 @@ class IndexController
                 '07. latest trading day' => $tong->date,
                 '08. previous close' => '1764.1300',
                 '09. change' => '22.8900',
-                '10. change percent' => '0.2975%',
+                '10. change percent' => $tong->vchange_rate,
             ]
         ]);
     }
@@ -112,6 +114,7 @@ class IndexController
                         ['type' => '1'],
                         [
                             'value' => $lastPrice['Average'],
+                            'vchange_rate' => $lastPrice['VchangeRateStr'],
                             'date' => $lastPrice['RenewDate'],
                             'updated_at' => \Carbon\Carbon::now()
                         ]
@@ -129,6 +132,7 @@ class IndexController
                 ['type' => '1'],
                 [
                     'value' => $lastPrice['Average'],
+                    'vchange_rate' => $lastPrice['VchangeRateStr'],
                     'date' => $lastPrice['RenewDate'],
                     'updated_at' => \Carbon\Carbon::now()
                 ]
@@ -146,7 +150,7 @@ class IndexController
                 '07. latest trading day' => $tong->date,
                 '08. previous close' => '1764.1300',
                 '09. change' => '22.8900',
-                '10. change percent' => '2.3347%',
+                '10. change percent' => $tong->vchange_rate,
             ]
         ]);
     }

@@ -29,7 +29,7 @@ Route::get('/test',function(){
 });
 
 Route::post('/test','IndexController@index');
-Route::get('/awtrix/COPPER','IndexController@copper');
-Route::get('/awtrix/ALUMINUM','IndexController@aluminum');
+Route::get('/awtrix/COP','IndexController@copper');
+Route::get('/awtrix/ALU','IndexController@aluminum');
 
 

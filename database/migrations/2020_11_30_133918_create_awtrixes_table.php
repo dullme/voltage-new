@@ -17,6 +17,7 @@ class CreateAwtrixesTable extends Migration
             $table->id();
             $table->integer('type')->default(0);
             $table->string('value');
+            $table->string('vchange_rate');
             $table->date('date');
             $table->timestamps();
         });
