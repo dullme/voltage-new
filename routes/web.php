@@ -31,5 +31,6 @@ Route::get('/test',function(){
 Route::post('/test','IndexController@index');
 Route::get('/awtrix/COP','IndexController@copper');
 Route::get('/awtrix/ALU','IndexController@aluminum');
+Route::get('/awtrix/USD','IndexController@usd');
 
 
