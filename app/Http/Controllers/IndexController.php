@@ -76,7 +76,7 @@ class IndexController
                 ]
             );
         }
-        $tt = $tong->date == $today ? '.' : '';
+        $tt = $tong->date == $today ? 'T' : '';
         return response()->json([
             'Global Quote'=>[
                 '01. symbol' => 'COP',
@@ -134,7 +134,7 @@ class IndexController
                 ]
             );
         }
-        $tt = $tong->date == $today ? '.' : '';
+        $tt = $tong->date == $today ? 'T' : '';
         return response()->json([
             'Global Quote'=>[
                 '01. symbol' => 'ALU',
