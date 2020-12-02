@@ -76,14 +76,14 @@ class IndexController
                 ]
             );
         }
-
+        $tt = $tong->date == $today ? '.' : '';
         return response()->json([
             'Global Quote'=>[
                 '01. symbol' => 'COP',
                 '02. open' => '1764.5400',
                 '03. high' => '1797.0100',
                 '04. low' => '1764.5400',
-                '05. price' => $tong->value . $tong->date == $today ? '.' : '',
+                '05. price' => "{$tong->value}{$tt}",
                 '06. volume' => '739507',
                 '07. latest trading day' => $tong->date,
                 '08. previous close' => '1764.1300',
@@ -134,14 +134,14 @@ class IndexController
                 ]
             );
         }
-
+        $tt = $tong->date == $today ? '.' : '';
         return response()->json([
             'Global Quote'=>[
                 '01. symbol' => 'ALU',
                 '02. open' => '1764.5400',
                 '03. high' => '1797.0100',
                 '04. low' => '1764.5400',
-                '05. price' => $tong->value . $tong->date == $today ? '.' : '',
+                '05. price' => "{$tong->value}{$tt}",
                 '06. volume' => '739507',
                 '07. latest trading day' => $tong->date,
                 '08. previous close' => '1764.1300',
