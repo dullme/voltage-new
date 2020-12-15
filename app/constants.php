@@ -20,11 +20,10 @@ define('LINE_NUMBER_LETTER', [
 ]);
 
 define('DYNAMICS', [
-    ''          => 2,
     'CABLE'     => 2,
     'CONNECTOR' => 4,
     'FUSE'      => 6,
-    'INJECTION' => 9,
+    'OVERMOLDING' => 9,
     'OTHER'     => 10,
 ]);
 

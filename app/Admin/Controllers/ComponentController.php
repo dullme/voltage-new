@@ -29,22 +29,29 @@ class ComponentController extends AdminController
         $grid = new Grid(new Component());
         $grid->model()->resetOrderBy();
 
+        $grid->filter(function ($filter) {
+            $filter->disableIdFilter();
+            $filter->equal('part_type', 'Category')->select(array_flip(DYNAMICS));
+        });
+
         $grid->column('id', __('Id'));
-        $grid->column('name', __('Name'));
-        $grid->column('part_type', __('Part type'))->display(function ($part_type) {
+        $grid->column('name', __('Description'));
+        $grid->column('description2', __('Description2'));
+        $grid->column('part_type', __('Category'))->display(function ($part_type) {
             return PartType::getDescription($part_type);
         })->label();
-        $grid->column('wire_size', __('Wire size'))->display(function ($wire_size) {
-            return $wire_size ? '#' . $wire_size : '';
-        });
-        $grid->column('match_wire_size', __('Match wire size'))->display(function ($match_wire_size) {
-            return $match_wire_size ? '#' . $match_wire_size : '';
-        });
-        $grid->column('price', __('Price'))->display(function ($price) {
-            return isset(CURRENCY_MARK[$this->currency]) ? CURRENCY_MARK[$this->currency] . ' ' . $price : $price;
-        });
-        $grid->column('weight', __('Weight/kg'));
-        $grid->column('created_at', __('Created at'));
+//        $grid->column('wire_size', __('Wire size'))->display(function ($wire_size) {
+//            return $wire_size ? '#' . $wire_size : '';
+//        });
+//        $grid->column('match_wire_size', __('Match wire size'))->display(function ($match_wire_size) {
+//            return $match_wire_size ? '#' . $match_wire_size : '';
+//        });
+//        $grid->column('price', __('Price'))->display(function ($price) {
+//            return isset(CURRENCY_MARK[$this->currency]) ? CURRENCY_MARK[$this->currency] . ' ' . $price : $price;
+//        });
+//        $grid->column('weight', __('Weight/kg'));
+//        $grid->column('created_at', __('Created at'));
+        $grid->disableActions();
 
         return $grid;
     }

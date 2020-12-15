@@ -16,6 +16,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    $r = [
+        'video' => '1'
+    ];
+
+    $m = [
+        'video' => 'video'
+    ];
+
+    dd($r, $m, [$r, $m]);
 
     return view('welcome');
 });

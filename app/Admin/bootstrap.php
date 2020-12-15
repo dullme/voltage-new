@@ -37,7 +37,7 @@ Grid::init(function (Grid $grid) {
 
 //    $grid->disableCreateButton();
 
-    $grid->disableFilter(); //隐藏搜索
+//    $grid->disableFilter(); //隐藏搜索
 
     $grid->disableRowSelector(); //隐藏多选
 

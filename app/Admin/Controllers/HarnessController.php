@@ -55,12 +55,12 @@ class HarnessController extends ResponseController
         $grid->column('have_fuse', __('有无 Fuse'))->bool();
         $grid->column('fuse', __('Fuse'));
         $grid->column('string', __('String'));
-        $grid->column('outlet_length', __('Outlet length'));
+//        $grid->column('outlet_length', __('Outlet length'));
         $grid->column('module', __('Module'))->display(function ($module) {
             return HarnessModule::getDescription($module);
         })->label();
-        $grid->column('created_at', __('Created at'));
-
+//        $grid->column('created_at', __('Created at'));
+        $grid->disableActions();
         return $grid;
     }
 
