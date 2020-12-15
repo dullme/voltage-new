@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\ComponentComb;
 use App\Models\HarnessComponent;
 use DB;
 use Log;
@@ -101,8 +102,9 @@ class UpdateItems extends Command
             DB::rollBack();
         }
 
-
+        $this->test();//特殊处理有BOM的Cable，到时候修改！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
         $this->updateHarness();
+        $this->updateTemplate();
         echo 'SUCCESS';
     }
 
@@ -115,7 +117,7 @@ class UpdateItems extends Command
         $item = "http://40.73.31.249:8048/Voltage/ODataV4/Company('Voltage')/VoltageItem";
         $response = $client->request('GET', $item, [
             'query' => [
-                '$filter' => "Date gt {$date} and BOM eq {$bom}"
+                '$filter' => "Date gt {$date} and BOM eq {$bom} and Item_Category_Code eq 'HARNESS'"
             ],
             'auth' => [
                 'admin_puguang',
@@ -208,5 +210,99 @@ class UpdateItems extends Command
         }
 
 
+    }
+
+    public function updateTemplate()
+    {
+        $now = Carbon::now()->toDateTimeString();
+        $client = new Client();
+        $item = "http://40.73.31.249:8048/Voltage/ODataV4/Company('Voltage')/VoltageTemplate";
+        $response = $client->request('GET', $item, [
+            'auth' => [
+                'admin_puguang',
+                'Puguang@202011',
+                'ntlm'
+            ]
+        ]);
+        $data = json_decode($response->getBody()->getContents(), true);
+        $data = collect($data['value'])->where('Description', '!=', '')->map(function ($item) use ($now){
+
+            return [
+                'name' => $item['Description'],
+                'type' => $item['Item_Category_Code'],
+                'code' => $item['Code'],
+                'line_id' => Component::where('no', $item['Cable'])->first()->id,
+                'male_id' => Component::where('no', $item['Connector1'])->first()->id,
+                'female_id' => Component::where('no', $item['Connector2'])->first()->id,
+                'created_at' => $now,
+                'created_at' => $now,
+            ];
+        });
+
+        $componentCombs = ComponentComb::whereIn('code', $data->pluck('code'))->get();
+        $data = $data->whereNotIn('code', $componentCombs->pluck('code'));
+
+        ComponentComb::insert($data->toArray());
+    }
+
+    public function test()
+    {
+        $date = Carbon::today()->subDay()->toDateString();//昨天
+        $date = '2020-10-22'; //测试日期
+        $client = new Client();
+        $item = "http://40.73.31.249:8048/Voltage/ODataV4/Company('Voltage')/VoltageItem";
+        $response = $client->request('GET', $item, [
+            'query' => [
+                '$filter' => "Date gt {$date} and Item_Category_Code eq 'CABLE'"
+            ],
+            'auth' => [
+                'admin_puguang',
+                'Puguang@202011',
+                'ntlm'
+            ]
+        ]);
+        $data = json_decode($response->getBody()->getContents(), true);
+        $data = collect($data['value'])->map(function ($item){
+            return [
+                'no' => $item['No'],
+                'name' => $item['Description'],
+                'description2' => $item['Description_2'],
+                'part_type' => DYNAMICS[$item['Item_Category_Code']] ?? 10,
+                'wire_size' => $item['Wire_Size'],
+                'match_wire_size' => $item['Match_Wire_Size'],
+                'currency' => '1',//币种
+                'price' => '1',//价格
+                'weight' => '1',//重量
+                'created_at' => $item['Date'],
+                'updated_at' => $item['Date'],
+            ];
+        });
+
+        $component = Component::whereIn('no', $data->pluck('no'))->get(); //查询是否存在Item
+
+        DB::beginTransaction();
+        try {
+            if($component->count()){ //存在Item 更新
+                $update_data = $data->whereIn('no', $component->pluck('no'))->map(function ($item){
+                    unset($item['created_at']);
+                    return $item;
+                });
+
+                $updated = updateBatch('components', $update_data->toArray());//需要更新
+                Log::info("更新{$updated}【Component】",$component->toArray());
+
+                $need_created = $data->whereNotIn('no', $component->pluck('no')->toArray())->values()->toArray();
+                Component::insert($need_created);//需要新增
+                Log::info("新增".count($need_created)."【Component】",$need_created);
+            }else{ //否则全部新增
+                Component::insert($data->toArray());
+                Log::info("新增{$data->count()}【Component】",$data->toArray());
+            }
+
+            DB::commit();
+        }catch (\Exception $exception){
+            Log::warning($exception->getMessage());
+            DB::rollBack();
+        }
     }
 }

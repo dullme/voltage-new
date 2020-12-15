@@ -23,7 +23,7 @@ define('DYNAMICS', [
     'CABLE'     => 2,
     'CONNECTOR' => 4,
     'FUSE'      => 6,
-    'OVERMOLDING' => 9,
+    'OVERMOLD' => 9,
     'OTHER'     => 10,
 ]);
 

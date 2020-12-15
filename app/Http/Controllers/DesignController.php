@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ComponentComb;
 use Illuminate\Http\Request;
 
 class DesignController extends Controller
@@ -13,7 +14,6 @@ class DesignController extends Controller
         if(is_null($code)){
             return response()->json('Code is required', 422);
         }
-
         $quotation = \App\Models\Quotation::with('blocks')->find($request->input('code'));
         if(!$quotation){
             return response()->json('Please check if the code is correct', 422);
@@ -56,8 +56,9 @@ class DesignController extends Controller
 
         $typicals = $typical->pluck('res_fuses')->flatten(1)->groupBy('component_comb')->map(function ($item){
             return $item->pluck('attributes')->flatten(1)->groupBy('length')->map(function ($i) use($item){
+                $comb = ComponentComb::find($item[0]['component_comb']);
                 return [
-                    'no' => $item[0]['component_comb'],
+                    'no' => $comb->code,
                     'length' => $i[0]['length'],
                     'count' => $i->sum('count'),
 
