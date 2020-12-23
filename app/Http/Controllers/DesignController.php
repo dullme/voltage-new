@@ -58,7 +58,7 @@ class DesignController extends Controller
             return $item->pluck('attributes')->flatten(1)->groupBy('length')->map(function ($i) use($item){
                 $comb = ComponentComb::find($item[0]['component_comb']);
                 return [
-                    'no' => $comb->code,
+                    'template' => $comb->code,
                     'length' => $i[0]['length'],
                     'count' => $i->sum('count'),
 
